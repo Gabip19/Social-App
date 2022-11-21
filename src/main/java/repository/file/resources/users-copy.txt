@@ -1,0 +1,11 @@
+6c7520fa-5ac8-4466-bd01-7913acaf0cdc;Aurora;Constanta;constanta-aurora01@gmail.com;1992-09-13
+0e385c9c-23ed-448f-9499-d19555b096bb;Mihail;Popescu;mihail_pop@yahoo.com;1993-03-28
+c115bfb1-b588-45ed-a4c8-e83416244f8f;Florin;Rahela;florin.rahela@gmail.com;1999-08-02
+bb5f6385-6c0a-4dc7-9db8-6e75982d9a11;Florian;Simona;florian.simona@gmail.com;2004-05-26
+43f27a89-1826-4fcb-bea6-8641ab6a25fc;Silvia;Florina;silvia.florina@gmail.com;2007-09-10
+90de488d-c633-48cd-9451-60f90d376e8b;Ozana;Iuliana;ozana.iuliana@yahoo.com;1998-10-21
+b7cea49a-3433-401f-bdc2-440249597b4b;Alex;Costache;alex.costache@gmail.com;2003-10-06
+de8822d3-b4a9-4b85-9cc9-90eaa27f8a37;Sofia;Anamaria;sofia_anamaria@gmail.com;2006-08-28
+b1a24014-4648-4489-bea7-72f07023cd6e;Oana;Mihaela;oana_mihaela@gmail.com;2007-08-24
+c2a16983-caab-4ba3-98cb-77a7922b05c0;Mircea;Daria;mircea.daria@gmail.com;2008-08-07
+15853060-48ee-454f-9081-882efb013257;Beniamin;Eugenia;beni_eug@gmail.com;2003-12-31
