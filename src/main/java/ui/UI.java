@@ -31,29 +31,14 @@ public class UI {
     public void run() {
         boolean running = true;
         int option;
-        String line;
 
         while (running) {
             try {
-                printMenu();
-                System.out.print("\tYour option: ");
-                line = scanner.nextLine();
-                //System.out.println(line);
-                option = Integer.parseInt(line);
-
-                switch (option) {
-                    case 1 -> addUser();
-                    case 2 -> removeUser();
-                    case 3 -> printList(srv.getUsers());
-                    case 4 -> addFriend();
-                    case 5 -> removeFriend();
-                    case 6 -> printFriendships();
-                    case 7 -> numOfCommunities();
-                    case 8 -> mostActiveCommunity();
-                    case 9 -> updateUser();
-                    case 0 -> running = false;
-                    default -> System.out.println("\nInvalid option.\n");
+                option = getMenuOption();
+                if (option != 0) {
+                    executeOption(option);
                 }
+                else running = false;
             }
             catch (NumberFormatException e) {
                 System.out.println("\nOption must be an integer.\n");
@@ -63,6 +48,28 @@ public class UI {
                 //e.printStackTrace();
             }
         }
+    }
+
+    private void executeOption(int option) {
+        switch (option) {
+            case 1 -> addUser();
+            case 2 -> removeUser();
+            case 3 -> printList(srv.getUsers());
+            case 4 -> addFriend();
+            case 5 -> removeFriend();
+            case 6 -> printFriendships();
+            case 7 -> numOfCommunities();
+            case 8 -> mostActiveCommunity();
+            case 9 -> updateUser();
+            default -> System.out.println("\nInvalid option.\n");
+        }
+    }
+
+    private int getMenuOption() {
+        printMenu();
+        System.out.print("\tYour option: ");
+        String line = scanner.nextLine();
+        return Integer.parseInt(line);
     }
 
     private void printMenu() {
