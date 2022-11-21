@@ -170,19 +170,13 @@ public class Graph<ID> {
             );
         }
 
-        Optional<Map.Entry<ID, Integer>> result = distances.entrySet().stream().reduce(
+        return distances.entrySet().stream().reduce(
                 (x, y) -> {
                     if (x.getValue() > y.getValue())
                         return x;
                     else
                         return y;
                 }
-        );
-
-        ID nodeIndex = null;
-        if (result.isPresent()) {
-            nodeIndex = result.get().getKey();
-        }
-        return nodeIndex;
+        ).map(Map.Entry::getKey).orElse(null);
     }
 }
