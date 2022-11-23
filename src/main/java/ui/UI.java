@@ -3,11 +3,8 @@ package ui;
 import domain.User;
 import domain.validators.FriendshipValidator;
 import domain.validators.UserValidator;
-import domain.validators.Validator;
-import domain.validators.exceptions.ValidationException;
 import repository.database.UserDatabaseRepository;
 import repository.file.FriendshipFileRepository;
-import repository.file.UserFileRepository;
 import service.Service;
 
 import java.util.ArrayList;
