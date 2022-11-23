@@ -262,6 +262,9 @@ public class Service {
             throw new RuntimeException("Invalid date format. Try: yyyy-MM-dd.\n");
         }
 
+        newLastName = newLastName.substring(0, 1).toUpperCase() + newLastName.substring(1);
+        newFirstName = newFirstName.substring(0, 1).toUpperCase() + newFirstName.substring(1);
+
         User updatedUser = new User(
                 newFirstName,
                 newLastName,

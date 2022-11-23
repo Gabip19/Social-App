@@ -20,7 +20,12 @@ public class UI {
     private UI() {
         srv = new Service(
 //            new UserFileRepository(new UserValidator(), "src/main/java/repository/file/resources/users.txt"),
-            new UserDatabaseRepository("jdbc:postgresql://localhost:5432/ToySocialApp", "postgres", "postgres", new UserValidator()),
+            new UserDatabaseRepository(
+                    "users",
+                    "jdbc:postgresql://localhost:5432/ToySocialApp",
+                    "postgres",
+                    "postgres",
+                    new UserValidator()),
             new FriendshipFileRepository(new FriendshipValidator(), "src/main/java/repository/file/resources/friendships.txt")
         );
     }
