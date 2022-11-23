@@ -23,6 +23,16 @@ public class User extends Entity<UUID> {
         friendIDs = new ArrayList<>();
     }
 
+    public User(UUID id, String firstName, String lastName, String email, LocalDate birthdate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthdate = birthdate;
+
+        this.setId(id);
+        friendIDs = new ArrayList<>();
+    }
+
     public String getFirstName() {
         return firstName;
     }
