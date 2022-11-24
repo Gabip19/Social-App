@@ -8,11 +8,11 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
 
-public class UserDatabaseRepository extends AbstractDatabaseRepository<UUID, User> {
+public class UserDatabaseRepo extends AbstractDatabaseRepository<UUID, User> {
 
     private final Validator<User> validator;
 
-    public UserDatabaseRepository(String tableName, String url, String username, String password, Validator<User> validator) {
+    public UserDatabaseRepo(String tableName, String url, String username, String password, Validator<User> validator) {
         super(tableName, url, username, password);
         this.validator = validator;
     }
