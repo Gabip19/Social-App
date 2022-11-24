@@ -1,5 +1,6 @@
 package ui;
 
+import config.ApplicationContext;
 import domain.User;
 import repository.database.DatabaseTables;
 import domain.validators.FriendshipValidator;
@@ -23,17 +24,17 @@ public class UI {
 //            new UserFileRepository(new UserValidator(), "src/main/java/repository/file/resources/users.txt"),
             new UserDatabaseRepo(
                     DatabaseTables.users.toString(),
-                    "jdbc:postgresql://localhost:5432/ToySocialApp",
-                    "postgres",
-                    "postgres",
+                    ApplicationContext.DATABASE_URL,
+                    ApplicationContext.DB_USERNAME,
+                    ApplicationContext.DB_PASSWORD,
                     new UserValidator()
             ),
 //            new FriendshipFileRepository(new FriendshipValidator(), "src/main/java/repository/file/resources/friendships.txt")
             new FriendshipDatabaseRepo(
                     DatabaseTables.friendships.toString(),
-                    "jdbc:postgresql://localhost:5432/ToySocialApp",
-                    "postgres",
-                    "postgres",
+                    ApplicationContext.DATABASE_URL,
+                    ApplicationContext.DB_USERNAME,
+                    ApplicationContext.DB_PASSWORD,
                     new FriendshipValidator()
             )
         );
