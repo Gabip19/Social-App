@@ -25,7 +25,6 @@ public class FriendshipDatabaseRepo extends AbstractDatabaseRepository<UUID, Fri
 
         String sql = "INSERT INTO friendships VALUES (?, ?, ?, ?)";
         try (
-                Connection connection = DriverManager.getConnection(url, username, password);
                 PreparedStatement statement = connection.prepareStatement(sql)
         ) {
             statement.setObject(1, entity.getId());
@@ -40,7 +39,7 @@ public class FriendshipDatabaseRepo extends AbstractDatabaseRepository<UUID, Fri
 
         return entity;
     }
-    
+
     @Override
     public Friendship update(Friendship entity) {
         if (entity == null)
@@ -51,7 +50,6 @@ public class FriendshipDatabaseRepo extends AbstractDatabaseRepository<UUID, Fri
         if (findOne(entity.getId()) != null) {
             String sql = "UPDATE friendships SET friends_from = ? WHERE id = ?";
             try (
-                    Connection connection = DriverManager.getConnection(url, username, password);
                     PreparedStatement statement = connection.prepareStatement(sql)
             ) {
                 statement.setTimestamp(1, Timestamp.valueOf(entity.getFriendsFrom()));

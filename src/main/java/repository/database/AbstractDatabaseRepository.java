@@ -12,12 +12,22 @@ public abstract class AbstractDatabaseRepository<UUID, E extends Entity<UUID>> i
     protected final String username;
     protected final String password;
     private final String tableName;
+    protected Connection connection;
 
     public AbstractDatabaseRepository(String tableName, String url, String username, String password) {
         this.tableName = tableName;
         this.url = url;
         this.username = username;
         this.password = password;
+        connectToDB();
+    }
+
+    private void connectToDB() {
+        try {
+            this.connection = DriverManager.getConnection(this.url, this.username, this.password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -28,7 +38,6 @@ public abstract class AbstractDatabaseRepository<UUID, E extends Entity<UUID>> i
         String strSql = "SELECT * FROM $table WHERE id = ?";
         String sql = strSql.replace("$table", tableName);
         try (
-                Connection connection = DriverManager.getConnection(url, username, password);
                 PreparedStatement statement = connection.prepareStatement(sql)
         ) {
             statement.setObject(1, uuid);
@@ -51,7 +60,6 @@ public abstract class AbstractDatabaseRepository<UUID, E extends Entity<UUID>> i
         String strSql = "SELECT * FROM $table";
         String sql = strSql.replace("$table", tableName);
         try (
-                Connection connection = DriverManager.getConnection(url, username, password);
                 PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery()
         ) {
@@ -70,7 +78,6 @@ public abstract class AbstractDatabaseRepository<UUID, E extends Entity<UUID>> i
             String strSql = "DELETE FROM $table WHERE id = ?";
             String sql = strSql.replace("$table", tableName);
             try (
-                    Connection connection = DriverManager.getConnection(url, username, password);
                     PreparedStatement statement = connection.prepareStatement(sql)
             ) {
                 statement.setObject(1, uuid);

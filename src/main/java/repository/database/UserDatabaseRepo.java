@@ -26,7 +26,6 @@ public class UserDatabaseRepo extends AbstractDatabaseRepository<UUID, User> {
 
         String sql = "INSERT INTO users VALUES (?, ?, ?, ?, ?)";
         try (
-                Connection connection = DriverManager.getConnection(url, username, password);
                 PreparedStatement statement = connection.prepareStatement(sql)
         ) {
             statement.setObject(1, entity.getId());
@@ -53,7 +52,6 @@ public class UserDatabaseRepo extends AbstractDatabaseRepository<UUID, User> {
         if (findOne(entity.getId()) != null) {
             String sql = "UPDATE users SET first_name = ?, last_name = ?, birthdate = ? WHERE id = ?";
             try (
-                    Connection connection = DriverManager.getConnection(url, username, password);
                     PreparedStatement statement = connection.prepareStatement(sql)
             ) {
                 statement.setString(1, entity.getFirstName());
