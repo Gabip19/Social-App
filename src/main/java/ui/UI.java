@@ -26,7 +26,8 @@ public class UI {
                     "jdbc:postgresql://localhost:5432/ToySocialApp",
                     "postgres",
                     "postgres",
-                    new UserValidator()),
+                    new UserValidator()
+            ),
 //            new FriendshipFileRepository(new FriendshipValidator(), "src/main/java/repository/file/resources/friendships.txt")
             new FriendshipDatabaseRepo(
                     DatabaseTables.friendships.toString(),
