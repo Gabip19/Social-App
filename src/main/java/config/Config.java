@@ -16,11 +16,11 @@ public class Config {
 
     public static Properties getProperties() {
         Properties properties = new Properties();
-        URI FINAL_CONFIG_LOCATION;
+        URI CONFIG_LOCATION_AS_URI;
 
         try {
-            FINAL_CONFIG_LOCATION = new URI(CONFIG_LOCATION);
-            properties.load(new FileReader(FINAL_CONFIG_LOCATION.getPath()));
+            CONFIG_LOCATION_AS_URI = new URI(CONFIG_LOCATION);
+            properties.load(new FileReader(CONFIG_LOCATION_AS_URI.getPath()));
             return properties;
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
