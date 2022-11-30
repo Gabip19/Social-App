@@ -21,7 +21,6 @@ public class UI {
 
     private UI() {
         srv = new Service(
-//            new UserFileRepository(new UserValidator(), "src/main/java/repository/file/resources/users.txt"),
             new UserDatabaseRepo(
                     DatabaseTables.users.toString(),
                     ApplicationContext.DATABASE_URL,
@@ -29,7 +28,6 @@ public class UI {
                     ApplicationContext.DB_PASSWORD,
                     new UserValidator()
             ),
-//            new FriendshipFileRepository(new FriendshipValidator(), "src/main/java/repository/file/resources/friendships.txt")
             new FriendshipDatabaseRepo(
                     DatabaseTables.friendships.toString(),
                     ApplicationContext.DATABASE_URL,
@@ -42,6 +40,24 @@ public class UI {
 
     public static UI getInstance() {
         return instance;
+    }
+
+    public void start() {
+        auth();
+        run();
+    }
+
+    private void auth() {
+        boolean notLogged = true;
+        while (notLogged) {
+            printLoginMenu();
+            notLogged = false;
+        }
+    }
+
+    private void printLoginMenu() {
+        System.out.println("\n------------===< LOG IN >===------------\n");
+
     }
 
     public void run() {
