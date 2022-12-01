@@ -7,7 +7,9 @@ import domain.validators.FriendshipValidator;
 import domain.validators.UserValidator;
 import repository.database.FriendshipDatabaseRepo;
 import repository.database.UserDatabaseRepo;
+import service.FriendshipService;
 import service.Service;
+import service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,22 +23,22 @@ public class UI {
 
     private UI() {
         srv = new Service(
-//            new UserFileRepository(new UserValidator(), "src/main/java/repository/file/resources/users.txt"),
-            new UserDatabaseRepo(
-                    DatabaseTables.users.toString(),
-                    ApplicationContext.DATABASE_URL,
-                    ApplicationContext.DB_USERNAME,
-                    ApplicationContext.DB_PASSWORD,
-                    new UserValidator()
-            ),
-//            new FriendshipFileRepository(new FriendshipValidator(), "src/main/java/repository/file/resources/friendships.txt")
-            new FriendshipDatabaseRepo(
-                    DatabaseTables.friendships.toString(),
-                    ApplicationContext.DATABASE_URL,
-                    ApplicationContext.DB_USERNAME,
-                    ApplicationContext.DB_PASSWORD,
-                    new FriendshipValidator()
-            )
+                new UserService(
+                    new UserDatabaseRepo(
+                        DatabaseTables.users.toString(),
+                        ApplicationContext.DATABASE_URL,
+                        ApplicationContext.DB_USERNAME,
+                        ApplicationContext.DB_PASSWORD,
+                        new UserValidator()
+                )),
+                new FriendshipService(
+                    new FriendshipDatabaseRepo(
+                        DatabaseTables.friendships.toString(),
+                        ApplicationContext.DATABASE_URL,
+                        ApplicationContext.DB_USERNAME,
+                        ApplicationContext.DB_PASSWORD,
+                        new FriendshipValidator()
+            ))
         );
     }
 
