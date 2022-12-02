@@ -21,20 +21,22 @@ public class UI {
 
     private UI() {
         srv = new Service(
-            new UserDatabaseRepo(
-                    DatabaseTables.users.toString(),
-                    ApplicationContext.DATABASE_URL,
-                    ApplicationContext.DB_USERNAME,
-                    ApplicationContext.DB_PASSWORD,
-                    new UserValidator()
-            ),
-            new FriendshipDatabaseRepo(
-                    DatabaseTables.friendships.toString(),
-                    ApplicationContext.DATABASE_URL,
-                    ApplicationContext.DB_USERNAME,
-                    ApplicationContext.DB_PASSWORD,
-                    new FriendshipValidator()
-            )
+                new UserService(
+                    new UserDatabaseRepo(
+                        DatabaseTables.users.toString(),
+                        ApplicationContext.DATABASE_URL,
+                        ApplicationContext.DB_USERNAME,
+                        ApplicationContext.DB_PASSWORD,
+                        new UserValidator()
+                )),
+                new FriendshipService(
+                    new FriendshipDatabaseRepo(
+                        DatabaseTables.friendships.toString(),
+                        ApplicationContext.DATABASE_URL,
+                        ApplicationContext.DB_USERNAME,
+                        ApplicationContext.DB_PASSWORD,
+                        new FriendshipValidator()
+            ))
         );
     }
 

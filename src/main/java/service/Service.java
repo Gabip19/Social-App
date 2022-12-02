@@ -3,26 +3,17 @@ package service;
 import domain.Friendship;
 import domain.User;
 import domain.validators.exceptions.FriendshipException;
-import repository.Repository;
 import utils.Graph;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Service {
-    private final Repository<UUID, User> userRepo;
-    private final Repository<UUID, Friendship> friendRepo;
+    private final UserService userSrv;
+    private final FriendshipService friendSrv;
 
-    /**
-     * Service constructor
-     * @param userRepo Repository to store users
-     * @param friendRepo Repository to store the friendship relation between users
-     */
-    public Service(Repository<UUID, User> userRepo, Repository<UUID, Friendship> friendRepo) {
-        this.userRepo = userRepo;
-        this.friendRepo = friendRepo;
-//        populateLists();
+    public Service(UserService userSrv, FriendshipService friendSrv) {
+        this.userSrv = userSrv;
+        this.friendSrv = friendSrv;
     }
 
     /**
@@ -30,7 +21,7 @@ public class Service {
      * @return list of Users
      */
     public ArrayList<User> getUsers() {
-        return new ArrayList<>( (Collection<User>) userRepo.findAll());
+        return userSrv.getUsers();
     }
 
     /**
@@ -38,7 +29,7 @@ public class Service {
      * @return list of Friendships
      */
     public List<Friendship> getFriendships() {
-        return new ArrayList<>( (Collection<Friendship>) friendRepo.findAll());
+        return friendSrv.getFriendships();
     }
 
     /**
@@ -47,7 +38,7 @@ public class Service {
      * @return the user with the given ID
      */
     public User findOneUser(UUID userID) {
-        return userRepo.findOne(userID);
+        return userSrv.findOneUser(userID);
     }
 
     /**
@@ -64,22 +55,7 @@ public class Service {
         lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
         firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
 
-        LocalDate date;
-        try {
-            date = LocalDate.parse(birthdate);
-        } catch (DateTimeParseException e) {
-            throw new RuntimeException("Invalid date format. Try: yyyy-MM-dd.\n");
-        }
-
-        userRepo.findAll().forEach(
-                x -> {
-                    if (x.getEmail().equals(email))
-                        throw new RuntimeException("An user with the given email already exists.");
-                }
-        );
-
-        User user = new User(firstName, lastName, email, date);
-        userRepo.save(user);
+        userSrv.addUser(lastName, firstName, email, birthdate);
     }
 
     /**
@@ -89,17 +65,7 @@ public class Service {
      * @return a list with all the users respecting the rule
      */
     public ArrayList<User> getUsersWithName(String string) {
-        Collection<User> users = (Collection<User>) userRepo.findAll();
-        final String stringToMatch = string.toLowerCase();
-        return new ArrayList<>( users.stream()
-                .filter(
-                    (User x) -> {
-                        String fullName = x.getLastName().toLowerCase() + " " + x.getFirstName().toLowerCase();
-                        return fullName.contains(stringToMatch);
-                    }
-                )
-                .toList()
-        );
+        return userSrv.getUsersWithName(string);
     }
 
     /**
@@ -108,30 +74,11 @@ public class Service {
      * @return a list of all friends of USER
      */
     public ArrayList<User> getFriendsForUser(User user) {
-        loadFriends(user);
+        friendSrv.loadFriends(user);
 
         return new ArrayList<>(
-                user.getFriendIDs().stream().map(userRepo::findOne).toList()
+                user.getFriendIDs().stream().map(userSrv::findOneUser).toList()
         );
-    }
-
-    /**
-     * Loads into the user's friends list the IDs of his current friends.
-     * The load occurs only if the list is empty
-     * @param user the user for which to determin friends' IDs
-     */
-    private void loadFriends(User user) {
-        if (user.getFriendIDs().isEmpty()) {
-            UUID userId = user.getId();
-            friendRepo.findAll().forEach(
-                    (Friendship x) -> {
-                        if (x.getUser1ID().equals(userId))
-                            user.getFriendIDs().add(x.getUser2ID());
-                        else if (x.getUser2ID().equals(userId))
-                            user.getFriendIDs().add(x.getUser1ID());
-                    }
-            );
-        }
     }
 
     /**
@@ -140,10 +87,9 @@ public class Service {
      * @param user the user to be deleted
      */
     public void removeUser(User user) {
-        UUID id = user.getId();
-        userRepo.delete(id);
+        userSrv.removeUser(user);
 
-        removeFriendsForUser(id);
+        removeFriendsForUser(user.getId());
     }
 
     /**
@@ -152,14 +98,14 @@ public class Service {
      */
     private void removeFriendsForUser(UUID id) {
         ArrayList<UUID> fsIDsToRemove = new ArrayList<>();
-        friendRepo.findAll().forEach(
+        friendSrv.getFriendships().forEach(
                 x -> {
                     if (x.containsID(id))
                         fsIDsToRemove.add(x.getId());
                 }
         );
 
-        fsIDsToRemove.forEach(friendRepo::delete);
+        fsIDsToRemove.forEach(friendSrv::delete);
     }
 
     /**
@@ -171,16 +117,11 @@ public class Service {
      */
     public void addFriendship(User currentUser, User friendUser) throws FriendshipException {
         final Friendship auxFriendS = new Friendship(currentUser.getId(), friendUser.getId());
-        friendRepo.findAll().forEach( (Friendship x) -> {
-            if (x.equals(auxFriendS)) {
-                throw new FriendshipException("Users are already friends.\n");
-            }
-        });
 
-        loadFriends(currentUser);
-        loadFriends(friendUser);
+        friendSrv.loadFriends(currentUser);
+        friendSrv.loadFriends(friendUser);
 
-        friendRepo.save(auxFriendS);
+        friendSrv.addFriendship(auxFriendS);
 
         currentUser.getFriendIDs().add(friendUser.getId());
         friendUser.getFriendIDs().add(currentUser.getId());
@@ -195,19 +136,17 @@ public class Service {
      */
     public void removeFriendship(User currentUser, User friendToRemove) throws FriendshipException {
         final Friendship auxFriendS = new Friendship(currentUser.getId(), friendToRemove.getId());
-        for (Friendship friendship : friendRepo.findAll()) {
-            if (friendship.equals(auxFriendS)) {
-                friendRepo.delete(friendship.getId());
-                currentUser.getFriendIDs().remove(friendToRemove.getId());
-                friendToRemove.getFriendIDs().remove(currentUser.getId());
-                return;
-            }
+        try {
+            friendSrv.removeFriendship(auxFriendS);
+            currentUser.getFriendIDs().remove(friendToRemove.getId());
+            friendToRemove.getFriendIDs().remove(currentUser.getId());
+        } catch (FriendshipException e) {
+            throw new FriendshipException(
+                    friendToRemove.getLastName() +
+                            " is not a friend of " +
+                            currentUser.getLastName() + ".\n"
+            );
         }
-        throw new FriendshipException(
-                friendToRemove.getLastName() +
-                " is not a friend of " +
-                currentUser.getLastName() + ".\n"
-        );
     }
 
     /**
@@ -218,7 +157,7 @@ public class Service {
     private Graph<UUID> createFriendsGraph() {
         Graph<UUID> graph = new Graph<>();
 
-        friendRepo.findAll().forEach(
+        friendSrv.getFriendships().forEach(
                 x -> graph.addUndirectedEdge(x.getUser1ID(), x.getUser2ID())
         );
         return graph;
@@ -243,7 +182,7 @@ public class Service {
      */
     public ArrayList<User> mostActiveCommunity() {
         Graph<UUID> graph = createFriendsGraph();
-        return new ArrayList<>(graph.getComponentWithMaxLen().stream().map(userRepo::findOne).toList());
+        return new ArrayList<>(graph.getComponentWithMaxLen().stream().map(userSrv::findOneUser).toList());
     }
 
     /**
@@ -255,25 +194,10 @@ public class Service {
      * @throws RuntimeException if an invalid date is provided
      */
     public void updateUser(User userToUpdate, String newLastName, String newFirstName, String newBirthdate) throws RuntimeException {
-        LocalDate date;
-        try {
-            date = LocalDate.parse(newBirthdate);
-        } catch (DateTimeParseException e) {
-            throw new RuntimeException("Invalid date format. Try: yyyy-MM-dd.\n");
-        }
-
         newLastName = newLastName.substring(0, 1).toUpperCase() + newLastName.substring(1);
         newFirstName = newFirstName.substring(0, 1).toUpperCase() + newFirstName.substring(1);
 
-        User updatedUser = new User(
-                newFirstName,
-                newLastName,
-                userToUpdate.getEmail(),
-                date
-        );
-        updatedUser.setId(userToUpdate.getId());
-
-        userRepo.update(updatedUser);
+        userSrv.updateUser(userToUpdate, newLastName, newFirstName, newBirthdate);
     }
 
     /////////////////////////////////
