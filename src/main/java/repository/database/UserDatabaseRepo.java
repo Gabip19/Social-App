@@ -1,5 +1,6 @@
 package repository.database;
 
+import domain.HashedPasswordDTO;
 import domain.User;
 import domain.validators.Validator;
 
@@ -78,4 +79,22 @@ public class UserDatabaseRepo extends AbstractDatabaseRepository<UUID, User> {
 
         return new User(id, firstName, lastName, email, birthdate);
     }
+
+    public void updateUserPassword(String email, HashedPasswordDTO passwordInfo) {
+        String sql = "UPDATE users SET salt = ?, password = ? WHERE email = ?";
+        try (
+                PreparedStatement ps = connection.prepareStatement(sql);
+        ) {
+            ps.setString(1, passwordInfo.getSalt());
+            ps.setString(2, passwordInfo.getHashedPassword());
+            ps.setString(3, email);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public HashedPasswordDTO getLoginInfoForEmail(String email) {
+//
+//    }
 }

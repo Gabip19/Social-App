@@ -1,7 +1,8 @@
 package service;
 
+import domain.HashedPasswordDTO;
 import domain.User;
-import repository.Repository;
+import repository.database.UserDatabaseRepo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -10,9 +11,10 @@ import java.util.Collection;
 import java.util.UUID;
 
 public class UserService {
-    private final Repository<UUID, User> userRepo;
+//    private final Repository<UUID, User> userRepo;
+    private final UserDatabaseRepo userRepo;
 
-    public UserService(Repository<UUID, User> userRepo) {
+    public UserService(UserDatabaseRepo userRepo) {
         this.userRepo = userRepo;
     }
 
@@ -20,7 +22,7 @@ public class UserService {
         return new ArrayList<>( (Collection<User>) userRepo.findAll());
     }
 
-    public void addUser(String lastName, String firstName, String email, String birthdate) throws RuntimeException {
+    public void addUser(String lastName, String firstName, String email, String birthdate, HashedPasswordDTO passwordInfo) throws RuntimeException {
         LocalDate date;
         try {
             date = LocalDate.parse(birthdate);
@@ -37,6 +39,7 @@ public class UserService {
 
         User user = new User(firstName, lastName, email, date);
         userRepo.save(user);
+        userRepo.updateUserPassword(user.getEmail(), passwordInfo);
     }
 
     public void removeUser(User user) {
