@@ -83,7 +83,7 @@ public class UserDatabaseRepo extends AbstractDatabaseRepository<UUID, User> {
     public void setUserPassword(String email, HashedPasswordDTO passwordInfo) {
         String sql = "UPDATE users SET salt = ?, password = ? WHERE email = ?";
         try (
-                PreparedStatement ps = connection.prepareStatement(sql);
+                PreparedStatement ps = connection.prepareStatement(sql)
         ) {
             ps.setString(1, passwordInfo.getSalt());
             ps.setString(2, passwordInfo.getHashedPassword());
@@ -94,7 +94,39 @@ public class UserDatabaseRepo extends AbstractDatabaseRepository<UUID, User> {
         }
     }
 
-//    public HashedPasswordDTO getLoginInfoForEmail(String email) {
-//
-//    }
+    public User findUserByEmail(String email) {
+        String sql = "SELECT * FROM users WHERE email = ?";
+        try (
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setString(1, email);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                return createEntity(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public HashedPasswordDTO getLoginInfo(UUID id) {
+        String sql = "SELECT salt, password FROM users WHERE id = ?";
+        HashedPasswordDTO passwordDTO = null;
+        try (
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setObject(1, id);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                passwordDTO = new HashedPasswordDTO(
+                    resultSet.getString("salt"),
+                    resultSet.getString("password")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return passwordDTO;
+    }
 }

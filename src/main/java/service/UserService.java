@@ -2,6 +2,7 @@ package service;
 
 import domain.HashedPasswordDTO;
 import domain.User;
+import domain.validators.exceptions.SignInException;
 import repository.database.UserDatabaseRepo;
 
 import java.time.LocalDate;
@@ -89,5 +90,13 @@ public class UserService {
         updatedUser.setId(userToUpdate.getId());
 
         userRepo.update(updatedUser);
+    }
+
+    public User getUserWithEmail(String email) {
+        return userRepo.findUserByEmail(email);
+    }
+
+    public HashedPasswordDTO getLoginInfo(UUID id) {
+        return userRepo.getLoginInfo(id);
     }
 }

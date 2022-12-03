@@ -40,7 +40,7 @@ public class PasswordHasher {
         return hashedPassword;
     }
 
-    public static byte[] getNewSalt() {
+    private static byte[] getNewSalt() {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);

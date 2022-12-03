@@ -4,6 +4,7 @@ import domain.Friendship;
 import domain.HashedPasswordDTO;
 import domain.User;
 import domain.validators.exceptions.FriendshipException;
+import domain.validators.exceptions.SignInException;
 import utils.Graph;
 import utils.PasswordHasher;
 
@@ -36,12 +37,30 @@ public class Network {
         return friendSrv.getFriendships();
     }
 
-    private void signIn(User user) {
+    private void setCurrentUser(User user) {
         currentUser = user;
     }
 
     public User getCurrentUser() {
         return currentUser;
+    }
+
+    public void signIn(String email, String password) {
+        User user = userSrv.getUserWithEmail(email);
+        if (user == null) {
+            throw new SignInException("Incorrect email provided.");
+        }
+
+        if (checkPassword(password, userSrv.getLoginInfo(user.getId()))) {
+            setCurrentUser(user);
+        }
+        else throw new SignInException("Incorrect password provided.");
+    }
+
+    private boolean checkPassword(String password, HashedPasswordDTO loginInfo) {
+        String hashedPassword = PasswordHasher.getHashedPassword(password, loginInfo.getSalt());
+        String passwordToMatch = loginInfo.getHashedPassword();
+        return hashedPassword.equals(passwordToMatch);
     }
 
     /**
@@ -71,7 +90,7 @@ public class Network {
 
         User newUser = userSrv.addUser(lastName, firstName, email, birthdate, hashedPassword);
 
-        signIn(newUser);
+        setCurrentUser(newUser);
     }
 
     /**

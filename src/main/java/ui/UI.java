@@ -58,7 +58,10 @@ public class UI {
             int option = Integer.parseInt(scanner.nextLine());
 
             switch (option) {
-//                case 1 ->
+                case 1 -> {
+                    signIn();
+                    signedIn = true;
+                }
                 case 2 -> {
                     addUser();
                     signedIn = true;
@@ -168,6 +171,17 @@ public class UI {
         System.out.print("Introduce substring: ");
         String substring = scanner.nextLine();
         return srv.getUsersWithName(substring);
+    }
+
+    private void signIn() {
+        System.out.println("\n------------===< SIGN IN >===------------\n");
+        System.out.print("Email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Password: ");
+        String password = scanner.nextLine();
+
+        srv.signIn(email, password);
     }
 
     private void addUser() {
