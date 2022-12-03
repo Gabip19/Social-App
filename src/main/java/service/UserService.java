@@ -30,16 +30,20 @@ public class UserService {
             throw new RuntimeException("Invalid date format. Try: yyyy-MM-dd.\n");
         }
 
-        userRepo.findAll().forEach(
-                x -> {
-                    if (x.getEmail().equals(email))
-                        throw new RuntimeException("An user with the given email already exists.");
-                }
-        );
+        if (!emailIsAvailable(email))
+            throw new RuntimeException("An user with the given email already exists.");
 
         User user = new User(firstName, lastName, email, date);
         userRepo.save(user);
         userRepo.updateUserPassword(user.getEmail(), passwordInfo);
+    }
+
+    private boolean emailIsAvailable(String email) {
+        for (User x : userRepo.findAll()) {
+            if (x.getEmail().equals(email))
+                return false;
+        }
+        return true;
     }
 
     public void removeUser(User user) {
