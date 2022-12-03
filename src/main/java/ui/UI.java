@@ -7,7 +7,9 @@ import domain.validators.FriendshipValidator;
 import domain.validators.UserValidator;
 import repository.database.FriendshipDatabaseRepo;
 import repository.database.UserDatabaseRepo;
-import service.Service;
+import service.FriendshipService;
+import service.Network;
+import service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +18,11 @@ import java.util.Scanner;
 public class UI {
 
     private static final UI instance = new UI();
-    private final Service srv;
+    private final Network srv;
     private final Scanner scanner = new Scanner(System.in);
 
     private UI() {
-        srv = new Service(
+        srv = new Network(
                 new UserService(
                     new UserDatabaseRepo(
                         DatabaseTables.users.toString(),

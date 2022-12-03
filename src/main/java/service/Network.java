@@ -7,13 +7,15 @@ import utils.Graph;
 
 import java.util.*;
 
-public class Service {
+public class Network {
     private final UserService userSrv;
     private final FriendshipService friendSrv;
+    private User currentUser;
 
-    public Service(UserService userSrv, FriendshipService friendSrv) {
+    public Network(UserService userSrv, FriendshipService friendSrv) {
         this.userSrv = userSrv;
         this.friendSrv = friendSrv;
+        currentUser = null;
     }
 
     /**
