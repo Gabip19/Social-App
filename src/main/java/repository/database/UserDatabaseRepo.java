@@ -80,7 +80,7 @@ public class UserDatabaseRepo extends AbstractDatabaseRepository<UUID, User> {
         return new User(id, firstName, lastName, email, birthdate);
     }
 
-    public void updateUserPassword(String email, HashedPasswordDTO passwordInfo) {
+    public void setUserPassword(String email, HashedPasswordDTO passwordInfo) {
         String sql = "UPDATE users SET salt = ?, password = ? WHERE email = ?";
         try (
                 PreparedStatement ps = connection.prepareStatement(sql);

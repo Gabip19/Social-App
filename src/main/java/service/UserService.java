@@ -22,7 +22,7 @@ public class UserService {
         return new ArrayList<>( (Collection<User>) userRepo.findAll());
     }
 
-    public void addUser(String lastName, String firstName, String email, String birthdate, HashedPasswordDTO passwordInfo) throws RuntimeException {
+    public User addUser(String lastName, String firstName, String email, String birthdate, HashedPasswordDTO passwordInfo) throws RuntimeException {
         LocalDate date;
         try {
             date = LocalDate.parse(birthdate);
@@ -35,7 +35,9 @@ public class UserService {
 
         User user = new User(firstName, lastName, email, date);
         userRepo.save(user);
-        userRepo.updateUserPassword(user.getEmail(), passwordInfo);
+        userRepo.setUserPassword(user.getEmail(), passwordInfo);
+
+        return user;
     }
 
     private boolean emailIsAvailable(String email) {

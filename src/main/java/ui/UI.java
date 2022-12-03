@@ -47,31 +47,50 @@ public class UI {
     }
 
     public void start() {
-        auth();
         run();
     }
 
     private void auth() {
-        boolean notLogged = true;
-        while (notLogged) {
+        boolean signedIn = false;
+
+        while (!signedIn) {
             printLoginMenu();
-            notLogged = false;
+            int option = Integer.parseInt(scanner.nextLine());
+
+            switch (option) {
+//                case 1 ->
+                case 2 -> {
+                    addUser();
+                    signedIn = true;
+                }
+                case 3 -> signedIn = true;
+            }
         }
     }
 
     private void printLoginMenu() {
         System.out.println("\n------------===< LOG IN >===------------\n");
-
+        System.out.println("1. Log into account.\n");
+        System.out.println("2. Create new account.\n");
     }
 
     public void run() {
         boolean running = true;
+        boolean signedIn = false;
         int option;
 
         while (running) {
             try {
+                if (!signedIn) {
+                    auth();
+                    signedIn = true;
+                }
+
                 option = getMenuOption();
-                if (option != 0) {
+                if (option == -1) {
+                    signedIn = false;
+                }
+                else if (option != 0) {
                     executeOption(option);
                 }
                 else running = false;
@@ -88,7 +107,7 @@ public class UI {
 
     private void executeOption(int option) {
         switch (option) {
-            case 1 -> addUser();
+//            case 1 -> addUser();
             case 2 -> removeUser();
             case 3 -> printList(srv.getUsers());
             case 4 -> addFriend();
@@ -110,6 +129,7 @@ public class UI {
 
     private void printMenu() {
         System.out.println("\n------------===< MENU >===------------\n");
+        System.out.println("\tCURRENT USER: " + srv.getCurrentUser().getLastName() + "\n");
         System.out.println("\t1. Add user.");
         System.out.println("\t2. Remove user.");
         System.out.println("\t3. Print all users.");
@@ -139,6 +159,11 @@ public class UI {
         return Integer.parseInt(indexStr);
     }
 
+    private String readPassword() {
+        System.out.print("Password: ");
+        return scanner.nextLine();
+    }
+
     private ArrayList<User> getUsersBySubString() {
         System.out.print("Introduce substring: ");
         String substring = scanner.nextLine();
@@ -159,7 +184,9 @@ public class UI {
         System.out.print("Introduce birthdate: ");
         String birthdate = scanner.nextLine();
 
-        srv.addUser(lastName, firstName, email, birthdate);
+        String password = readPassword();
+
+        srv.addUser(lastName, firstName, email, birthdate, password);
         System.out.println("\nUser added successfully.\n");
     }
 

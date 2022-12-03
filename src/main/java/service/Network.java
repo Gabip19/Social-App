@@ -1,9 +1,11 @@
 package service;
 
 import domain.Friendship;
+import domain.HashedPasswordDTO;
 import domain.User;
 import domain.validators.exceptions.FriendshipException;
 import utils.Graph;
+import utils.PasswordHasher;
 
 import java.util.*;
 
@@ -34,6 +36,14 @@ public class Network {
         return friendSrv.getFriendships();
     }
 
+    private void signIn(User user) {
+        currentUser = user;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
     /**
      * Returns the user with the given ID
      * @param userID the ID of the user to search for
@@ -53,11 +63,15 @@ public class Network {
      * @throws RuntimeException <p>if an invalid date is provided</p>
      *                          <p>if the email is already used by a user</p>
      */
-    public void addUser(String lastName, String firstName, String email, String birthdate) throws RuntimeException {
+    public void addUser(String lastName, String firstName, String email, String birthdate, String password) {
         lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
         firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
 
-        userSrv.addUser(lastName, firstName, email, birthdate);
+        HashedPasswordDTO hashedPassword = PasswordHasher.newHashForPassword(password);
+
+        User newUser = userSrv.addUser(lastName, firstName, email, birthdate, hashedPassword);
+
+        signIn(newUser);
     }
 
     /**
