@@ -57,6 +57,10 @@ public class Network {
         else throw new SignInException("Incorrect password provided.");
     }
 
+    public void signOut() {
+        setCurrentUser(null);
+    }
+
     private boolean checkPassword(String password, HashedPasswordDTO loginInfo) {
         String hashedPassword = PasswordHasher.getHashedPassword(password, loginInfo.getSalt());
         String passwordToMatch = loginInfo.getHashedPassword();
