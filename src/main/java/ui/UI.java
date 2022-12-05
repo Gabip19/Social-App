@@ -132,7 +132,7 @@ public class UI {
 
     private void printMenu() {
         System.out.println("\n------------===< MENU >===------------\n");
-        System.out.println("\tCURRENT USER: " + srv.getCurrentUser().getLastName() + "\n");
+        System.out.println("\tCURRENT USER: " + srv.getCurrentUser().getFirstName() + "\n");
         System.out.println("\t1. Add user.");
         System.out.println("\t2. Remove user.");
         System.out.println("\t3. Print all users.");
