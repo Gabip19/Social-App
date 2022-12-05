@@ -108,7 +108,7 @@ public class UI {
         }
     }
 
-    private void executeOption(int option) {
+    private void executeOption(int option) { // TODO: 12/05/22 accept/reject friend request options and see pending friend requests
         switch (option) {
 //            case 1 -> addUser();
             case 2 -> removeUser();

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Friendship extends Entity<UUID> {
+public class Friendship extends Entity<UUID> { // TODO: 12/06/22 refactor to sender and receiver
     private UUID user1ID;
     private UUID user2ID;
     private LocalDateTime friendsFrom;
@@ -17,7 +17,7 @@ public class Friendship extends Entity<UUID> {
      * @param user2ID first user's id
      */
     public Friendship(UUID user1ID, UUID user2ID, FriendshipStatus status) {
-        if (user1ID.compareTo(user2ID) < 0) {
+        if (user1ID.compareTo(user2ID) < 0) { // TODO: 12/06/22 remove this
             this.user1ID = user1ID;
             this.user2ID = user2ID;
         }
@@ -31,7 +31,7 @@ public class Friendship extends Entity<UUID> {
     }
 
     public Friendship(UUID friendshipID, UUID user1ID, UUID user2ID, String date, FriendshipStatus friendshipStatus) {
-        if (user1ID.compareTo(user2ID) < 0) {
+        if (user1ID.compareTo(user2ID) < 0) { // TODO: 12/06/22 remove this
             this.user1ID = user1ID;
             this.user2ID = user2ID;
         }
@@ -81,7 +81,7 @@ public class Friendship extends Entity<UUID> {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o) { // TODO: 12/06/22 use containsID for equality test
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Friendship that = (Friendship) o;
@@ -89,7 +89,7 @@ public class Friendship extends Entity<UUID> {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode() { // TODO: 12/06/22 test this against equals for consistency
         return Objects.hash(user1ID, user2ID);
     }
 

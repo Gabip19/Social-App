@@ -1,6 +1,7 @@
 package service;
 
 import domain.Friendship;
+import domain.FriendshipStatus;
 import domain.HashedPasswordDTO;
 import domain.User;
 import domain.validators.exceptions.FriendshipException;
@@ -116,9 +117,19 @@ public class Network {
         friendSrv.loadFriends(user);
 
         return new ArrayList<>(
-                user.getFriendIDs().stream().map(userSrv::findOneUser).toList()
+            user.getFriendIDs().stream().map(userSrv::findOneUser).toList()
         );
     }
+
+    public List<Friendship> getFriendRequestsForUser(User user) { // TODO: 12/06/22 refactor for user to be the receiver
+        return friendSrv.getFriendships()
+                .stream()
+                .filter(x -> x.containsID(user.getId()))
+                .filter(x -> x.getFriendshipStatus().equals(FriendshipStatus.PENDING))
+                .toList();
+    }
+
+    // TODO: 12/06/22 create getSentFriendRequests method
 
     /**
      * Deletes a given user from the corresponding repository.
@@ -128,14 +139,14 @@ public class Network {
     public void removeUser(User user) {
         userSrv.removeUser(user);
 
-        removeFriendsForUser(user.getId());
+        removeFriendshipsForUser(user.getId());
     }
 
     /**
      * Deletes from the Friendship Repository all friendships containing a given user
      * @param id the ID of the user
      */
-    private void removeFriendsForUser(UUID id) {
+    private void removeFriendshipsForUser(UUID id) {
         ArrayList<UUID> fsIDsToRemove = new ArrayList<>();
         friendSrv.getFriendships().forEach(
                 x -> {
@@ -153,8 +164,12 @@ public class Network {
      * @param friendToAdd the user to be added as friend
      * @throws FriendshipException if the users are already friends
      */
-    public void sendFriendRequest(User friendToAdd) {
-        final Friendship auxFriendS = new Friendship(currentUser.getId(), friendToAdd.getId());
+    public void sendFriendRequest(User friendToAdd) { // TODO: 12/06/22 verify for sender to be the current user
+        final Friendship auxFriendS = new Friendship(
+                currentUser.getId(),
+                friendToAdd.getId(),
+                FriendshipStatus.PENDING
+        );
 
         friendSrv.loadFriends(currentUser);
         friendSrv.loadFriends(friendToAdd);
@@ -165,6 +180,13 @@ public class Network {
         friendToAdd.getFriendIDs().add(currentUser.getId());
     }
 
+    // TODO: 12/05/22 create acceptFriendRequestFrom method
+    public void acceptFriendRequest() {
+
+    }
+
+    // TODO: 12/05/22 create rejectFriendRequestFrom method
+
     /**
      * Removes the friendship between two given users.
      * <p>The users' friends list are also updated.</p>
@@ -172,7 +194,12 @@ public class Network {
      * @throws FriendshipException if the given users are not friends
      */
     public void removeFriend(User friendToRemove) throws FriendshipException {
-        final Friendship auxFriendS = new Friendship(currentUser.getId(), friendToRemove.getId());
+        final Friendship auxFriendS = new Friendship(
+                currentUser.getId(),
+                friendToRemove.getId(),
+                FriendshipStatus.ACCEPTED
+        );
+
         try {
             friendSrv.removeFriendship(auxFriendS);
             currentUser.getFriendIDs().remove(friendToRemove.getId());
@@ -190,9 +217,10 @@ public class Network {
     private Graph<UUID> createFriendsGraph() {
         Graph<UUID> graph = new Graph<>();
 
-        friendSrv.getFriendships().forEach(
-                x -> graph.addUndirectedEdge(x.getUser1ID(), x.getUser2ID())
-        );
+        friendSrv.getFriendships()
+                .stream()
+                .filter(x -> x.getFriendshipStatus().equals(FriendshipStatus.ACCEPTED))
+                .forEach(x -> graph.addUndirectedEdge(x.getUser1ID(), x.getUser2ID()));
         return graph;
     }
 

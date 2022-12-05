@@ -1,6 +1,7 @@
 package service;
 
 import domain.Friendship;
+import domain.FriendshipStatus;
 import domain.User;
 import domain.validators.exceptions.FriendshipException;
 import repository.Repository;
@@ -31,23 +32,34 @@ public class FriendshipService {
             UUID userId = user.getId();
             friendRepo.findAll().forEach(
                     (Friendship x) -> {
-                        if (x.getUser1ID().equals(userId))
-                            user.getFriendIDs().add(x.getUser2ID());
-                        else if (x.getUser2ID().equals(userId))
-                            user.getFriendIDs().add(x.getUser1ID());
+                        if (x.getFriendshipStatus().equals(FriendshipStatus.ACCEPTED)) {
+                            if (x.getUser1ID().equals(userId))
+                                user.getFriendIDs().add(x.getUser2ID());
+                            else if (x.getUser2ID().equals(userId))
+                                user.getFriendIDs().add(x.getUser1ID());
+                        }
                     }
             );
         }
     }
-
+    
     public void addFriendship(Friendship friendshipToAdd) throws FriendshipException {
         friendRepo.findAll().forEach((Friendship x) -> {
             if (x.equals(friendshipToAdd)) {
-                throw new FriendshipException("Users are already friends.\n");
+                throwExistingFriendshipException(x);
             }
         });
 
         friendRepo.save(friendshipToAdd);
+    }
+
+    private static void throwExistingFriendshipException(Friendship x) throws FriendshipException {
+        if (x.getFriendshipStatus().equals(FriendshipStatus.ACCEPTED))
+            throw new FriendshipException("Already friend with that user.\n");
+        if (x.getFriendshipStatus().equals(FriendshipStatus.PENDING))
+            throw new FriendshipException("A pending friend request already exists.\n");
+        if (x.getFriendshipStatus().equals(FriendshipStatus.REJECTED))
+            throw new FriendshipException("User already rejected your friend request.\n");
     }
 
     public void removeFriendship(Friendship friendshipToRemove) throws FriendshipException {
