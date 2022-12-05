@@ -16,7 +16,7 @@ public class Friendship extends Entity<UUID> {
      * @param user1ID first user's id
      * @param user2ID first user's id
      */
-    public Friendship(UUID user1ID, UUID user2ID) {
+    public Friendship(UUID user1ID, UUID user2ID, FriendshipStatus status) {
         if (user1ID.compareTo(user2ID) < 0) {
             this.user1ID = user1ID;
             this.user2ID = user2ID;
@@ -27,6 +27,7 @@ public class Friendship extends Entity<UUID> {
         }
         this.setId(UUID.randomUUID());
         this.friendsFrom = LocalDateTime.now();
+        this.friendshipStatus = status;
     }
 
     public Friendship(UUID friendshipID, UUID user1ID, UUID user2ID, String date, FriendshipStatus friendshipStatus) {
@@ -84,13 +85,12 @@ public class Friendship extends Entity<UUID> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Friendship that = (Friendship) o;
-        return Objects.equals(user1ID, that.user1ID) && Objects.equals(user2ID, that.user2ID) &&
-                Objects.equals(friendsFrom, that.friendsFrom) && Objects.equals(friendshipStatus, that.friendshipStatus);
+        return Objects.equals(user1ID, that.user1ID) && Objects.equals(user2ID, that.user2ID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user1ID, user2ID, friendsFrom, friendshipStatus);
+        return Objects.hash(user1ID, user2ID);
     }
 
     @Override

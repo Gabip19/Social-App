@@ -18,13 +18,13 @@ public class FriendshipDatabaseRepo extends AbstractDatabaseRepository<UUID, Fri
     }
 
     @Override
-    public Friendship save(Friendship entity) { // TODO: 12/05/22 should insert status too
+    public Friendship save(Friendship entity) {
         if (entity == null)
             throw new IllegalArgumentException("Entity must not be null.\n");
 
         validator.validate(entity);
 
-        String sql = "INSERT INTO friendships VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO friendships VALUES (?, ?, ?, ?, ?)";
         try (
                 PreparedStatement statement = connection.prepareStatement(sql)
         ) {
@@ -32,6 +32,7 @@ public class FriendshipDatabaseRepo extends AbstractDatabaseRepository<UUID, Fri
             statement.setObject(2, entity.getUser1ID());
             statement.setObject(3, entity.getUser2ID());
             statement.setTimestamp(4, Timestamp.valueOf(entity.getFriendsFrom()));
+            statement.setString(5, String.valueOf(entity.getFriendshipStatus()));
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -42,19 +43,20 @@ public class FriendshipDatabaseRepo extends AbstractDatabaseRepository<UUID, Fri
     }
 
     @Override
-    public Friendship update(Friendship entity) { // TODO: 12/05/22 should update status too
+    public Friendship update(Friendship entity) {
         if (entity == null)
             throw new IllegalArgumentException("Entity must not be null.\n");
 
         validator.validate(entity);
 
         if (findOne(entity.getId()) != null) {
-            String sql = "UPDATE friendships SET friends_from = ? WHERE id = ?";
+            String sql = "UPDATE friendships SET friends_from = ?, status = ? WHERE id = ?";
             try (
                     PreparedStatement statement = connection.prepareStatement(sql)
             ) {
                 statement.setTimestamp(1, Timestamp.valueOf(entity.getFriendsFrom()));
-                statement.setObject(2, entity.getId());
+                statement.setString(2, String.valueOf(entity.getFriendshipStatus()));
+                statement.setObject(3, entity.getId());
                 statement.executeUpdate();
 
                 return entity;
