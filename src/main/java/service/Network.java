@@ -231,43 +231,4 @@ public class Network {
 
         userSrv.updateUser(currentUser, newLastName, newFirstName, newBirthdate);
     }
-
-    /////////////////////////////////
-//    public void populateLists() {
-//        User user1 = new User("Florin", "Rahela", "florin.rahela@gmail.com", LocalDate.parse("1992-10-25"));
-//        userRepo.save(user1);
-//        User user2 = new User("Florian", "Simona", "florian.simona@gmail.com", LocalDate.parse("1993-03-28"));
-//        userRepo.save(user2);
-//        User user3 = new User("Oana", "Mihaela", "oana_mihaela@gmail.com", LocalDate.parse("1999-08-02"));
-//        userRepo.save(user3);
-//        User user4 = new User("Aurora", "Constanta", "constanta-aurora01@gmail.com", LocalDate.parse("2004-05-26"));
-//        userRepo.save(user4);
-//        User user5 = new User("Alex", "Costache", "alex.costache@gmail.com", LocalDate.parse("2007-09-10"));
-//        userRepo.save(user5);
-//        User user6 = new User("Mircea", "Daria", "mircea.daria@gmail.com", LocalDate.parse("1998-10-21"));
-//        userRepo.save(user6);
-//        User user7 = new User("Beniamin", "Eugenia", "beni_eug@gmail.com", LocalDate.parse("2003-10-06"));
-//        userRepo.save(user7);
-//        User user8 = new User("Silvia", "Florina", "silvia.florina@gmail.com", LocalDate.parse("2006-08-28"));
-//        userRepo.save(user8);
-//        User user9 = new User("Sofia", "Anamaria", "sofia_anamaria@gmail.com", LocalDate.parse("2007-08-24"));
-//        userRepo.save(user9);
-//        User user10 = new User("Ozana", "Iuliana", "ozana.iuliana@yahoo.com", LocalDate.parse("2008-08-07"));
-//        userRepo.save(user10);
-//        User user11 = new User("Mihail", "Popescu", "mihail_pop@yahoo.com", LocalDate.parse("2003-12-31"));
-//        userRepo.save(user11);
-//
-//        addFriendship(user1, user4);
-//        addFriendship(user1, user7);
-//        addFriendship(user4, user7);
-//        addFriendship(user4, user6);
-//        addFriendship(user6, user7);
-//
-//        addFriendship(user2, user3);
-//
-//        addFriendship(user5, user9);
-//        addFriendship(user8, user9);
-//        addFriendship(user9, user10);
-//    }
-    /////////////////////////////////
 }

@@ -2,7 +2,6 @@ package service;
 
 import domain.HashedPasswordDTO;
 import domain.User;
-import domain.validators.exceptions.SignInException;
 import repository.database.UserDatabaseRepo;
 
 import java.time.LocalDate;
@@ -12,7 +11,6 @@ import java.util.Collection;
 import java.util.UUID;
 
 public class UserService {
-//    private final Repository<UUID, User> userRepo;
     private final UserDatabaseRepo userRepo;
 
     public UserService(UserDatabaseRepo userRepo) {
