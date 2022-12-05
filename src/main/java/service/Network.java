@@ -150,41 +150,35 @@ public class Network {
     /**
      * Creates a friendship between two given users then saves it.
      * <p>The users' friends lists are also updated.</p>
-     * @param currentUser the user that sent the friend request
-     * @param friendUser the user to be added as friend
+     * @param friendToAdd the user to be added as friend
      * @throws FriendshipException if the users are already friends
      */
-    public void addFriendship(User currentUser, User friendUser) throws FriendshipException {
-        final Friendship auxFriendS = new Friendship(currentUser.getId(), friendUser.getId());
+    public void sendFriendRequest(User friendToAdd) {
+        final Friendship auxFriendS = new Friendship(currentUser.getId(), friendToAdd.getId());
 
         friendSrv.loadFriends(currentUser);
-        friendSrv.loadFriends(friendUser);
+        friendSrv.loadFriends(friendToAdd);
 
         friendSrv.addFriendship(auxFriendS);
 
-        currentUser.getFriendIDs().add(friendUser.getId());
-        friendUser.getFriendIDs().add(currentUser.getId());
+        currentUser.getFriendIDs().add(friendToAdd.getId());
+        friendToAdd.getFriendIDs().add(currentUser.getId());
     }
 
     /**
      * Removes the friendship between two given users.
      * <p>The users' friends list are also updated.</p>
-     * @param currentUser the user that wants to remove a friend
      * @param friendToRemove the friend that will be removed
      * @throws FriendshipException if the given users are not friends
      */
-    public void removeFriendship(User currentUser, User friendToRemove) throws FriendshipException {
+    public void removeFriend(User friendToRemove) throws FriendshipException {
         final Friendship auxFriendS = new Friendship(currentUser.getId(), friendToRemove.getId());
         try {
             friendSrv.removeFriendship(auxFriendS);
             currentUser.getFriendIDs().remove(friendToRemove.getId());
             friendToRemove.getFriendIDs().remove(currentUser.getId());
         } catch (FriendshipException e) {
-            throw new FriendshipException(
-                    friendToRemove.getLastName() +
-                            " is not a friend of " +
-                            currentUser.getLastName() + ".\n"
-            );
+            throw new FriendshipException("You are not friend with " + friendToRemove.getFirstName() + "\n");
         }
     }
 
@@ -226,17 +220,16 @@ public class Network {
 
     /**
      * Updates a user
-     * @param userToUpdate the user that is going to be updated
      * @param newLastName the new last name for the user
      * @param newFirstName the new first name for the user
      * @param newBirthdate the new birthdate for the user
      * @throws RuntimeException if an invalid date is provided
      */
-    public void updateUser(User userToUpdate, String newLastName, String newFirstName, String newBirthdate) throws RuntimeException {
+    public void updateUser(String newLastName, String newFirstName, String newBirthdate) {
         newLastName = newLastName.substring(0, 1).toUpperCase() + newLastName.substring(1);
         newFirstName = newFirstName.substring(0, 1).toUpperCase() + newFirstName.substring(1);
 
-        userSrv.updateUser(userToUpdate, newLastName, newFirstName, newBirthdate);
+        userSrv.updateUser(currentUser, newLastName, newFirstName, newBirthdate);
     }
 
     /////////////////////////////////

@@ -226,57 +226,37 @@ public class UI {
 
     private void addFriend() {
         System.out.println("\n------------===< ADD FRIEND >===------------\n");
-        System.out.println("Search for current user");
 
+        System.out.println("\nSearch for friends");
         ArrayList<User> matchingUsers = getUsersBySubString();
         printList(matchingUsers);
 
         if (!matchingUsers.isEmpty()) {
+            int index = readIndex("Index of user you want to add as friend: ");
+            User friendUser = matchingUsers.get(index);
 
-            int index = readIndex("Index of current user: ");
-            User currentUser = matchingUsers.get(index);
+            srv.sendFriendRequest(friendUser);
 
-            System.out.println("\nSearch for friends");
-            matchingUsers = getUsersBySubString();
-            printList(matchingUsers);
-
-            if (!matchingUsers.isEmpty()) {
-                index = readIndex("Index of user you want to add as friend: ");
-                User friendUser = matchingUsers.get(index);
-
-                srv.addFriendship(currentUser, friendUser);
-
-                System.out.println(
-                        "\n" + currentUser.getFirstName() +
-                        " is now friend with "
-                        + friendUser.getFirstName() + ".\n"
-                );
-                //printList(srv.getFriendsForUser(currentUser));
-            }
+            System.out.println(
+                    "\n" + srv.getCurrentUser().getFirstName() +
+                    " is now friend with "
+                    + friendUser.getFirstName() + ".\n"
+            );
         }
-
     }
 
     private void removeFriend() {
         System.out.println("\n------------===< REMOVE FRIEND >===------------\n");
-        System.out.println("Search for current user");
 
-        ArrayList<User> matchingUsers = getUsersBySubString();
-        printList(matchingUsers);
+        ArrayList<User> friends = srv.getFriendsForUser(srv.getCurrentUser());
+        printList(friends);
 
-        if (!matchingUsers.isEmpty()) {
-            int index = readIndex("Index of current user: ");
-            User currentUser = matchingUsers.get(index);
+        int index = readIndex("Index of friend to be removed: ");
+        User friendToRemove = friends.get(index);
 
-            ArrayList<User> friends = srv.getFriendsForUser(currentUser);
-            printList(friends);
-            index = readIndex("Index of friend to be removed: ");
-            User friendToRemove = friends.get(index);
+        srv.removeFriend(friendToRemove);
 
-            srv.removeFriendship(currentUser, friendToRemove);
-
-            System.out.println("\nFriend removed successfully.\n");
-        }
+        System.out.println("\nFriend removed successfully.\n");
     }
 
     private void printFriendships() {
@@ -308,26 +288,16 @@ public class UI {
 
     private void updateUser() {
         System.out.println("\n------------===< UPDATE USER >===------------\n");
-        System.out.println("Search for user:");
 
-        ArrayList<User> matchingUsers = getUsersBySubString();
-        printList(matchingUsers);
+        System.out.print("Introduce the new last name: ");
+        String newLastName = scanner.nextLine();
+        System.out.print("Introduce the new first name: ");
+        String newFirstName = scanner.nextLine();
+        System.out.print("Introduce the new birthdate: ");
+        String newBirthdate = scanner.nextLine();
 
-        if (!matchingUsers.isEmpty()) {
+        srv.updateUser(newLastName, newFirstName, newBirthdate);
 
-            int index = readIndex("Index of current user: ");
-            User userToUpdate = matchingUsers.get(index);
-
-            System.out.print("Introduce the new last name: ");
-            String newLastName = scanner.nextLine();
-            System.out.print("Introduce the new first name: ");
-            String newFirstName = scanner.nextLine();
-            System.out.print("Introduce the new birthdate: ");
-            String newBirthdate = scanner.nextLine();
-
-            srv.updateUser(userToUpdate, newLastName, newFirstName, newBirthdate);
-
-            System.out.println("User updated successfully.\n");
-        }
+        System.out.println("User updated successfully.\n");
     }
 }
