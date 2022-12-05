@@ -4,7 +4,7 @@ import domain.Friendship;
 import domain.validators.Validator;
 import domain.factory.EntityAsStringFactory;
 import domain.factory.EntityFactory;
-import domain.factory.EntityTypeEnum;
+import domain.factory.EntityTypes;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +17,7 @@ public class FriendshipFileRepository extends AbstractFileRepository<UUID, Frien
 
     @Override
     protected Friendship extractEntity(List<String> attr) {
-        return EntityFactory.createEntity(EntityTypeEnum.FRIENDSHIP, attr);
+        return EntityFactory.createEntity(EntityTypes.FRIENDSHIP, attr);
     }
 
     @Override

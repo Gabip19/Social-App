@@ -1,6 +1,6 @@
 package domain.factory;
 
-public enum EntityTypeEnum {
+public enum EntityTypes {
     USER,
     FRIENDSHIP
 }

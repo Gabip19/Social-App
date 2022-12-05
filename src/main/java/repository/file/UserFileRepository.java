@@ -4,7 +4,7 @@ import domain.User;
 import domain.validators.Validator;
 import domain.factory.EntityAsStringFactory;
 import domain.factory.EntityFactory;
-import domain.factory.EntityTypeEnum;
+import domain.factory.EntityTypes;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +17,7 @@ public class UserFileRepository extends AbstractFileRepository<UUID, User> {
 
     @Override
     protected User extractEntity(List<String> attr) {
-        return EntityFactory.createEntity(EntityTypeEnum.USER, attr);
+        return EntityFactory.createEntity(EntityTypes.USER, attr);
     }
 
     @Override

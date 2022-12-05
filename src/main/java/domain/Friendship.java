@@ -7,8 +7,8 @@ import java.util.UUID;
 public class Friendship extends Entity<UUID> {
     private UUID user1ID;
     private UUID user2ID;
-
     private LocalDateTime friendsFrom;
+    private FriendshipStatus friendshipStatus;
 
     /**
      * Creates a friendship with the given IDs.
@@ -29,7 +29,7 @@ public class Friendship extends Entity<UUID> {
         this.friendsFrom = LocalDateTime.now();
     }
 
-    public Friendship(UUID friendshipID, UUID user1ID, UUID user2ID, String date) {
+    public Friendship(UUID friendshipID, UUID user1ID, UUID user2ID, String date, FriendshipStatus friendshipStatus) {
         if (user1ID.compareTo(user2ID) < 0) {
             this.user1ID = user1ID;
             this.user2ID = user2ID;
@@ -40,6 +40,7 @@ public class Friendship extends Entity<UUID> {
         }
         this.setId(friendshipID);
         friendsFrom = LocalDateTime.parse(date);
+        this.friendshipStatus = friendshipStatus;
     }
 
     public UUID getUser1ID() {
@@ -66,6 +67,14 @@ public class Friendship extends Entity<UUID> {
         this.friendsFrom = friendsFrom;
     }
 
+    public FriendshipStatus getFriendshipStatus() {
+        return friendshipStatus;
+    }
+
+    public void setFriendshipStatus(FriendshipStatus friendshipStatus) {
+        this.friendshipStatus = friendshipStatus;
+    }
+
     public boolean containsID(UUID id) {
         return this.user1ID.equals(id) || this.user2ID.equals(id);
     }
@@ -75,12 +84,13 @@ public class Friendship extends Entity<UUID> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Friendship that = (Friendship) o;
-        return Objects.equals(user1ID, that.user1ID) && Objects.equals(user2ID, that.user2ID);
+        return Objects.equals(user1ID, that.user1ID) && Objects.equals(user2ID, that.user2ID) &&
+                Objects.equals(friendsFrom, that.friendsFrom) && Objects.equals(friendshipStatus, that.friendshipStatus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user1ID, user2ID);
+        return Objects.hash(user1ID, user2ID, friendsFrom, friendshipStatus);
     }
 
     @Override
@@ -89,6 +99,7 @@ public class Friendship extends Entity<UUID> {
                 "User1_ID= " + user1ID +
                 ", User2_ID= " + user2ID +
                 ", ID= " + getId() +
-                ", FriendsFrom= " + getFriendsFrom();
+                ", FriendsFrom= " + getFriendsFrom() +
+                ", FriendshipStatus= " + getFriendshipStatus();
     }
 }

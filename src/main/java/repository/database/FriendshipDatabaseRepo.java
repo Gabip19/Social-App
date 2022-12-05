@@ -1,6 +1,7 @@
 package repository.database;
 
 import domain.Friendship;
+import domain.FriendshipStatus;
 import domain.validators.Validator;
 
 import java.sql.*;
@@ -17,7 +18,7 @@ public class FriendshipDatabaseRepo extends AbstractDatabaseRepository<UUID, Fri
     }
 
     @Override
-    public Friendship save(Friendship entity) {
+    public Friendship save(Friendship entity) { // TODO: 12/05/22 should insert status too
         if (entity == null)
             throw new IllegalArgumentException("Entity must not be null.\n");
 
@@ -41,7 +42,7 @@ public class FriendshipDatabaseRepo extends AbstractDatabaseRepository<UUID, Fri
     }
 
     @Override
-    public Friendship update(Friendship entity) {
+    public Friendship update(Friendship entity) { // TODO: 12/05/22 should update status too
         if (entity == null)
             throw new IllegalArgumentException("Entity must not be null.\n");
 
@@ -70,7 +71,8 @@ public class FriendshipDatabaseRepo extends AbstractDatabaseRepository<UUID, Fri
         UUID user1ID = resultSet.getObject("user1_id", UUID.class);
         UUID user2ID = resultSet.getObject("user2_id", UUID.class);
         LocalDateTime friendsFrom = resultSet.getTimestamp("friends_from").toLocalDateTime();
+        FriendshipStatus status = FriendshipStatus.valueOf(resultSet.getString("status"));
 
-        return new Friendship(id, user1ID, user2ID, friendsFrom.toString());
+        return new Friendship(id, user1ID, user2ID, friendsFrom.toString(), status);
     }
 }
