@@ -4,68 +4,56 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Friendship extends Entity<UUID> { // TODO: 12/06/22 refactor to sender and receiver
-    private UUID user1ID;
-    private UUID user2ID;
-    private LocalDateTime friendsFrom;
+public class Friendship extends Entity<UUID> {
+    private UUID senderID;
+    private UUID receiverID;
+    private LocalDateTime friendshipDate;
     private FriendshipStatus friendshipStatus;
 
     /**
      * Creates a friendship with the given IDs.
      * <p> The lower UUID will be always stored first </p>
-     * @param user1ID first user's id
-     * @param user2ID first user's id
+     * @param senderID first user's id
+     * @param receiverID first user's id
      */
-    public Friendship(UUID user1ID, UUID user2ID, FriendshipStatus status) {
-        if (user1ID.compareTo(user2ID) < 0) { // TODO: 12/06/22 remove this
-            this.user1ID = user1ID;
-            this.user2ID = user2ID;
-        }
-        else {
-            this.user1ID = user2ID;
-            this.user2ID = user1ID;
-        }
+    public Friendship(UUID senderID, UUID receiverID, FriendshipStatus status) {
+        this.senderID = senderID;
+        this.receiverID = receiverID;
         this.setId(UUID.randomUUID());
-        this.friendsFrom = LocalDateTime.now();
+        this.friendshipDate = LocalDateTime.now();
         this.friendshipStatus = status;
     }
 
-    public Friendship(UUID friendshipID, UUID user1ID, UUID user2ID, String date, FriendshipStatus friendshipStatus) {
-        if (user1ID.compareTo(user2ID) < 0) { // TODO: 12/06/22 remove this
-            this.user1ID = user1ID;
-            this.user2ID = user2ID;
-        }
-        else {
-            this.user1ID = user2ID;
-            this.user2ID = user1ID;
-        }
+    public Friendship(UUID friendshipID, UUID senderID, UUID receiverID, String friendsFromDate, FriendshipStatus friendshipStatus) {
+        this.senderID = senderID;
+        this.receiverID = receiverID;
         this.setId(friendshipID);
-        friendsFrom = LocalDateTime.parse(date);
+        friendshipDate = LocalDateTime.parse(friendsFromDate);
         this.friendshipStatus = friendshipStatus;
     }
 
-    public UUID getUser1ID() {
-        return user1ID;
+    public UUID getSenderID() {
+        return senderID;
     }
 
-    public void setUser1ID(UUID user1ID) {
-        this.user1ID = user1ID;
+    public void setSenderID(UUID senderID) {
+        this.senderID = senderID;
     }
 
-    public UUID getUser2ID() {
-        return user2ID;
+    public UUID getReceiverID() {
+        return receiverID;
     }
 
-    public void setUser2ID(UUID user2ID) {
-        this.user2ID = user2ID;
+    public void setReceiverID(UUID receiverID) {
+        this.receiverID = receiverID;
     }
 
-    public LocalDateTime getFriendsFrom() {
-        return friendsFrom;
+    public LocalDateTime getFriendshipDate() {
+        return friendshipDate;
     }
 
-    public void setFriendsFrom(LocalDateTime friendsFrom) {
-        this.friendsFrom = friendsFrom;
+    public void setFriendshipDate(LocalDateTime friendshipDate) {
+        this.friendshipDate = friendshipDate;
     }
 
     public FriendshipStatus getFriendshipStatus() {
@@ -77,29 +65,31 @@ public class Friendship extends Entity<UUID> { // TODO: 12/06/22 refactor to sen
     }
 
     public boolean containsID(UUID id) {
-        return this.user1ID.equals(id) || this.user2ID.equals(id);
+        return this.senderID.equals(id) || this.receiverID.equals(id);
     }
 
     @Override
-    public boolean equals(Object o) { // TODO: 12/06/22 use containsID for equality test
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Friendship that = (Friendship) o;
-        return Objects.equals(user1ID, that.user1ID) && Objects.equals(user2ID, that.user2ID);
+        return that.containsID(senderID) && that.containsID(receiverID);
     }
 
     @Override
-    public int hashCode() { // TODO: 12/06/22 test this against equals for consistency
-        return Objects.hash(user1ID, user2ID);
+    public int hashCode() {
+        if (senderID.compareTo(receiverID) < 0)
+            return Objects.hash(senderID, receiverID);
+        else return Objects.hash(receiverID, senderID);
     }
 
     @Override
     public String toString() {
         return "FriendShip: " +
-                "User1_ID= " + user1ID +
-                ", User2_ID= " + user2ID +
+                "User1_ID= " + senderID +
+                ", User2_ID= " + receiverID +
                 ", ID= " + getId() +
-                ", FriendsFrom= " + getFriendsFrom() +
+                ", FriendsFrom= " + getFriendshipDate() +
                 ", FriendshipStatus= " + getFriendshipStatus();
     }
 }

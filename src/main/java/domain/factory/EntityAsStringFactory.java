@@ -16,9 +16,9 @@ public class EntityAsStringFactory {
                     + entityUser.getBirthdate();
         } else if (entity instanceof Friendship entityFriendship) {
             return entityFriendship.getId() + ";"
-                    + entityFriendship.getUser1ID() + ";"
-                    + entityFriendship.getUser2ID() + ";"
-                    + entityFriendship.getFriendsFrom();
+                    + entityFriendship.getSenderID() + ";"
+                    + entityFriendship.getReceiverID() + ";"
+                    + entityFriendship.getFriendshipDate();
         }
         throw new RuntimeException("Unknown entity type.\n");
     }

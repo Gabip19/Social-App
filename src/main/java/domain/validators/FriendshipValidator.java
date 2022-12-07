@@ -17,10 +17,10 @@ public class FriendshipValidator implements Validator<Friendship>{
      */
     @Override
     public void validate(Friendship friendship) throws FriendshipException {
-        if (friendship.getUser1ID() == null || friendship.getUser2ID() == null) {
+        if (friendship.getSenderID() == null || friendship.getReceiverID() == null) {
             throw new FriendshipException("IDs can not be null.\n");
         }
-        if (friendship.getUser1ID().equals(friendship.getUser2ID())) {
+        if (friendship.getSenderID().equals(friendship.getReceiverID())) {
             throw new FriendshipException("A user can not befriend himself.\n");
         }
     }

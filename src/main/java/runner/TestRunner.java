@@ -1,5 +1,7 @@
 package runner;
 
+import domain.Friendship;
+import domain.FriendshipStatus;
 import domain.User;
 import domain.validators.UserValidator;
 import domain.validators.Validator;

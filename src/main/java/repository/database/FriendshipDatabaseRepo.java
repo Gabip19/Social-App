@@ -29,9 +29,9 @@ public class FriendshipDatabaseRepo extends AbstractDatabaseRepository<UUID, Fri
                 PreparedStatement statement = connection.prepareStatement(sql)
         ) {
             statement.setObject(1, entity.getId());
-            statement.setObject(2, entity.getUser1ID());
-            statement.setObject(3, entity.getUser2ID());
-            statement.setTimestamp(4, Timestamp.valueOf(entity.getFriendsFrom()));
+            statement.setObject(2, entity.getSenderID());
+            statement.setObject(3, entity.getReceiverID());
+            statement.setTimestamp(4, Timestamp.valueOf(entity.getFriendshipDate()));
             statement.setString(5, String.valueOf(entity.getFriendshipStatus()));
 
             statement.executeUpdate();
@@ -54,7 +54,7 @@ public class FriendshipDatabaseRepo extends AbstractDatabaseRepository<UUID, Fri
             try (
                     PreparedStatement statement = connection.prepareStatement(sql)
             ) {
-                statement.setTimestamp(1, Timestamp.valueOf(entity.getFriendsFrom()));
+                statement.setTimestamp(1, Timestamp.valueOf(entity.getFriendshipDate()));
                 statement.setString(2, String.valueOf(entity.getFriendshipStatus()));
                 statement.setObject(3, entity.getId());
                 statement.executeUpdate();

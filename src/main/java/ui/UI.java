@@ -1,7 +1,9 @@
 package ui;
 
 import config.ApplicationContext;
+import domain.Friendship;
 import domain.User;
+import domain.validators.exceptions.SignInException;
 import repository.database.DatabaseTables;
 import domain.validators.FriendshipValidator;
 import domain.validators.UserValidator;
@@ -47,78 +49,76 @@ public class UI {
     }
 
     public void start() {
-        run();
+        auth();
     }
 
     private void auth() {
-        boolean signedIn = false;
+        boolean running = true;
 
-        while (!signedIn) {
-            printLoginMenu();
-            int option = Integer.parseInt(scanner.nextLine());
+        while (running) {
+            try {
+                printLoginMenu();
+                int option = Integer.parseInt(scanner.nextLine());
 
-            switch (option) {
-                case 1 -> {
-                    signIn();
-                    signedIn = true;
+                switch (option) {
+                    case 1 -> {
+                        signIn();
+                        run();
+                    }
+                    case 2 -> {
+                        addUser();
+                        run();
+                    }
+                    case 0 -> running = false;
                 }
-                case 2 -> {
-                    addUser();
-                    signedIn = true;
-                }
-                case 3 -> signedIn = true;
+            } catch (SignInException e) {
+                System.out.println("\n" + e.getMessage());
             }
         }
     }
 
     private void printLoginMenu() {
         System.out.println("\n------------===< LOG IN >===------------\n");
-        System.out.println("1. Log into account.\n");
-        System.out.println("2. Create new account.\n");
+        System.out.print("1. Log into account.\n");
+        System.out.print("2. Create new account.\n");
+        System.out.print("0. EXIT.\n");
     }
 
     public void run() {
-        boolean running = true;
-        boolean signedIn = false;
+        boolean signedIn = true;
         int option;
 
-        while (running) {
+        while (signedIn) {
             try {
-                if (!signedIn) {
-                    auth();
-                    signedIn = true;
-                }
-
                 option = getMenuOption();
-                if (option == -1) {
-                    signedIn = false;
-                }
-                else if (option != 0) {
+                if (option != 0) {
                     executeOption(option);
                 }
-                else running = false;
+                else signedIn = false;
             }
             catch (NumberFormatException e) {
                 System.out.println("\nOption must be an integer.\n");
             }
             catch (Exception e) {
                 System.out.println("\n" + e.getMessage());
-                //e.printStackTrace();
+//                e.printStackTrace();
             }
         }
     }
 
-    private void executeOption(int option) { // TODO: 12/05/22 accept/reject friend request options and see pending friend requests
+    private void executeOption(int option) {
         switch (option) {
-//            case 1 -> addUser();
+            case 1 -> printFriendRequests(srv.getFriendRequestsForUser(srv.getCurrentUser()));
             case 2 -> removeUser();
             case 3 -> printList(srv.getUsers());
             case 4 -> addFriend();
             case 5 -> removeFriend();
             case 6 -> printFriendships();
-            case 7 -> numOfCommunities();
-            case 8 -> mostActiveCommunity();
-            case 9 -> updateUser();
+            case 7 -> updateUser();
+            case 8 -> acceptFriendRequest();
+            case 9 -> rejectFriendRequest();
+            case 10 -> numOfCommunities();
+            case 11 -> mostActiveCommunity();
             default -> System.out.println("\nInvalid option.\n");
         }
     }
@@ -133,26 +133,27 @@ public class UI {
     private void printMenu() {
         System.out.println("\n------------===< MENU >===------------\n");
         System.out.println("\tCURRENT USER: " + srv.getCurrentUser().getFirstName() + "\n");
-        System.out.println("\t1. Add user.");
-        System.out.println("\t2. Remove user.");
-        System.out.println("\t3. Print all users.");
-        System.out.println("\t4. Add friend.");
-        System.out.println("\t5. Remove friend.");
-        System.out.println("\t6. Print all friendships.");
-        System.out.println("\t7. Print number of communities.");
-        System.out.println("\t8. Print the most active community.");
-        System.out.println("\t9. Update user.");
-        System.out.println("\t0. EXIT");
+        System.out.println("\t 1. Print pending friend requests.");
+        System.out.println("\t 2. Remove user.");
+        System.out.println("\t 3. Print all users.");
+        System.out.println("\t 4. Add friend.");
+        System.out.println("\t 5. Remove friend.");
+        System.out.println("\t 6. Print all friendships.");
+        System.out.println("\t 7. Update user.");
+        System.out.println("\t 8. Accept friend request.");
+        System.out.println("\t 9. Reject friend request.");
+        System.out.println("\t10. Print number of communities.");
+        System.out.println("\t11. Print the most active community.");
+        System.out.println("\t0. SIGN OUT");
         System.out.println("\n------------===< ---- >===------------");
     }
 
     private <T> void printList(List<T> list) {
         if (list.isEmpty()) {
-//            System.out.println("List is empty.");
             throw new RuntimeException("List is empty.");
         }
         System.out.println();
-        list.forEach( (T x) -> System.out.println(list.indexOf(x) + ". " + x));
+        list.forEach((T x) -> System.out.println(list.indexOf(x) + ". " + x));
         System.out.println("\n");
     }
 
@@ -204,6 +205,18 @@ public class UI {
         System.out.println("\nUser added successfully.\n");
     }
 
+    private void printFriendRequests(List<Friendship> friendRequests) {
+        if (!friendRequests.isEmpty()) {
+            friendRequests.forEach(
+                    x -> {
+                        String name = srv.findOneUser(x.getSenderID()).getFirstName();
+                        System.out.println(friendRequests.indexOf(x) + ". Pending friend request from " + name + ".");
+                    }
+            );
+        }
+        else throw new RuntimeException("No pending friend requests.");
+    }
+
     private void removeUser() {
         System.out.println("\n------------===< REMOVE >===------------\n");
         System.out.println("Search user to be removed");
@@ -238,9 +251,7 @@ public class UI {
             srv.sendFriendRequest(friendUser);
 
             System.out.println(
-                    "\n" + srv.getCurrentUser().getFirstName() +
-                    " is now friend with "
-                    + friendUser.getFirstName() + ".\n"
+                    "\nFriend request sent.\n"
             );
         }
     }
@@ -259,13 +270,41 @@ public class UI {
         System.out.println("\nFriend removed successfully.\n");
     }
 
+    private void acceptFriendRequest() {
+        System.out.println("\n------------===< ACCEPT FRIEND REQUEST >===------------\n");
+        List<Friendship> friendRequests = srv.getFriendRequestsForUser(srv.getCurrentUser());
+        printFriendRequests(friendRequests);
+
+        if (!friendRequests.isEmpty()) {
+            int index = readIndex("\nIndex of friendship: ");
+            Friendship friendshipToAccept = friendRequests.get(index);
+            srv.acceptFriendRequest(friendshipToAccept);
+
+            System.out.println("\nFriend request accepted.\n");
+        }
+    }
+
+    private void rejectFriendRequest() {
+        System.out.println("\n------------===< REJECT FRIEND REQUEST >===------------\n");
+        List<Friendship> friendRequests = srv.getFriendRequestsForUser(srv.getCurrentUser());
+        printFriendRequests(friendRequests);
+
+        if (!friendRequests.isEmpty()) {
+            int index = readIndex("\nIndex of friendship: ");
+            Friendship friendshipToAccept = friendRequests.get(index);
+            srv.rejectFriendRequest(friendshipToAccept);
+
+            System.out.println("\nFriend request rejected.\n");
+        }
+    }
+
     private void printFriendships() {
         var a = srv.getFriendships().stream().map( x ->
-                srv.findOneUser(x.getUser1ID()).getLastName()
+                srv.findOneUser(x.getSenderID()).getLastName()
                         + " is friend with " +
-                        srv.findOneUser(x.getUser2ID()).getLastName()
+                        srv.findOneUser(x.getReceiverID()).getLastName()
                         + " since " +
-                        x.getFriendsFrom() + "."
+                        x.getFriendshipDate() + "."
         ).toList();
 
         printList(a);

@@ -6,6 +6,7 @@ import domain.User;
 import domain.validators.exceptions.FriendshipException;
 import repository.Repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,10 +34,10 @@ public class FriendshipService {
             friendRepo.findAll().forEach(
                     (Friendship x) -> {
                         if (x.getFriendshipStatus().equals(FriendshipStatus.ACCEPTED)) {
-                            if (x.getUser1ID().equals(userId))
-                                user.getFriendIDs().add(x.getUser2ID());
-                            else if (x.getUser2ID().equals(userId))
-                                user.getFriendIDs().add(x.getUser1ID());
+                            if (x.getSenderID().equals(userId))
+                                user.getFriendIDs().add(x.getReceiverID());
+                            else if (x.getReceiverID().equals(userId))
+                                user.getFriendIDs().add(x.getSenderID());
                         }
                     }
             );
@@ -72,7 +73,13 @@ public class FriendshipService {
         throw new FriendshipException();
     }
 
-    public Friendship delete(UUID id) {
-        return friendRepo.delete(id);
+    public void delete(UUID id) {
+        friendRepo.delete(id);
+    }
+
+    public void updateFriendship(Friendship friendshipToUpdate, LocalDateTime newFriendshipDate, FriendshipStatus newStatus) {
+        friendshipToUpdate.setFriendshipDate(newFriendshipDate);
+        friendshipToUpdate.setFriendshipStatus(newStatus);
+        friendRepo.update(friendshipToUpdate);
     }
 }
