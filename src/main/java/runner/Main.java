@@ -1,10 +1,9 @@
 package runner;
 
-import ui.UI;
+import gui.GUI;
 
 public class Main {
     public static void main(String[] args) {
-        UI ui = UI.getInstance();
-        ui.start();
+        GUI.main(args);
     }
 }
