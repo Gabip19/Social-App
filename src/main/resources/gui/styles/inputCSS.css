@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@500;700&family=Nunito&family=Pacifico&family=Ubuntu&display=swap');
+
+.root {
+    -fx-font-family: 'Ubuntu', sans-serif;
+    /*-fx-background-color: #ffffff;*/
+    -fx-background-image: url("images/4back.jpg");
+}
+
+.close-btn, .min-btn {
+    -fx-background-radius: 0;
+    -fx-font-size: 15;
+    -fx-background-color: rgb(0, 0, 0, 0);
+    -fx-font-weight: 200;
+}
+
+.close-btn:hover {
+    -fx-background-color: rgba(255, 0, 0, 0.73);
+}
+
+.min-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.45);
+}
+
+.sign-in-vbox {
+    -fx-background-color: white;
+    -fx-background-radius: 35;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0, 0.7), 40, 0, 0, 0);
+}
+
+.welcome-title {
+    -fx-font-family: 'Pacifico', cursive;;
+    -fx-font-size: 60;
+    -fx-text-fill: black;
+}
+
+.input-title {
+    -fx-font-family: 'Commissioner', sans-serif;
+    -fx-font-weight: 500;
+    -fx-font-size: 25;
+    -fx-text-fill: #5d5656;
+}
+
+.input-icon {
+    -fx-icon-color: #5d5656;
+}
+
+.grid-input {
+    -fx-font-size: 15;
+    -fx-background-radius: 12;
+}
+
+.grid-input:hover, .grid-input:focused {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+.date-picker > .text-field {
+    -fx-font-size: 15;
+    -fx-background-radius: 12 0 0 12;
+}
+
+.date-picker > .arrow-button {
+    -fx-background-radius: 0 12 12 0;
+    -fx-background-color: linear-gradient(to bottom, rgb(147, 146, 241) 0%, rgb(217, 124, 246) 20%, rgba(0,195,235,1) 96%);
+}
+
+.error-label {
+    -fx-font-family: 'Commissioner', sans-serif;
+    -fx-font-weight: 500;
+    -fx-font-size: 16;
+    -fx-text-fill: red;
+}
+
+.btn-login {
+    -fx-background-radius: 10;
+    -fx-font-family: 'Commissioner', sans-serif;
+    -fx-font-weight: 500;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+    -fx-background-color: linear-gradient(to bottom, rgb(236, 89, 190) 0%, rgba(162,112,205,1) 28%, rgba(123,123,233,1) 49%, rgb(0, 210, 255) 96%);
+    /*    background: rgb(213,80,174);
+    background: linear-gradient(180deg, rgba(213,80,174,1) 0%, rgba(162,112,205,1) 28%, rgba(123,123,233,1) 49%, rgba(0,195,235,1) 96%);*/
+    /*    background: rgb(176,93,232);
+    background: linear-gradient(0deg, rgba(176,93,232,1) 0%, rgba(196,38,207,1) 17%, rgba(253,29,29,1) 60%, rgba(252,176,69,1) 100%);*/
+}
+
+.btn-login:hover, .btn-login:focused {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 15, 0, 0, 0);
+    -fx-background-color: linear-gradient(to bottom, rgba(255,0,91,1) 0%, rgba(133,104,240,1) 33%, rgba(82,165,246,1) 64%, rgba(0,255,201,1) 90%);
+}
+
+.bottom-text-label {
+    -fx-font-size: 16;
+    -fx-underline: false;
+}
+
+.bottom-btn {
+    -fx-text-fill: #24a3d3;
+}
+
+.bottom-btn:hover {
+    -fx-text-fill: #be5be1;
+}
