@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1146.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@styles/inputCSS.css" />
+    </stylesheets>
+    <Group layoutX="1034.0" layoutY="-2.0">
+        <children>
+            <HBox layoutY="2.0" prefHeight="27.0" prefWidth="112.0">
+                <children>
+                    <Button focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="69.0" styleClass="min-btn" text="_" />
+                    <Button focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="69.0" styleClass="close-btn" text="X" />
+                </children>
+            </HBox>
+        </children>
+    </Group>
+    <Group id="sign-in-group" layoutX="573.0" layoutY="250.0">
+        <VBox alignment="CENTER" layoutX="-191.0" layoutY="-175.0" prefHeight="661.0" prefWidth="382.0" styleClass="sign-in-vbox">
+            <padding>
+                <Insets bottom="30.0" left="60.0" right="60.0" />
+            </padding>
+            <Label alignment="CENTER" prefHeight="88.0" prefWidth="284.0" styleClass="welcome-title" text="New?">
+                <VBox.margin>
+                    <Insets top="50.0" />
+                </VBox.margin>
+            </Label>
+            <Label styleClass="input-title" text="SIGN UP">
+                <VBox.margin>
+                    <Insets top="-15.0" />
+                </VBox.margin>
+            </Label>
+            <GridPane prefHeight="243.0" prefWidth="262.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="0.0" prefWidth="40.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="226.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <VBox.margin>
+                    <Insets bottom="20.0" top="30.0" />
+                </VBox.margin>
+
+                <TextField promptText="First name" styleClass="grid-input" GridPane.columnIndex="1" />
+                <TextField promptText="Last name" styleClass="grid-input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <DatePicker prefWidth="315.0" promptText="Birthdate" styleClass="grid-input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField promptText="Email" styleClass="grid-input" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <PasswordField promptText="Password" styleClass="grid-input" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <PasswordField promptText="Repeat Password" styleClass="grid-input" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                <FontIcon iconLiteral="mdmz-person_outline" iconSize="25" styleClass="input-icon" />
+                <FontIcon iconLiteral="mdmz-person" iconSize="25" GridPane.rowIndex="1" styleClass="input-icon" />
+                <FontIcon iconLiteral="mdoal-calendar_today" iconSize="25" GridPane.rowIndex="2" styleClass="input-icon" />
+                <FontIcon iconLiteral="mdoal-email" iconSize="25" GridPane.rowIndex="3" styleClass="input-icon" />
+                <FontIcon iconLiteral="mdoal-lock" iconSize="25" GridPane.rowIndex="4" styleClass="input-icon" />
+                <FontIcon iconLiteral="mdal-lock" iconSize="25" GridPane.rowIndex="5" styleClass="input-icon" />
+            </GridPane>
+            <Label styleClass="error-label" text="Invalid password provided.">
+                <VBox.margin>
+                    <Insets bottom="30.0" />
+                </VBox.margin>
+            </Label>
+            <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="243.0" styleClass="btn-login" text="SIGN UP">
+                <VBox.margin>
+                    <Insets bottom="40.0" top="10.0" />
+                </VBox.margin>
+            </Button>
+            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="300.0">
+                <Label prefHeight="25.0" prefWidth="151.0" styleClass="bottom-text-label" text="Been here already?" />
+                <Hyperlink text="Sign in!">
+                    <styleClass>
+                        <String fx:value="bottom-text-label" />
+                        <String fx:value="bottom-btn" />
+                    </styleClass></Hyperlink>
+            </HBox>
+        </VBox>
+    </Group>
+</AnchorPane>
