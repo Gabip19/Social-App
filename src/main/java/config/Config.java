@@ -9,10 +9,10 @@ import java.util.Properties;
 
 public class Config {
 
-    private static final String CONFIG_LOCATION =
-            Objects.requireNonNull(
-                    Config.class.getClassLoader().getResource("config.properties")
-            ).getFile();
+    private static final String CONFIG_LOCATION = "";
+//            Objects.requireNonNull(
+//                    Config.class.getClassLoader().getResource("config.properties")
+//            ).getFile();
 
     public static Properties getProperties() {
         Properties properties = new Properties();

@@ -8,20 +8,31 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import service.Network;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class SignUpController extends AuthController {
+    private Network srv;
+
     @FXML
     public VBox signUpVBox;
+
+    public void setSrv(Network srv) {
+        this.srv = srv;
+    }
 
     public void initialize() {
         fadeInFromBelowAnimation(signUpVBox);
     }
 
     public void switchToSignInScene(ActionEvent event) throws IOException {
-        Parent signInRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/signin.fxml")));
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/gui/signin.fxml")));
+
+        Parent signInRoot = loader.load();
+        SignInController signInController = loader.getController();
+        signInController.setSrv(srv);
 
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 

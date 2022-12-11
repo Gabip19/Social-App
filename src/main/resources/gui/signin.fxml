@@ -16,9 +16,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<!--<?import org.kordamp.ikonli.javafx.FontIcon?>-->
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="signInPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1146.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1146.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignInController">
     <stylesheets>
         <URL value="@styles/inputCSS.css" />
     </stylesheets>
@@ -26,72 +26,70 @@
         <HBox layoutY="2.0" prefHeight="27.0" prefWidth="112.0">
             <Button focusTraversable="false" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="30.0" prefWidth="69.0" styleClass="min-btn">
                 <graphic>
-<!--                    <FontIcon iconLiteral="mdmz-minimize" iconSize="20" styleClass="topbar-btn" />-->
+                    <FontIcon iconLiteral="mdmz-minimize" iconSize="20" styleClass="topbar-btn" />
                 </graphic>
             </Button>
             <Button focusTraversable="false" mnemonicParsing="false" onAction="#closeWindow" prefHeight="30.0" prefWidth="69.0" styleClass="close-btn">
                 <graphic>
-<!--                    <FontIcon iconLiteral="mdal-close" iconSize="20" styleClass="topbar-btn" />-->
+                    <FontIcon iconLiteral="mdal-close" iconSize="20" styleClass="topbar-btn" />
                 </graphic>
             </Button>
         </HBox>
     </Group>
     <Group id="sign-in-group" layoutX="382.0" layoutY="75.0">
-      <children>
-           <VBox fx:id="signInVBox" alignment="CENTER" prefHeight="661.0" prefWidth="382.0" styleClass="sign-in-vbox">
-               <padding>
-                   <Insets bottom="60.0" left="60.0" right="60.0" />
-               </padding>
-               <Label prefHeight="67.0" prefWidth="248.0" styleClass="welcome-title" text="Welcome">
-                   <VBox.margin>
-                       <Insets top="50.0" />
-                   </VBox.margin>
-               </Label>
-               <Label styleClass="input-title" text="SIGN IN">
-                   <VBox.margin>
-                       <Insets top="-15.0" />
-                   </VBox.margin>
-               </Label>
-               <GridPane prefHeight="84.0" prefWidth="262.0">
-                   <columnConstraints>
-                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
-                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="226.0" />
-                   </columnConstraints>
-                   <rowConstraints>
-                       <RowConstraints maxHeight="60.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                       <RowConstraints maxHeight="60.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                   </rowConstraints>
-                   <VBox.margin>
-                       <Insets bottom="20.0" top="30.0" />
-                   </VBox.margin>
-      
-                   <TextField promptText="Email" styleClass="grid-input" GridPane.columnIndex="1" />
-                   <PasswordField promptText="Password" styleClass="grid-input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      
-      <!--                <FontIcon iconLiteral="mdoal-email" iconSize="25" GridPane.rowIndex="0" styleClass="input-icon" />-->
-      <!--                <FontIcon iconLiteral="mdoal-lock" iconSize="25" GridPane.rowIndex="1" styleClass="input-icon" />-->
-      
-               </GridPane>
-               <Label styleClass="error-label" text="Invalid password provided.">
-                   <VBox.margin>
-                       <Insets bottom="30.0" />
-                   </VBox.margin>
-               </Label>
-               <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="243.0" styleClass="btn-login" text="SIGN IN">
-                   <VBox.margin>
-                       <Insets bottom="40.0" top="10.0" />
-                   </VBox.margin>
-               </Button>
-               <HBox alignment="CENTER" prefHeight="54.0" prefWidth="300.0">
-                   <Label styleClass="bottom-text-label" text="First time here?" />
-                   <Hyperlink onAction="#switchToSignUpScene" text="Create an account!">
-                       <styleClass>
-                           <String fx:value="bottom-text-label" />
-                           <String fx:value="bottom-btn" />
-                       </styleClass>
-                   </Hyperlink>
-               </HBox>
-           </VBox>
-      </children>
+        <VBox fx:id="signInVBox" alignment="CENTER" prefHeight="661.0" prefWidth="382.0" styleClass="sign-in-vbox">
+            <padding>
+                <Insets bottom="60.0" left="60.0" right="60.0" />
+            </padding>
+            <Label prefHeight="67.0" prefWidth="248.0" styleClass="welcome-title" text="Welcome">
+                <VBox.margin>
+                    <Insets top="50.0" />
+                </VBox.margin>
+            </Label>
+            <Label styleClass="input-title" text="SIGN IN">
+                <VBox.margin>
+                    <Insets top="-15.0" />
+                </VBox.margin>
+            </Label>
+            <GridPane prefHeight="84.0" prefWidth="262.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="226.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="60.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="60.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <VBox.margin>
+                    <Insets bottom="20.0" top="30.0" />
+                </VBox.margin>
+
+                <TextField fx:id="emailField" promptText="Email" styleClass="grid-input" GridPane.columnIndex="1" />
+                <PasswordField fx:id="passwordField" onAction="#signIn" promptText="Password" styleClass="grid-input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <FontIcon iconLiteral="mdoal-email" iconSize="25" GridPane.rowIndex="0" styleClass="input-icon" />
+                <FontIcon iconLiteral="mdoal-lock" iconSize="25" GridPane.rowIndex="1" styleClass="input-icon" />
+
+            </GridPane>
+            <Label fx:id="errorLabel" styleClass="error-label">
+                <VBox.margin>
+                    <Insets bottom="30.0" />
+                </VBox.margin>
+            </Label>
+            <Button fx:id="signInButton" mnemonicParsing="false" onAction="#signIn" prefHeight="46.0" prefWidth="243.0" styleClass="btn-login" text="SIGN IN">
+                <VBox.margin>
+                    <Insets bottom="40.0" top="10.0" />
+                </VBox.margin>
+            </Button>
+            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="300.0">
+                <Label styleClass="bottom-text-label" text="First time here?" />
+                <Hyperlink onAction="#switchToSignUpScene" text="Create an account!">
+                    <styleClass>
+                        <String fx:value="bottom-text-label" />
+                        <String fx:value="bottom-btn" />
+                    </styleClass>
+                </Hyperlink>
+            </HBox>
+        </VBox>
     </Group>
 </AnchorPane>
