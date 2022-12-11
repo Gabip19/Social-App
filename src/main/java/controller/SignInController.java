@@ -38,6 +38,7 @@ public class SignInController extends AuthController {
 
     public void initialize() {
         fadeInFromBelowAnimation(signInVBox);
+        signInVBox.requestFocus();
     }
 
     private void clearFields() {
@@ -53,6 +54,9 @@ public class SignInController extends AuthController {
         } catch (SignInException e) {
             errorLabel.setText(e.getMessage());
             clearFields();
+        }
+        finally {
+            signInVBox.requestFocus();
         }
     }
 

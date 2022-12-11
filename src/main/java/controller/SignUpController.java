@@ -25,6 +25,7 @@ public class SignUpController extends AuthController {
 
     public void initialize() {
         fadeInFromBelowAnimation(signUpVBox);
+        signUpVBox.requestFocus();
     }
 
     public void switchToSignInScene(ActionEvent event) throws IOException {
