@@ -17,24 +17,28 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import org.kordamp.ikonli.javafx.FontIcon?>
+<!--<?import org.kordamp.ikonli.javafx.FontIcon?>-->
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1146.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="signUpPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1146.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignUpController">
     <stylesheets>
         <URL value="@styles/inputCSS.css" />
     </stylesheets>
     <Group layoutX="1034.0" layoutY="-2.0">
-        <children>
-            <HBox layoutY="2.0" prefHeight="27.0" prefWidth="112.0">
-                <children>
-                    <Button focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="69.0" styleClass="min-btn" text="_" />
-                    <Button focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="69.0" styleClass="close-btn" text="X" />
-                </children>
-            </HBox>
-        </children>
+        <HBox layoutY="2.0" prefHeight="27.0" prefWidth="112.0">
+            <Button focusTraversable="false" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="30.0" prefWidth="69.0" styleClass="min-btn">
+                <graphic>
+<!--                    <FontIcon iconLiteral="mdmz-minimize" iconSize="20" styleClass="topbar-btn" />-->
+                </graphic>
+            </Button>
+            <Button focusTraversable="false" mnemonicParsing="false" onAction="#closeWindow" prefHeight="30.0" prefWidth="69.0" styleClass="close-btn">
+                <graphic>
+<!--                    <FontIcon iconLiteral="mdal-close" iconSize="20" styleClass="topbar-btn" />-->
+                </graphic>
+            </Button>
+        </HBox>
     </Group>
     <Group id="sign-in-group" layoutX="573.0" layoutY="250.0">
-        <VBox alignment="CENTER" layoutX="-191.0" layoutY="-175.0" prefHeight="661.0" prefWidth="382.0" styleClass="sign-in-vbox">
+        <VBox fx:id="signUpVBox" alignment="CENTER" layoutX="-191.0" layoutY="-175.0" prefHeight="661.0" prefWidth="382.0" styleClass="sign-in-vbox">
             <padding>
                 <Insets bottom="30.0" left="60.0" right="60.0" />
             </padding>
@@ -72,12 +76,12 @@
                 <PasswordField promptText="Password" styleClass="grid-input" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <PasswordField promptText="Repeat Password" styleClass="grid-input" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-                <FontIcon iconLiteral="mdmz-person_outline" iconSize="25" styleClass="input-icon" />
-                <FontIcon iconLiteral="mdmz-person" iconSize="25" GridPane.rowIndex="1" styleClass="input-icon" />
-                <FontIcon iconLiteral="mdoal-calendar_today" iconSize="25" GridPane.rowIndex="2" styleClass="input-icon" />
-                <FontIcon iconLiteral="mdoal-email" iconSize="25" GridPane.rowIndex="3" styleClass="input-icon" />
-                <FontIcon iconLiteral="mdoal-lock" iconSize="25" GridPane.rowIndex="4" styleClass="input-icon" />
-                <FontIcon iconLiteral="mdal-lock" iconSize="25" GridPane.rowIndex="5" styleClass="input-icon" />
+<!--                <FontIcon iconLiteral="mdmz-person_outline" iconSize="25" styleClass="input-icon" />-->
+<!--                <FontIcon iconLiteral="mdmz-person" iconSize="25" GridPane.rowIndex="1" styleClass="input-icon" />-->
+<!--                <FontIcon iconLiteral="mdoal-calendar_today" iconSize="25" GridPane.rowIndex="2" styleClass="input-icon" />-->
+<!--                <FontIcon iconLiteral="mdoal-email" iconSize="25" GridPane.rowIndex="3" styleClass="input-icon" />-->
+<!--                <FontIcon iconLiteral="mdoal-lock" iconSize="25" GridPane.rowIndex="4" styleClass="input-icon" />-->
+<!--                <FontIcon iconLiteral="mdal-lock" iconSize="25" GridPane.rowIndex="5" styleClass="input-icon" />-->
             </GridPane>
             <Label styleClass="error-label" text="Invalid password provided.">
                 <VBox.margin>
@@ -91,7 +95,7 @@
             </Button>
             <HBox alignment="CENTER" prefHeight="54.0" prefWidth="300.0">
                 <Label prefHeight="25.0" prefWidth="151.0" styleClass="bottom-text-label" text="Been here already?" />
-                <Hyperlink text="Sign in!">
+                <Hyperlink onAction="#switchToSignInScene" text="Sign in!">
                     <styleClass>
                         <String fx:value="bottom-text-label" />
                         <String fx:value="bottom-btn" />
