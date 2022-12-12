@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane fx:id="rootAnchor" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MainPaneController">
+   <stylesheets>
+      <URL value="@styles/main-windowCSS.css"/>
+   </stylesheets>
+   <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+      <HBox fx:id="topHBox" alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="1146.0" styleClass="top-hbox" VBox.vgrow="NEVER">
+         <Button mnemonicParsing="false" text="MINIMIZE"/>
+         <Button mnemonicParsing="false" text="CLOSE"/>
+      </HBox>
+
+      <BorderPane prefHeight="810.0" prefWidth="1146.0" VBox.vgrow="ALWAYS">
+
+         <left>
+            <ListView fx:id="friendsListView" prefHeight="744.0" prefWidth="305.0" styleClass="friends-view" BorderPane.alignment="CENTER"/>
+         </left>
+
+         <center>
+            <AnchorPane fx:id="midWindow" prefHeight="785.0" prefWidth="1039.0" styleClass="mid-window" BorderPane.alignment="CENTER"/>
+         </center>
+
+         <top>
+            <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="10.0" prefWidth="1146.0" styleClass="action-top-bar"
+                  BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets bottom="12.0" left="20.0" right="20.0" top="12.0"/>
+               </padding>
+               <Button fx:id="friendsButton" styleClass="btn-friends" mnemonicParsing="false" text="FRIENDS" HBox.hgrow="NEVER"/>
+               <Button fx:id="homeButton" styleClass="btn-home" mnemonicParsing="false" text="HOME" HBox.hgrow="NEVER"/>
+               <Region minWidth="-Infinity" prefHeight="55.0" prefWidth="55.0" HBox.hgrow="ALWAYS"/>
+               <TextField fx:id="searchBar" styleClass="search-bar" minWidth="-Infinity" prefHeight="25.0" prefWidth="305.0" HBox.hgrow="ALWAYS"/>
+               <Region minWidth="-Infinity" prefHeight="66.0" prefWidth="0.0" HBox.hgrow="ALWAYS"/>
+               <Button fx:id="requestsButton" styleClass="btn-rqst" mnemonicParsing="false" text="Friend Requests" HBox.hgrow="NEVER"/>
+               <Button fx:id="messagesButton" styleClass="btn-msg" mnemonicParsing="false" text="Messages" HBox.hgrow="NEVER"/>
+               <Label fx:id="userNameLabel" styleClass="user-name-label" prefHeight="28.0" prefWidth="51.0" text="NAME" HBox.hgrow="NEVER"/>
+               <Button fx:id="logOutButton" styleClass="btn-log-out" mnemonicParsing="false" text="LOGOUT" HBox.hgrow="NEVER"/>
+            </HBox>
+         </top>
+
+      </BorderPane>
+   </VBox>
+</AnchorPane>

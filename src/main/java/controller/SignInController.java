@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class SignInController extends AuthController {
-    private Network srv;
-
     @FXML
     public VBox signInVBox;
     @FXML
@@ -31,10 +29,6 @@ public class SignInController extends AuthController {
     public Label errorLabel;
     @FXML
     public Button signInButton;
-
-    public void setSrv(Network srv) {
-        this.srv = srv;
-    }
 
     public void initialize() {
         fadeInFromBelowAnimation(signInVBox);
@@ -64,8 +58,6 @@ public class SignInController extends AuthController {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/gui/signup.fxml")));
 
         Parent signUpRoot = loader.load();
-        SignUpController signUpController = loader.getController();
-        signUpController.setSrv(srv);
 
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 

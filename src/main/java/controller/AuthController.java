@@ -3,22 +3,10 @@ package controller;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.scene.Node;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class AuthController {
-
-    public void closeWindow(ActionEvent event) {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
-    }
-
-    public void minimizeWindow(ActionEvent event) {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setIconified(true);
-    }
+public class AuthController extends GuiController {
 
     protected void fadeInFromBelowAnimation(Node node) {
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), node);
