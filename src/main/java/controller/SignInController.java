@@ -42,8 +42,8 @@ public class SignInController extends AuthController {
     }
 
     private void clearFields() {
-        emailField.setText("");
-        passwordField.setText("");
+        emailField.clear();
+        passwordField.clear();
     }
 
     public void signIn() {

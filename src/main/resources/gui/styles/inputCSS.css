@@ -71,7 +71,7 @@
 .error-label {
     -fx-font-family: 'Commissioner', sans-serif;
     -fx-font-weight: 500;
-    -fx-font-size: 16;
+    -fx-font-size: 14;
     -fx-text-fill: red;
 }
 

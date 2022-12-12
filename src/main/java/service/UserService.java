@@ -2,6 +2,7 @@ package service;
 
 import domain.HashedPasswordDTO;
 import domain.User;
+import domain.validators.exceptions.ValidationException;
 import repository.database.UserDatabaseRepo;
 
 import java.time.LocalDate;
@@ -26,11 +27,11 @@ public class UserService {
         try {
             date = LocalDate.parse(birthdate);
         } catch (DateTimeParseException e) {
-            throw new RuntimeException("Invalid date format. Try: yyyy-MM-dd.\n");
+            throw new ValidationException("Invalid date format.\n");
         }
 
         if (!emailIsAvailable(email))
-            throw new RuntimeException("An user with the given email already exists.");
+            throw new ValidationException("An account with the given email already exists.");
 
         User user = new User(firstName, lastName, email, date);
         userRepo.save(user);

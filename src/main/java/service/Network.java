@@ -6,6 +6,7 @@ import domain.HashedPasswordDTO;
 import domain.User;
 import domain.validators.exceptions.FriendshipException;
 import domain.validators.exceptions.SignInException;
+import domain.validators.exceptions.ValidationException;
 import utils.Graph;
 import utils.PasswordHasher;
 
@@ -89,6 +90,9 @@ public class Network {
      *                          <p>if the email is already used by a user</p>
      */
     public void addUser(String lastName, String firstName, String email, String birthdate, String password) {
+        if (lastName.length() == 0 || firstName.length() == 0)
+            throw new ValidationException("Empty name field(s).");
+
         lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
         firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
 
