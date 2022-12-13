@@ -1,32 +1,64 @@
+.root {
+    -fx-font-size: 15;
+}
+
 .top-hbox {
+    -fx-background-color: #00ffe9;
 }
 
 .friends-view {
+    -fx-background-color: #73e173;
 }
 
 .mid-window {
+    -fx-background-color: #f55e5e;
 }
 
 .action-top-bar {
+    -fx-background-color: yellow;
 }
 
 .btn-friends {
+    -fx-background-radius: 50;
 }
 
 .btn-home {
+    -fx-background-radius: 50;
+    -fx-background-color: rgb(0, 0, 0, 0);
 }
 
 .search-bar {
+    -fx-background-radius: 50;
 }
 
 .btn-rqst {
+    -fx-background-radius: 50;
 }
 
 .btn-msg {
+    -fx-background-radius: 50;
 }
 
 .user-name-label {
 }
 
 .btn-log-out {
+    -fx-background-radius: 50;
+}
+
+.name-label {
+    -fx-font-size: 16;
+    -fx-background-color: orange;
+}
+
+.msg-btn {
+    -fx-font-size: 16;
+}
+
+.remove-btn {
+    -fx-font-size: 16;
+}
+
+.friend-hbox {
+    -fx-background-color: red;
 }

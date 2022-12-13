@@ -2,6 +2,7 @@ package controller;
 
 import domain.User;
 import gui.FriendListCell;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,5 +30,6 @@ public class FriendListViewController {
             new User("Nume1 52125", "Nume2 2512", "email3@e.com", LocalDate.of(2000, 12, 12))
         );
         mainView.setItems(users);
+        mainView.setPrefWidth(500);
     }
 }
