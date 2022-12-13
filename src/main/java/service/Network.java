@@ -13,6 +13,7 @@ import utils.PasswordHasher;
 import java.time.LocalDateTime;
 import java.util.*;
 
+// TODO: 12/13/22 haveOngoingFriendship
 public class Network {
     private final UserService userSrv;
     private final FriendshipService friendSrv;
@@ -46,6 +47,12 @@ public class Network {
 
     public User getCurrentUser() {
         return currentUser;
+    }
+
+    public List<Friendship> getUserFriendships(User user) {
+        return getFriendships().stream()
+                .filter(x -> x.containsID(user.getId()))
+                .toList();
     }
 
     public void signIn(String email, String password) {
@@ -130,8 +137,9 @@ public class Network {
         return friendSrv.getFriendships()
                 .stream()
                 .filter(x ->
-                        x.getReceiverID().equals(user.getId()) &&
-                        x.getFriendshipStatus().equals(FriendshipStatus.PENDING))
+                        x.getReceiverID().equals(user.getId())
+//                       && x.getFriendshipStatus().equals(FriendshipStatus.PENDING)
+                )
                 .toList();
     }
 

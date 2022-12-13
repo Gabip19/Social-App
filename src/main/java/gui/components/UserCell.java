@@ -1,24 +1,25 @@
-package gui;
+package gui.components;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
-public class FriendCell extends HBox {
+public class UserCell extends HBox {
     @FXML
-    public HBox hBoxRoot;
+    public AnchorPane anchorRoot;
     @FXML
-    public Button removeFriendButton;
+    public Button addFriendButton;
     @FXML
     public Label nameLabel;
 
-    public FriendCell() {
+    public UserCell() {
         super();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/friend-cell-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/user-cell-view.fxml"));
         loader.setController(this);
         try {
             loader.load();
@@ -27,8 +28,8 @@ public class FriendCell extends HBox {
         }
     }
 
-    public HBox getHBoxRoot() {
-        return hBoxRoot;
+    public AnchorPane getAnchorRoot() {
+        return anchorRoot;
     }
 
     public void setNameLabelText(String text) {

@@ -9,4 +9,6 @@ module ToySocialApp.main {
     exports gui;
     opens controller to javafx.fxml;
     exports controller;
+    exports gui.components;
+    opens gui.components to javafx.fxml;
 }

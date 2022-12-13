@@ -1,0 +1,14 @@
+.root {
+    -fx-background-color: red;
+}
+
+.name-label {
+    -fx-background-color: red;
+}
+
+.btn-add-friend {
+}
+
+.region {
+    -fx-background-color: yellow;
+}

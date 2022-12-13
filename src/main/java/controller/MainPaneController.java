@@ -1,7 +1,10 @@
 package controller;
 
+import domain.Friendship;
 import domain.User;
-import gui.FriendListCell;
+import gui.components.FriendListCell;
+import gui.components.FriendshipListCell;
+import gui.components.UserListCell;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
+// TODO: 12/13/22 refactor friend cells
 public class MainPaneController extends GuiController {
     public Button logOutButton;
     public Label userNameLabel;
@@ -26,8 +30,9 @@ public class MainPaneController extends GuiController {
     public HBox topHBox;
     public AnchorPane rootAnchor;
     public BorderPane borderPane;
-    public ListView<User> searchUsersListView = new ListView<>();
+    public ListView<Friendship> requestsListView;
 
+    public ListView<User> searchUsersListView = new ListView<>();
     private final ObservableList<User> currentUserFriends = FXCollections.observableArrayList();
 
     public void initialize() {
@@ -36,11 +41,16 @@ public class MainPaneController extends GuiController {
 
         // TODO: 12/13/22 init function for searchUserListView
         rootAnchor.getChildren().add(searchUsersListView);
-//        searchUsersListView.setVisible(false);
+        searchUsersListView.setCellFactory(param -> new UserListCell());
         searchUsersListView.prefWidthProperty().bind(Bindings.add(0, searchBar.widthProperty()));
         searchBar.layoutXProperty().addListener(param -> {
             searchUsersListView.setLayoutX(searchBar.getLayoutX());
         });
+
+        requestsListView.setCellFactory(param -> new FriendshipListCell(srv));
+        requestsListView.setItems(FXCollections.observableArrayList(srv.getFriendRequestsForUser(srv.getCurrentUser())));
+        requestsListView.setPrefWidth(500);
+        borderPane.setRight(requestsListView);
 
         friendsListView.setCellFactory(param -> new FriendListCell());
         currentUserFriends.addAll(srv.getFriendsForUser(srv.getCurrentUser()));
