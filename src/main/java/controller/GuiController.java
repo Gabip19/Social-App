@@ -5,7 +5,7 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 import service.Network;
 
-public class GuiController {
+public abstract class GuiController {
     protected static Network srv;
 
     public static void setSrv(Network srv) {

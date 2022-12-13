@@ -2,6 +2,7 @@ package controller;
 
 import domain.User;
 import gui.FriendListCell;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -11,8 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-
-import java.time.LocalDate;
 
 public class MainPaneController extends GuiController {
     public Button logOutButton;
@@ -27,16 +26,48 @@ public class MainPaneController extends GuiController {
     public HBox topHBox;
     public AnchorPane rootAnchor;
     public BorderPane borderPane;
+    public ListView<User> searchUsersListView = new ListView<>();
+
+    private final ObservableList<User> currentUserFriends = FXCollections.observableArrayList();
 
     public void initialize() {
+
+        srv.signIn("beni_eug@gmail.com", "beniamin");
+
+        // TODO: 12/13/22 init function for searchUserListView
+        rootAnchor.getChildren().add(searchUsersListView);
+//        searchUsersListView.setVisible(false);
+        searchUsersListView.prefWidthProperty().bind(Bindings.add(0, searchBar.widthProperty()));
+        searchBar.layoutXProperty().addListener(param -> {
+            searchUsersListView.setLayoutX(searchBar.getLayoutX());
+        });
+
         friendsListView.setCellFactory(param -> new FriendListCell());
-        ObservableList<User> users = FXCollections.observableArrayList();
-        users.addAll(
-                new User("Nume1", "Nume2", "email@e.com", LocalDate.of(2000, 12, 12)),
-                new User("Nume 12341234", "Nume2 6432", "email1@e.com", LocalDate.of(2000, 12, 12)),
-                new User("Nume 6 443433", "Nume2 6342222", "email2@e.com", LocalDate.of(2000, 12, 12)),
-                new User("Nume1 52125", "Nume2 2512", "email3@e.com", LocalDate.of(2000, 12, 12))
-        );
-        friendsListView.setItems(users);
+        currentUserFriends.addAll(srv.getFriendsForUser(srv.getCurrentUser()));
+
+        friendsListView.setItems(currentUserFriends);
+        userNameLabel.setText(srv.getCurrentUser().getFirstName());
+
+        searchBar.onInputMethodTextChangedProperty().addListener(param -> searchForUsersAction());
+    }
+
+    public void searchForUsersAction() {
+        if (!searchBar.getText().equals("")) {
+            searchUsersListView.setLayoutY(searchBar.getLayoutY() + 60);
+            var resultSet = srv.getUsersWithName(searchBar.getText());
+            searchUsersListView.setItems(FXCollections.observableArrayList(resultSet));
+            searchUsersListView.setPrefHeight(resultSet.size() * 30 + 20);
+            searchUsersListView.setVisible(true);
+        } else {
+            searchUsersListView.setVisible(false);
+        }
+    }
+
+    public void showFriends() {
+        if (borderPane.getLeft() == null) {
+            borderPane.setLeft(friendsListView);
+        } else {
+            borderPane.setLeft(null);
+        }
     }
 }

@@ -6,8 +6,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<HBox fx:id="hBoxRoot" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="332.0" styleClass="friend-hbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<HBox fx:id="hBoxRoot" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="332.0" styleClass="friend-hbox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@styles/main-windowCSS.css" />
    </stylesheets>
@@ -16,6 +17,12 @@
    </padding>
    <Label fx:id="nameLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="30.0" prefWidth="210.0" styleClass="name-label" text="Label" wrapText="true" HBox.hgrow="ALWAYS" />
    <Region prefHeight="60.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
-   <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="37.0" prefWidth="46.0" styleClass="msg-btn" text="M" HBox.hgrow="NEVER" />
-   <Button fx:id="removeFriendButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="46.0" styleClass="remove-btn" text="X" HBox.hgrow="NEVER" />
+   <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="37.0" prefWidth="46.0" styleClass="msg-btn" HBox.hgrow="NEVER">
+      <graphic>
+         <FontIcon iconLiteral="mdomz-message" iconSize="20" />
+      </graphic></Button>
+   <Button fx:id="removeFriendButton" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="46.0" styleClass="remove-btn" HBox.hgrow="NEVER">
+      <graphic>
+         <FontIcon iconLiteral="mdal-block" iconSize="20" />
+      </graphic></Button>
 </HBox>

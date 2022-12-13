@@ -33,7 +33,7 @@
       <BorderPane fx:id="borderPane" prefHeight="810.0" prefWidth="1146.0" VBox.vgrow="ALWAYS">
 
          <left>
-            <ListView fx:id="friendsListView" prefHeight="755.0" prefWidth="385.0" styleClass="friends-view" BorderPane.alignment="CENTER" />
+            <ListView fx:id="friendsListView" prefHeight="746.0" prefWidth="385.0" styleClass="friends-view" BorderPane.alignment="CENTER" />
          </left>
 
          <center>
@@ -45,7 +45,7 @@
                <padding>
                   <Insets bottom="12.0" left="20.0" right="20.0" top="12.0" />
                </padding>
-               <Button fx:id="friendsButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btn-friends" HBox.hgrow="NEVER">
+               <Button fx:id="friendsButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showFriends" prefHeight="40.0" prefWidth="40.0" styleClass="btn-friends" HBox.hgrow="NEVER">
                   <HBox.margin>
                      <Insets right="15.0" />
                   </HBox.margin>
@@ -57,7 +57,7 @@
                      <FontIcon iconLiteral="mdral-home" iconSize="25" />
                   </graphic></Button>
                <Region minWidth="-Infinity" prefHeight="55.0" prefWidth="55.0" HBox.hgrow="ALWAYS" />
-               <TextField fx:id="searchBar" minWidth="-Infinity" prefHeight="25.0" prefWidth="305.0" promptText="Connect with people" styleClass="search-bar" HBox.hgrow="ALWAYS" />
+               <TextField fx:id="searchBar" alignment="CENTER" minWidth="-Infinity" onKeyTyped="#searchForUsersAction" prefHeight="25.0" prefWidth="305.0" promptText="Connect with people" styleClass="search-bar" HBox.hgrow="ALWAYS" />
                <Region minWidth="-Infinity" prefHeight="40.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
                <Button fx:id="requestsButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btn-rqst" HBox.hgrow="NEVER">
                   <HBox.margin>
