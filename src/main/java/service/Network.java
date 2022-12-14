@@ -126,19 +126,11 @@ public class Network {
      * @return a list of all friends of USER
      */
     public ArrayList<User> getFriendsForUser(User user) {
-        UUID userId = user.getId();
-        ArrayList<User> friends = new ArrayList<>();
-        friendSrv.getFriendships().forEach(
-                (Friendship x) -> {
-                    if (x.getFriendshipStatus().equals(FriendshipStatus.ACCEPTED)) {
-                        if (x.getSenderID().equals(userId))
-                            friends.add(userSrv.findOneUser(x.getReceiverID()));
-                        else if (x.getReceiverID().equals(userId))
-                            friends.add(userSrv.findOneUser(x.getSenderID()));
-                    }
-                }
+        friendSrv.loadFriends(user);
+
+        return new ArrayList<>(
+            user.getFriendIDs().stream().map(userSrv::findOneUser).toList()
         );
-        return friends;
     }
 
     public List<Friendship> getFriendRequestsForUser(User user) {

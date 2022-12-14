@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
-public class FriendCell {
+public class FriendCell extends HBox {
     @FXML
     public Button removeFriendButton;
     @FXML
@@ -20,6 +20,7 @@ public class FriendCell {
     public Button openChatButton;
 
     public FriendCell() {
+        super();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/friend-cell-view.fxml"));
         loader.setController(this);
         try {
@@ -36,9 +37,5 @@ public class FriendCell {
 
     public void setNameLabelText(String text) {
         nameLabel.setText(text);
-    }
-
-    public Button getRemoveFriendButton() {
-        return removeFriendButton;
     }
 }
