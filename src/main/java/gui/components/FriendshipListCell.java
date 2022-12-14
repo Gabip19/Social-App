@@ -20,7 +20,7 @@ public class FriendshipListCell extends ListCell<Friendship> {
     @Override
     protected void updateItem(Friendship item, boolean empty) {
         super.updateItem(item, empty);
-        if (item != null) {
+        if (item != null) { // FIXME: 12/14/22
             FriendshipCell friendshipCell = new FriendshipCell();
 
             User senderUser = srv.findOneUser(item.getSenderID());

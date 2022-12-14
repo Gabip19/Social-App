@@ -39,7 +39,7 @@ public class MainPaneController extends GuiController {
     public void initialize() {
         defineDraggableNode(topHBox);
 
-        srv.signIn("beni_eug@gmail.com", "beniamin");
+        srv.signIn("test@test.test", "test");
 
         // TODO: 12/13/22 init function for searchUserListView
         rootAnchor.getChildren().add(searchUsersListView);
@@ -54,12 +54,17 @@ public class MainPaneController extends GuiController {
         requestsListView.setPrefWidth(500);
         borderPane.setRight(requestsListView);
 
-        friendsListView.setCellFactory(param -> new FriendListCell());
-        currentUserFriends.addAll(srv.getFriendsForUser(srv.getCurrentUser()));
-        friendsListView.setItems(currentUserFriends);
+        initializeFriendListView();
+
         userNameLabel.setText(srv.getCurrentUser().getFirstName());
 
         searchBar.onInputMethodTextChangedProperty().addListener(param -> searchForUsersAction());
+    }
+
+    private void initializeFriendListView() {
+        friendsListView.setCellFactory(param -> new FriendListCell(srv, currentUserFriends));
+        currentUserFriends.setAll(srv.getFriendsForUser(srv.getCurrentUser()));
+        friendsListView.setItems(currentUserFriends);
     }
 
     public void searchForUsersAction() {

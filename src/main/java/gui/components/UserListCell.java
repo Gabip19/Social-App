@@ -12,7 +12,7 @@ public class UserListCell extends ListCell<User> {
     @Override
     protected void updateItem(User item, boolean empty) {
         super.updateItem(item, empty);
-        if (item != null) {
+        if (item != null) { // FIXME: 12/14/22
             UserCell userCell = new UserCell();
             userCell.setNameLabelText(item.getFirstName() + " " + item.getLastName());
 

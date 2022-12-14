@@ -38,4 +38,8 @@ public class FriendCell extends HBox {
     public void setNameLabelText(String text) {
         nameLabel.setText(text);
     }
+
+    public Button getRemoveFriendButton() {
+        return removeFriendButton;
+    }
 }
