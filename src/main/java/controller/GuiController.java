@@ -1,15 +1,13 @@
 package controller;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import service.Network;
 
 public abstract class GuiController {
     protected static Network srv;
     protected static Stage currentStage;
+    private static class Delta { double x, y; }
 
     public static void setSrv(Network srv) {
         GuiController.srv = srv;
@@ -19,15 +17,15 @@ public abstract class GuiController {
         GuiController.currentStage = stage;
     }
 
-    public void closeWindow(ActionEvent event) {
+    public void closeWindow() {
         currentStage.close();
     }
 
-    public void minimizeWindow(ActionEvent event) {
+    public void minimizeWindow() {
         currentStage.setIconified(true);
     }
 
-    public void maximizeWindow(ActionEvent event) {
+    public void maximizeWindow() {
         currentStage.setMaximized(!currentStage.isMaximized());
     }
 
@@ -46,5 +44,4 @@ public abstract class GuiController {
 
     }
 
-    private class Delta { double x, y; }
 }

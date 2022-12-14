@@ -9,6 +9,7 @@ import javafx.animation.TranslateTransition;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -67,7 +68,7 @@ public class MainPaneController extends GuiController {
         requestsListView.setCellFactory(param -> new FriendshipListCell(srv, friendRequests));
         friendRequests.setAll(srv.getFriendRequestsForUser(srv.getCurrentUser()));
         requestsListView.setItems(friendRequests);
-        requestsListView.setPrefWidth(500);
+        requestsListView.setPrefWidth(400);
         borderPane.setRight(requestsListView);
     }
 
@@ -90,27 +91,66 @@ public class MainPaneController extends GuiController {
         }
     }
 
-    public void showFriends() {
-        if (borderPane.getLeft() == null) {
-            TranslateTransition tr = new TranslateTransition();
-            tr.setFromX(-1 * friendsListView.getWidth());
-            tr.setByX(friendsListView.getWidth());
-            tr.setDuration(Duration.millis(700));
-            tr.setNode(friendsListView);
-
-            borderPane.setLeft(friendsListView);
-            tr.play();
+    public void showRequests() {
+        if (borderPane.getRight() == null) {
+            showRequestsPanel();
         } else {
-            TranslateTransition tr = new TranslateTransition();
-            tr.setFromX(0);
-            tr.setByX(-1 * friendsListView.getWidth());
-            tr.setDuration(Duration.millis(700));
-            tr.setNode(friendsListView);
-
-            tr.setOnFinished(param -> {
-                borderPane.setLeft(null);
-            });
-            tr.play();
+            hideRequestsPanel();
         }
+    }
+
+    private void hideRequestsPanel() {
+
+    }
+
+    private void showRequestsPanel() {
+
+    }
+
+    public void showFriends() {
+        System.out.println("\n\n");
+        var friends = srv.getFriendsForUser(srv.getCurrentUser());
+        friends.forEach(System.out::println);
+        System.out.println("\n");
+        currentUserFriends.setAll(friends);
+//        currentUserFriends.forEach(System.out::println);
+        if (borderPane.getLeft() == null) {
+            showFriendsPanel();
+        } else {
+            hideFriendsPanel();
+        }
+    }
+
+    private void hideFriendsPanel() {
+        TranslateTransition tr = getXTransition(
+                friendsListView,
+                0d,
+                -1 * friendsListView.getWidth(),
+                700d
+        );
+        tr.setOnFinished(param -> {
+            borderPane.setLeft(null);
+        });
+        tr.play();
+    }
+
+    private void showFriendsPanel() {
+        TranslateTransition tr = getXTransition(
+                friendsListView,
+                -1 * friendsListView.getWidth(),
+                friendsListView.getWidth(),
+                700d
+        );
+        borderPane.setLeft(friendsListView);
+        tr.play();
+    }
+
+    private TranslateTransition getXTransition(Node node, Double fromX, Double ByX, Double duration) {
+        TranslateTransition tr = new TranslateTransition();
+        tr.setFromX(fromX);
+        tr.setByX(ByX);
+        tr.setDuration(Duration.millis(duration));
+        tr.setNode(node);
+        return tr;
     }
 }
