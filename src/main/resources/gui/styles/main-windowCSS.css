@@ -1,13 +1,14 @@
 .root {
     -fx-font-size: 15;
+    -fx-background-image: url("images/4back.jpg");
 }
 
 .top-hbox {
-    -fx-background-color: #00ffe9;
+    -fx-background-color: rgb(0, 0, 0, 0);
 }
 
 .friends-view {
-    -fx-background-color: #73e173;
+    -fx-background-color: rgb(0, 0, 0, 0);
 }
 
 .mid-window {
@@ -46,19 +47,18 @@
     -fx-background-radius: 50;
 }
 
-.name-label {
-    -fx-font-size: 16;
-    -fx-background-color: orange;
+.top-bar-btn, .close-app-btn {
+    -fx-background-radius: 0;
+    -fx-font-size: 15;
+    -fx-background-color: rgb(0, 0, 0, 0);
+    -fx-font-weight: 200;
+    -fx-background-color: rgba(255, 255, 255, 0.40);
 }
 
-.msg-btn {
-    -fx-font-size: 16;
+.top-bar-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.65);
 }
 
-.remove-btn {
-    -fx-font-size: 16;
-}
-
-.friend-hbox {
-    -fx-background-color: red;
+.close-app-btn:hover {
+    -fx-background-color: rgba(255, 0, 0, 0.73);
 }

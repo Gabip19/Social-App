@@ -44,7 +44,10 @@ public class GUI extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/main-window.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1146, 810);
 
+            GuiController.setCurrentStage(stage);
+
             stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
 //        } catch (RuntimeException e) {
 //            e.printStackTrace();

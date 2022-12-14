@@ -5,6 +5,7 @@ import domain.User;
 import gui.components.FriendListCell;
 import gui.components.FriendshipListCell;
 import gui.components.UserListCell;
+import javafx.animation.TranslateTransition;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,8 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
-// TODO: 12/13/22 refactor friend cells
 public class MainPaneController extends GuiController {
     public Button logOutButton;
     public Label userNameLabel;
@@ -36,6 +37,7 @@ public class MainPaneController extends GuiController {
     private final ObservableList<User> currentUserFriends = FXCollections.observableArrayList();
 
     public void initialize() {
+        defineDraggableNode(topHBox);
 
         srv.signIn("beni_eug@gmail.com", "beniamin");
 
@@ -54,7 +56,6 @@ public class MainPaneController extends GuiController {
 
         friendsListView.setCellFactory(param -> new FriendListCell());
         currentUserFriends.addAll(srv.getFriendsForUser(srv.getCurrentUser()));
-
         friendsListView.setItems(currentUserFriends);
         userNameLabel.setText(srv.getCurrentUser().getFirstName());
 
@@ -75,9 +76,25 @@ public class MainPaneController extends GuiController {
 
     public void showFriends() {
         if (borderPane.getLeft() == null) {
+            TranslateTransition tr = new TranslateTransition();
+            tr.setFromX(-1 * friendsListView.getWidth());
+            tr.setByX(friendsListView.getWidth());
+            tr.setDuration(Duration.millis(700));
+            tr.setNode(friendsListView);
+
             borderPane.setLeft(friendsListView);
+            tr.play();
         } else {
-            borderPane.setLeft(null);
+            TranslateTransition tr = new TranslateTransition();
+            tr.setFromX(0);
+            tr.setByX(-1 * friendsListView.getWidth());
+            tr.setDuration(Duration.millis(700));
+            tr.setNode(friendsListView);
+
+            tr.setOnFinished(param -> {
+                borderPane.setLeft(null);
+            });
+            tr.play();
         }
     }
 }

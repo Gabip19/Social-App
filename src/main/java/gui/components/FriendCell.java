@@ -25,6 +25,7 @@ public class FriendCell extends HBox {
         loader.setController(this);
         try {
             loader.load();
+            openChatButton.setOnAction(param -> System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

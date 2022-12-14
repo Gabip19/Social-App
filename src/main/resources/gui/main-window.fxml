@@ -2,6 +2,7 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -13,27 +14,41 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="rootAnchor" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainPaneController">
+<AnchorPane fx:id="rootAnchor" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MainPaneController">
    <stylesheets>
       <URL value="@styles/main-windowCSS.css" />
    </stylesheets>
    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
       <HBox fx:id="topHBox" alignment="CENTER_RIGHT" prefHeight="19.0" prefWidth="1146.0" styleClass="top-hbox" VBox.vgrow="NEVER">
-         <Button contentDisplay="CENTER" mnemonicParsing="false" prefWidth="45.0">
+         <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="30.0" prefWidth="50.0" styleClass="top-bar-btn" textAlignment="CENTER" HBox.hgrow="NEVER">
             <graphic>
                <FontIcon iconLiteral="mdrmz-minimize" iconSize="20" textAlignment="CENTER" />
-            </graphic></Button>
-         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+            </graphic>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor></Button>
+         <Button contentDisplay="CENTER" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#maximizeWindow" prefHeight="30.0" prefWidth="50.0" styleClass="top-bar-btn" textAlignment="CENTER" HBox.hgrow="NEVER">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
             <graphic>
-               <FontIcon iconLiteral="mdral-close" iconSize="20" textAlignment="CENTER" wrappingWidth="26.0" />
-            </graphic></Button>
+               <FontIcon iconLiteral="mdal-crop_square" iconSize="20" textAlignment="CENTER" />
+            </graphic>
+         </Button>
+         <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeWindow" prefHeight="30.0" prefWidth="50.0" styleClass="close-app-btn" textAlignment="CENTER" HBox.hgrow="NEVER">
+            <graphic>
+               <FontIcon iconLiteral="mdral-close" iconSize="20" textAlignment="CENTER" />
+            </graphic>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor></Button>
       </HBox>
 
       <BorderPane fx:id="borderPane" prefHeight="810.0" prefWidth="1146.0" VBox.vgrow="ALWAYS">
 
          <left>
-            <ListView fx:id="friendsListView" prefHeight="746.0" prefWidth="385.0" styleClass="friends-view" BorderPane.alignment="CENTER" />
+            <ListView fx:id="friendsListView" prefHeight="746.0" prefWidth="356.0" styleClass="friends-view" BorderPane.alignment="CENTER" />
          </left>
 
          <center>

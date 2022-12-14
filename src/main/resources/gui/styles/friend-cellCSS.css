@@ -1,12 +1,48 @@
-.root {
-    -fx-font-size: 7;
+@import url('https://fonts.googleapis.com/css2?family=Archivo&family=Arimo&family=Nunito&family=Pacifico&family=Ubuntu&display=swap');
+
+.friend-hbox {
+    -fx-font-size: 18;
+    -fx-background-color: rgba(255, 255, 255, 0.33);
+    -fx-border-color: rgba(194, 194, 194, 0.6);
+    -fx-border-width: 2;
+}
+
+.friend-hbox:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.7);
+    -fx-border-color: rgba(155, 155, 155, 0.75);
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 20, 0, 0, 0);
+    -fx-font-size: 19;
+}
+
+.friend-hbox:hover .msg-icon, .friend-hbox:hover .remove-icon {
+    -fx-icon-size: 32;
 }
 
 .name-label {
+    -fx-font-family: 'Arimo', sans-serif;
+    -fx-font-weight: 400;
+    -fx-text-fill: #2d2d2d;
 }
 
-.msg-btn {
+.msg-btn, .remove-btn {
+    -fx-background-color: rgb(0, 0, 0, 0);
 }
 
-.remove-btn {
+.msg-icon {
+    -fx-icon-color: #00d2ff;
+    -fx-icon-size: 30;
+}
+
+.msg-icon:hover {
+    -fx-icon-color: #067a93;
+}
+
+.remove-icon {
+    -fx-icon-color: red;
+    -fx-icon-size: 30;
+}
+
+.remove-icon:hover {
+    -fx-icon-color: #8c0707;
 }

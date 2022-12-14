@@ -8,7 +8,7 @@ public class FriendListCell extends ListCell<User> {
     public FriendListCell() {
         super();
         setPrefWidth(0);
-        setStyle("-fx-padding: 0px");
+        setStyle("-fx-padding: 0px; -fx-background-color: rgba(255,255,255,0.6);"); // rgb(194, 194, 194)
     }
 
     @Override
@@ -18,7 +18,6 @@ public class FriendListCell extends ListCell<User> {
 
             FriendCell friendCell = new FriendCell();
             friendCell.setNameLabelText(item.getFirstName() + " " + item.getLastName());
-
             setGraphic(friendCell.getAnchorRoot());
         }
     }
