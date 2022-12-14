@@ -49,4 +49,12 @@ public class FriendshipCell extends HBox {
     public void setStatusLabelText(String text) {
         statusLabel.setText(text);
     }
+
+    public Button getAcceptButton() {
+        return acceptButton;
+    }
+
+    public Button getRejectButton() {
+        return rejectButton;
+    }
 }

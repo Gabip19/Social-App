@@ -99,7 +99,7 @@
             </HBox>
          </top>
          <right>
-            <ListView fx:id="requestsListView" prefHeight="746.0" prefWidth="368.0" BorderPane.alignment="CENTER" />
+            <ListView fx:id="requestsListView" prefHeight="746.0" prefWidth="368.0" styleClass="request-list" BorderPane.alignment="CENTER" />
          </right>
 
       </BorderPane>

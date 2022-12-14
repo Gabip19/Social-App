@@ -7,10 +7,6 @@
     -fx-background-color: rgb(0, 0, 0, 0);
 }
 
-.friends-view {
-    -fx-background-color: rgb(0, 0, 0, 0);
-}
-
 .mid-window {
     -fx-background-color: #f55e5e;
 }
@@ -61,4 +57,12 @@
 
 .close-app-btn:hover {
     -fx-background-color: rgba(255, 0, 0, 0.73);
+}
+
+.friends-view {
+    -fx-background-color: rgb(0, 0, 0, 0);
+}
+
+.request-list {
+    -fx-background-color: rgb(0, 0, 0, 0);
 }

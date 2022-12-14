@@ -27,19 +27,25 @@ public class MainPaneController extends GuiController {
     public Button homeButton;
     public Button friendsButton;
     public AnchorPane midWindow;
-    public ListView<User> friendsListView;
     public HBox topHBox;
     public AnchorPane rootAnchor;
     public BorderPane borderPane;
-    public ListView<Friendship> requestsListView;
-
     public ListView<User> searchUsersListView = new ListView<>();
+
+    // FRIEND REQUESTS LIST
+    public ListView<Friendship> requestsListView;
+    private final ObservableList<Friendship> friendRequests = FXCollections.observableArrayList();
+
+    // FRIENDS LIST
+    public ListView<User> friendsListView;
     private final ObservableList<User> currentUserFriends = FXCollections.observableArrayList();
 
     public void initialize() {
         defineDraggableNode(topHBox);
 
         srv.signIn("test@test.test", "test");
+
+//        srv.getUsers().forEach(srv::sendFriendRequest);
 
         // TODO: 12/13/22 init function for searchUserListView
         rootAnchor.getChildren().add(searchUsersListView);
@@ -49,11 +55,7 @@ public class MainPaneController extends GuiController {
             searchUsersListView.setLayoutX(searchBar.getLayoutX());
         });
 
-        requestsListView.setCellFactory(param -> new FriendshipListCell(srv));
-        requestsListView.setItems(FXCollections.observableArrayList(srv.getFriendRequestsForUser(srv.getCurrentUser())));
-        requestsListView.setPrefWidth(500);
-        borderPane.setRight(requestsListView);
-
+        initializeFriendRequestsListView();
         initializeFriendListView();
 
         userNameLabel.setText(srv.getCurrentUser().getFirstName());
@@ -61,10 +63,19 @@ public class MainPaneController extends GuiController {
         searchBar.onInputMethodTextChangedProperty().addListener(param -> searchForUsersAction());
     }
 
+    private void initializeFriendRequestsListView() {
+        requestsListView.setCellFactory(param -> new FriendshipListCell(srv, friendRequests));
+        friendRequests.setAll(srv.getFriendRequestsForUser(srv.getCurrentUser()));
+        requestsListView.setItems(friendRequests);
+        requestsListView.setPrefWidth(500);
+        borderPane.setRight(requestsListView);
+    }
+
     private void initializeFriendListView() {
         friendsListView.setCellFactory(param -> new FriendListCell(srv, currentUserFriends));
         currentUserFriends.setAll(srv.getFriendsForUser(srv.getCurrentUser()));
         friendsListView.setItems(currentUserFriends);
+        borderPane.setLeft(friendsListView);
     }
 
     public void searchForUsersAction() {
