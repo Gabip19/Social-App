@@ -8,6 +8,7 @@ import gui.components.UserListCell;
 import javafx.animation.TranslateTransition;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -48,14 +49,7 @@ public class MainPaneController extends GuiController {
 
 //        srv.getUsers().forEach(srv::sendFriendRequest);
 
-        // TODO: 12/13/22 init function for searchUserListView
-        rootAnchor.getChildren().add(searchUsersListView);
-        searchUsersListView.setCellFactory(param -> new UserListCell());
-        searchUsersListView.prefWidthProperty().bind(Bindings.add(0, searchBar.widthProperty()));
-        searchBar.layoutXProperty().addListener(param -> {
-            searchUsersListView.setLayoutX(searchBar.getLayoutX());
-        });
-
+        initializeUserSearchListView();
         initializeFriendRequestsListView();
         initializeFriendListView();
 
@@ -64,18 +58,33 @@ public class MainPaneController extends GuiController {
         searchBar.onInputMethodTextChangedProperty().addListener(param -> searchForUsersAction());
     }
 
+    private void initializeUserSearchListView() {
+        rootAnchor.getChildren().add(searchUsersListView);
+        searchUsersListView.setCellFactory(param -> new UserListCell(srv));
+        searchUsersListView.prefWidthProperty().bind(Bindings.add(0, searchBar.widthProperty()));
+        searchBar.layoutXProperty().addListener(param -> {
+            searchUsersListView.setLayoutX(searchBar.getLayoutX());
+        });
+        searchUsersListView.setStyle("-fx-padding: 0px; -fx-background-radius: 0 0 30 30;");
+    }
+
     private void initializeFriendRequestsListView() {
-        requestsListView.setCellFactory(param -> new FriendshipListCell(srv, friendRequests));
         friendRequests.setAll(srv.getFriendRequestsForUser(srv.getCurrentUser()));
+        friendRequests.addListener((ListChangeListener<? super Friendship>) param -> reloadFriendsList());
+
+        requestsListView.setCellFactory(param -> new FriendshipListCell(srv, friendRequests));
         requestsListView.setItems(friendRequests);
         requestsListView.setPrefWidth(400);
+
         borderPane.setRight(requestsListView);
     }
 
     private void initializeFriendListView() {
-        friendsListView.setCellFactory(param -> new FriendListCell(srv, currentUserFriends));
         currentUserFriends.setAll(srv.getFriendsForUser(srv.getCurrentUser()));
+
+        friendsListView.setCellFactory(param -> new FriendListCell(srv, currentUserFriends));
         friendsListView.setItems(currentUserFriends);
+
         borderPane.setLeft(friendsListView);
     }
 
@@ -83,15 +92,22 @@ public class MainPaneController extends GuiController {
         if (!searchBar.getText().equals("")) {
             searchUsersListView.setLayoutY(searchBar.getLayoutY() + 60);
             var resultSet = srv.getUsersWithName(searchBar.getText());
-            searchUsersListView.setItems(FXCollections.observableArrayList(resultSet));
-            searchUsersListView.setPrefHeight(resultSet.size() * 30 + 20);
-            searchUsersListView.setVisible(true);
+            if (!resultSet.isEmpty()) {
+                searchUsersListView.setItems(FXCollections.observableArrayList(resultSet));
+                searchUsersListView.setPrefHeight(resultSet.size() * 50 + 30);
+                searchBar.setStyle("-fx-background-radius: 50 50 0 0");
+                searchUsersListView.setVisible(true);
+            } else {
+                searchUsersListView.setVisible(false);
+                searchBar.setStyle("-fx-background-radius: 50");
+            }
         } else {
             searchUsersListView.setVisible(false);
+            searchBar.setStyle("-fx-background-radius: 50");
         }
     }
 
-    public void showRequests() {
+    public void toggleRequestsPanel() {
         if (borderPane.getRight() == null) {
             showRequestsPanel();
         } else {
@@ -107,14 +123,13 @@ public class MainPaneController extends GuiController {
 
     }
 
-    public void showFriends() {
-        System.out.println("\n\n");
-        var friends = srv.getFriendsForUser(srv.getCurrentUser());
-        friends.forEach(System.out::println);
-        System.out.println("\n");
-        currentUserFriends.setAll(friends);
-//        currentUserFriends.forEach(System.out::println);
+    private void reloadFriendsList() {
+        currentUserFriends.setAll(srv.getFriendsForUser(srv.getCurrentUser()));
+    }
+
+    public void toggleFriendsPanel() {
         if (borderPane.getLeft() == null) {
+            reloadFriendsList();
             showFriendsPanel();
         } else {
             hideFriendsPanel();

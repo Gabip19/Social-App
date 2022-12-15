@@ -60,7 +60,7 @@
                <padding>
                   <Insets bottom="12.0" left="20.0" right="20.0" top="12.0" />
                </padding>
-               <Button fx:id="friendsButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showFriends" prefHeight="40.0" prefWidth="40.0" styleClass="btn-friends" HBox.hgrow="NEVER">
+               <Button fx:id="friendsButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleFriendsPanel" prefHeight="40.0" prefWidth="40.0" styleClass="btn-friends" HBox.hgrow="NEVER">
                   <HBox.margin>
                      <Insets right="15.0" />
                   </HBox.margin>

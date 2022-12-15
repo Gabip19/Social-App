@@ -35,4 +35,8 @@ public class UserCell extends HBox {
     public void setNameLabelText(String text) {
         nameLabel.setText(text);
     }
+
+    public Button getAddFriendButton() {
+        return addFriendButton;
+    }
 }

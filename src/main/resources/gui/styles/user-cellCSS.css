@@ -1,14 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@500;700&family=Nunito&family=Pacifico&family=Ubuntu&display=swap');
+
 .root {
-    -fx-background-color: red;
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+
+.main-hbox {
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-width: 1;
 }
 
 .name-label {
-    -fx-background-color: red;
+    -fx-font-family: 'Ubuntu', sans-serif;
+    -fx-font-size: 18;
 }
 
 .btn-add-friend {
+    -fx-background-color: linear-gradient(to bottom, rgb(236, 89, 190) 0%, rgba(162,112,205,1) 28%, rgba(123,123,233,1) 49%, rgb(0, 210, 255) 96%);
+    -fx-text-fill: white;
+}
+
+.btn-add-friend:hover {
+    -fx-background-color: linear-gradient(to bottom, rgba(255,0,91,1) 0%, rgba(133,104,240,1) 33%, rgba(82,165,246,1) 64%, rgba(0,255,201,1) 90%);
 }
 
 .region {
-    -fx-background-color: yellow;
 }
