@@ -294,4 +294,12 @@ public class Network {
 
         userSrv.updateUser(currentUser, newLastName, newFirstName, newBirthdate);
     }
+
+    public boolean usersAreFriends(User currentUser, User user) {
+        for (Friendship friendship : friendSrv.getFriendships()) {
+            if (friendship.containsID(currentUser.getId()) && friendship.containsID(user.getId()))
+                return true;
+        }
+        return false;
+    }
 }
