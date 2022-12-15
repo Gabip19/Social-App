@@ -10,7 +10,9 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -18,7 +20,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class MainPaneController extends GuiController {
     public Button logOutButton;
@@ -45,7 +51,6 @@ public class MainPaneController extends GuiController {
     public void initialize() {
         defineDraggableNode(topHBox);
 
-        srv.signIn("test@test.test", "test");
 
 //        srv.getUsers().forEach(srv::sendFriendRequest);
 
@@ -92,6 +97,7 @@ public class MainPaneController extends GuiController {
         if (!searchBar.getText().equals("")) {
             searchUsersListView.setLayoutY(searchBar.getLayoutY() + 60);
             var resultSet = srv.getUsersWithName(searchBar.getText());
+            resultSet.remove(srv.getCurrentUser());
             if (!resultSet.isEmpty()) {
                 searchUsersListView.setItems(FXCollections.observableArrayList(resultSet));
                 searchUsersListView.setPrefHeight(resultSet.size() * 50 + 30);
@@ -167,5 +173,29 @@ public class MainPaneController extends GuiController {
         tr.setDuration(Duration.millis(duration));
         tr.setNode(node);
         return tr;
+    }
+
+    public void logOut() {
+        try {
+            currentStage.close();
+            switchToSignInScene();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void switchToSignInScene() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/signin.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1146, 810);
+        Stage stage = new Stage();
+
+        GuiController.setCurrentStage(stage);
+
+        stage.setResizable(false);
+        stage.setTitle("Colors App");
+//        stage.getIcons().add(new Image("gui/testgui/styles/images/colorslogo.png"));
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+        stage.show();
     }
 }

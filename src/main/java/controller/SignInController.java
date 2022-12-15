@@ -13,7 +13,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import service.Network;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -45,11 +44,14 @@ public class SignInController extends AuthController {
         try {
             srv.signIn(emailField.getText(), passwordField.getText());
             System.out.println("\nSigned in successfully.\n");
+            currentStage.close();
+            switchToMainPage();
         } catch (SignInException e) {
             errorLabel.setText(e.getMessage());
             clearFields();
-        }
-        finally {
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
             signInVBox.requestFocus();
         }
     }

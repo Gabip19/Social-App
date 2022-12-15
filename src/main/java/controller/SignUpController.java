@@ -12,7 +12,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import service.Network;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -57,8 +56,12 @@ public class SignUpController extends AuthController {
                         passwordField.getText()
                 );
                 System.out.println("\nNew user created.\n");
+                currentStage.close();
+                switchToMainPage();
             } catch (ValidationException e) {
                 errorLabel.setText(e.getMessage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         } else {
             passwordField.clear();

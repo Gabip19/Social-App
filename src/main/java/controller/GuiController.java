@@ -1,8 +1,13 @@
 package controller;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import service.Network;
+
+import java.io.IOException;
 
 public abstract class GuiController {
     protected static Network srv;
@@ -15,6 +20,20 @@ public abstract class GuiController {
 
     public static void setCurrentStage(Stage stage) {
         GuiController.currentStage = stage;
+    }
+
+    public static void switchToMainPage() throws IOException {
+        GuiController.setSrv(srv);
+        Stage stage = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/gui/main-window.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1146, 810);
+
+        GuiController.setCurrentStage(stage);
+
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
     }
 
     public void closeWindow() {
@@ -43,5 +62,6 @@ public abstract class GuiController {
         });
 
     }
+
 
 }

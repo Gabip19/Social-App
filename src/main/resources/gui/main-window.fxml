@@ -92,7 +92,7 @@
                   <HBox.margin>
                      <Insets right="15.0" />
                   </HBox.margin></Label>
-               <Button fx:id="logOutButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btn-log-out" HBox.hgrow="NEVER">
+               <Button fx:id="logOutButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logOut" prefHeight="40.0" prefWidth="40.0" styleClass="btn-log-out" HBox.hgrow="NEVER">
                   <graphic>
                      <FontIcon iconLiteral="mdral-exit_to_app" iconSize="25" />
                   </graphic></Button>

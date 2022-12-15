@@ -20,14 +20,15 @@ import java.io.IOException;
 
 // TODO: 12/11/22 set background and icon
 public class GUI extends Application {
-    private Network service;
 
 //    @Override
-    public void start1(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException {
         GuiController.setSrv(createNetwork());
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/signin.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1146, 810);
+
+        GuiController.setCurrentStage(stage);
 
         stage.setResizable(false);
         stage.setTitle("Colors App");
@@ -37,7 +38,7 @@ public class GUI extends Application {
         stage.show();
     }
 
-    public void start(Stage stage) throws IOException {
+    public void start1(Stage stage) throws IOException {
 //        try {
             GuiController.setSrv(createNetwork());
 
