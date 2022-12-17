@@ -1,36 +1,37 @@
 package controller;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.Transition;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.util.Duration;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import utils.Animations;
+
+import java.io.IOException;
 
 public class AuthController extends GuiController {
 
-    protected void fadeInFromBelowAnimation(Node node) {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), node);
-        translateTransition.setFromY(100);
-        translateTransition.setToY(0);
+    public static void switchToMainPage() throws IOException { // TODO: 12/17/22 find preload solution?
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                GuiController.class.getResource("/gui/main-window.fxml")
+        );
+        Scene scene = new Scene(fxmlLoader.load(), 1146, 810);
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), node);
-        fadeTransition.setFromValue(0.0);
-        fadeTransition.setToValue(1.0);
-
-        ParallelTransition parallelTransition = new ParallelTransition(translateTransition, fadeTransition);
-
-        parallelTransition.play();
+        currentStage = new Stage();
+        currentStage.setScene(scene);
+        currentStage.initStyle(StageStyle.UNDECORATED);
+        currentStage.show();
     }
 
-    protected ParallelTransition fadeInToAboveAnimation(Node node) {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(600), node);
-        translateTransition.setToY(-100);
-
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(600), node);
-        fadeTransition.setFromValue(1.0);
-        fadeTransition.setToValue(0.0);
-
-        return new ParallelTransition(translateTransition, fadeTransition);
+    protected void switchAuthenticationScene(Node oldRootNode, Parent newRootNode) {
+        Transition animation = Animations.fadeInToAboveAnimation(oldRootNode);
+        animation.setOnFinished( e -> {
+            currentStage.setScene(new Scene(newRootNode));
+            currentStage.show();
+        });
+        animation.play();
     }
 
 }

@@ -22,7 +22,7 @@ import java.io.IOException;
 public class GUI extends Application {
 
 //    @Override
-    public void start(Stage stage) throws IOException {
+    public void start1(Stage stage) throws IOException {
         GuiController.setSrv(createNetwork());
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/signin.fxml"));
@@ -38,21 +38,17 @@ public class GUI extends Application {
         stage.show();
     }
 
-    public void start1(Stage stage) throws IOException {
-//        try {
-            GuiController.setSrv(createNetwork());
+    public void start(Stage stage) throws IOException {
+        GuiController.setSrv(createNetwork());
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/main-window.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1146, 810);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/main-window.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1146, 810);
 
-            GuiController.setCurrentStage(stage);
+        GuiController.setCurrentStage(stage);
 
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.show();
-//        } catch (RuntimeException e) {
-//            e.printStackTrace();
-//        }
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
     }
 
     public static void main(String[] args) {

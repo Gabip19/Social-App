@@ -88,7 +88,7 @@
                   <graphic>
                      <FontIcon disable="true" iconLiteral="mdmz-mark_chat_unread" iconSize="25" />
                   </graphic></Button>
-               <Label fx:id="userNameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="134.0" styleClass="user-name-label" text="hsdjfghjsdhfkjg" wrapText="true" HBox.hgrow="NEVER">
+               <Label fx:id="userNameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="134.0" styleClass="user-name-label" text="USER_NAME" wrapText="true" HBox.hgrow="NEVER">
                   <HBox.margin>
                      <Insets right="15.0" />
                   </HBox.margin></Label>

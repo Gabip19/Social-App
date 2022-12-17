@@ -51,8 +51,7 @@ public class MainPaneController extends GuiController {
     public void initialize() {
         defineDraggableNode(topHBox);
 
-
-//        srv.getUsers().forEach(srv::sendFriendRequest);
+        srv.signIn("test@test.test", "test");
 
         initializeUserSearchListView();
         initializeFriendRequestsListView();
@@ -60,16 +59,16 @@ public class MainPaneController extends GuiController {
 
         userNameLabel.setText(srv.getCurrentUser().getFirstName());
 
-        searchBar.onInputMethodTextChangedProperty().addListener(param -> searchForUsersAction());
+//        srv.getUsers().forEach(srv::sendFriendRequest);
     }
 
     private void initializeUserSearchListView() {
+        searchBar.layoutXProperty().addListener(
+                param -> searchUsersListView.setLayoutX(searchBar.getLayoutX()));
         rootAnchor.getChildren().add(searchUsersListView);
         searchUsersListView.setCellFactory(param -> new UserListCell(srv));
         searchUsersListView.prefWidthProperty().bind(Bindings.add(0, searchBar.widthProperty()));
-        searchBar.layoutXProperty().addListener(param -> {
-            searchUsersListView.setLayoutX(searchBar.getLayoutX());
-        });
+        searchUsersListView.setVisible(false);
         searchUsersListView.setStyle("-fx-padding: 0px; -fx-background-radius: 0 0 30 30;");
     }
 
@@ -93,7 +92,7 @@ public class MainPaneController extends GuiController {
         borderPane.setLeft(friendsListView);
     }
 
-    public void searchForUsersAction() {
+    public void searchForUsersAction() { // TODO: 12/17/22 break into smaller functions
         if (!searchBar.getText().equals("")) {
             searchUsersListView.setLayoutY(searchBar.getLayoutY() + 60);
             var resultSet = srv.getUsersWithName(searchBar.getText());
@@ -115,6 +114,7 @@ public class MainPaneController extends GuiController {
 
     public void toggleRequestsPanel() {
         if (borderPane.getRight() == null) {
+            // TODO: 12/17/22 reload requests list here
             showRequestsPanel();
         } else {
             hideRequestsPanel();

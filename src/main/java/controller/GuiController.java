@@ -1,13 +1,8 @@
 package controller;
 
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import service.Network;
-
-import java.io.IOException;
 
 public abstract class GuiController {
     protected static Network srv;
@@ -22,20 +17,6 @@ public abstract class GuiController {
         GuiController.currentStage = stage;
     }
 
-    public static void switchToMainPage() throws IOException {
-        GuiController.setSrv(srv);
-        Stage stage = new Stage();
-
-        FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/gui/main-window.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1146, 810);
-
-        GuiController.setCurrentStage(stage);
-
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
-    }
-
     public void closeWindow() {
         currentStage.close();
     }
@@ -48,7 +29,7 @@ public abstract class GuiController {
         currentStage.setMaximized(!currentStage.isMaximized());
     }
 
-    public void defineDraggableNode(Node node) {
+    public void defineDraggableNode(Node node) {    // TODO: 12/16/22 define for signin and signup too
         // allow the clock background to be used to drag the clock around.
         final Delta dragDelta = new Delta();
         node.setOnMousePressed(mouseEvent -> {
@@ -62,6 +43,4 @@ public abstract class GuiController {
         });
 
     }
-
-
 }
