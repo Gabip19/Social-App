@@ -74,7 +74,7 @@
                <Region minWidth="-Infinity" prefHeight="55.0" prefWidth="55.0" HBox.hgrow="ALWAYS" />
                <TextField fx:id="searchBar" alignment="CENTER" minWidth="-Infinity" onKeyTyped="#searchForUsersAction" prefHeight="25.0" prefWidth="305.0" promptText="Connect with people" styleClass="search-bar" HBox.hgrow="ALWAYS" />
                <Region minWidth="-Infinity" prefHeight="40.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
-               <Button fx:id="requestsButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btn-rqst" HBox.hgrow="NEVER">
+               <Button fx:id="requestsButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleRequestsPanel" prefHeight="40.0" prefWidth="40.0" styleClass="btn-rqst" HBox.hgrow="NEVER">
                   <HBox.margin>
                      <Insets right="15.0" />
                   </HBox.margin>

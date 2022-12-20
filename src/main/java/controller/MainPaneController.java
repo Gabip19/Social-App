@@ -6,13 +6,11 @@ import gui.components.FriendListCell;
 import gui.components.FriendshipListCell;
 import gui.components.UserListCell;
 import javafx.animation.Transition;
-import javafx.animation.TranslateTransition;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,7 +21,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 import utils.Animations;
 
 import java.io.IOException;
@@ -76,7 +73,7 @@ public class MainPaneController extends GuiController {
     }
 
     private void initializeFriendRequestsListView() {
-        friendRequests.setAll(srv.getFriendRequestsForUser(srv.getCurrentUser()));
+        reloadRequestsList();
         friendRequests.addListener((ListChangeListener<? super Friendship>) param -> reloadFriendsList());
 
         requestsListView.setCellFactory(param -> new FriendshipListCell(srv, friendRequests));
@@ -130,23 +127,43 @@ public class MainPaneController extends GuiController {
 
     public void toggleRequestsPanel() {
         if (borderPane.getRight() == null) {
-            // TODO: 12/17/22 reload requests list here
+            reloadRequestsList();
             showRequestsPanel();
         } else {
             hideRequestsPanel();
         }
     }
 
-    private void hideRequestsPanel() {
-
+    private void showRequestsPanel() {
+        Transition transition = Animations.horizontalSlideAnimation(
+                requestsListView,
+                requestsListView.getWidth(),
+                -1* requestsListView.getWidth(),
+                700d
+        );
+        borderPane.setRight(requestsListView);
+        transition.play();
     }
 
-    private void showRequestsPanel() {
-
+    private void hideRequestsPanel() {
+        Transition transition = Animations.horizontalSlideAnimation(
+                requestsListView,
+                0d,
+                requestsListView.getWidth(),
+                700d
+        );
+        transition.setOnFinished(param -> {
+            borderPane.setRight(null);
+        });
+        transition.play();
     }
 
     private void reloadFriendsList() {
         currentUserFriends.setAll(srv.getFriendsForUser(srv.getCurrentUser()));
+    }
+
+    private void reloadRequestsList() {
+        friendRequests.setAll(srv.getFriendRequestsForUser(srv.getCurrentUser()));
     }
 
     public void toggleFriendsPanel() {
@@ -156,6 +173,17 @@ public class MainPaneController extends GuiController {
         } else {
             hideFriendsPanel();
         }
+    }
+
+    private void showFriendsPanel() {
+        Transition transition = Animations.horizontalSlideAnimation(
+                friendsListView,
+                -1 * friendsListView.getWidth(),
+                friendsListView.getWidth(),
+                700d
+        );
+        borderPane.setLeft(friendsListView);
+        transition.play();
     }
 
     private void hideFriendsPanel() {
@@ -171,17 +199,6 @@ public class MainPaneController extends GuiController {
         transition.play();
     }
 
-    private void showFriendsPanel() {
-        Transition transition = Animations.horizontalSlideAnimation(
-                friendsListView,
-                -1 * friendsListView.getWidth(),
-                friendsListView.getWidth(),
-                700d
-        );
-        borderPane.setLeft(friendsListView);
-        transition.play();
-    }
-
     public void logOut() {
         try {
             currentStage.close();
@@ -194,15 +211,11 @@ public class MainPaneController extends GuiController {
     private void switchToSignInScene() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/signin.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1146, 810);
-        Stage stage = new Stage();
+        currentStage = new Stage();
 
-        GuiController.setCurrentStage(stage);
-
-        stage.setResizable(false);
-        stage.setTitle("Colors App");
-//        stage.getIcons().add(new Image("gui/testgui/styles/images/colorslogo.png"));
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
-        stage.show();
+        currentStage.setResizable(false);
+        currentStage.initStyle(StageStyle.UNDECORATED);
+        currentStage.setScene(scene);
+        currentStage.show();
     }
 }
