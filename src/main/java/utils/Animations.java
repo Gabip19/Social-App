@@ -32,4 +32,13 @@ public class Animations {
         return new ParallelTransition(translateTransition, fadeTransition);
     }
 
+    public static Transition horizontalSlideAnimation(Node node, Double fromX, Double ByX, Double millisDuration) {
+        TranslateTransition tr = new TranslateTransition();
+        tr.setFromX(fromX);
+        tr.setByX(ByX);
+        tr.setDuration(Duration.millis(millisDuration));
+        tr.setNode(node);
+        return tr;
+    }
+
 }

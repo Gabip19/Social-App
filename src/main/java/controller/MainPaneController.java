@@ -5,6 +5,7 @@ import domain.User;
 import gui.components.FriendListCell;
 import gui.components.FriendshipListCell;
 import gui.components.UserListCell;
+import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -23,8 +24,10 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import utils.Animations;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainPaneController extends GuiController {
     public Button logOutButton;
@@ -92,20 +95,33 @@ public class MainPaneController extends GuiController {
         borderPane.setLeft(friendsListView);
     }
 
-    public void searchForUsersAction() { // TODO: 12/17/22 break into smaller functions
+    public void searchForUsersAction() {
         if (!searchBar.getText().equals("")) {
-            searchUsersListView.setLayoutY(searchBar.getLayoutY() + 60);
-            var resultSet = srv.getUsersWithName(searchBar.getText());
-            resultSet.remove(srv.getCurrentUser());
-            if (!resultSet.isEmpty()) {
-                searchUsersListView.setItems(FXCollections.observableArrayList(resultSet));
-                searchUsersListView.setPrefHeight(resultSet.size() * 50 + 30);
-                searchBar.setStyle("-fx-background-radius: 50 50 0 0");
-                searchUsersListView.setVisible(true);
-            } else {
-                searchUsersListView.setVisible(false);
-                searchBar.setStyle("-fx-background-radius: 50");
-            }
+            showSearchView();
+        } else {
+            hideSearchView();
+        }
+    }
+
+    private void showSearchView() {
+        searchUsersListView.setLayoutY(searchBar.getLayoutY() + 60);
+        var resultSet = srv.getUsersWithName(searchBar.getText());
+
+        handleSearchUsersResult(resultSet);
+    }
+
+    private void hideSearchView() {
+        searchUsersListView.setVisible(false);
+        searchBar.setStyle("-fx-background-radius: 50");
+    }
+
+    private void handleSearchUsersResult(ArrayList<User> resultSet) {
+        resultSet.remove(srv.getCurrentUser());
+        if (!resultSet.isEmpty()) {
+            searchUsersListView.setItems(FXCollections.observableArrayList(resultSet));
+            searchUsersListView.setPrefHeight(resultSet.size() * 50 + 30);
+            searchBar.setStyle("-fx-background-radius: 50 50 0 0");
+            searchUsersListView.setVisible(true);
         } else {
             searchUsersListView.setVisible(false);
             searchBar.setStyle("-fx-background-radius: 50");
@@ -143,36 +159,27 @@ public class MainPaneController extends GuiController {
     }
 
     private void hideFriendsPanel() {
-        TranslateTransition tr = getXTransition(
+        Transition transition = Animations.horizontalSlideAnimation(
                 friendsListView,
                 0d,
                 -1 * friendsListView.getWidth(),
                 700d
         );
-        tr.setOnFinished(param -> {
+        transition.setOnFinished(param -> {
             borderPane.setLeft(null);
         });
-        tr.play();
+        transition.play();
     }
 
     private void showFriendsPanel() {
-        TranslateTransition tr = getXTransition(
+        Transition transition = Animations.horizontalSlideAnimation(
                 friendsListView,
                 -1 * friendsListView.getWidth(),
                 friendsListView.getWidth(),
                 700d
         );
         borderPane.setLeft(friendsListView);
-        tr.play();
-    }
-
-    private TranslateTransition getXTransition(Node node, Double fromX, Double ByX, Double duration) {
-        TranslateTransition tr = new TranslateTransition();
-        tr.setFromX(fromX);
-        tr.setByX(ByX);
-        tr.setDuration(Duration.millis(duration));
-        tr.setNode(node);
-        return tr;
+        transition.play();
     }
 
     public void logOut() {
