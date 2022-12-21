@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.Animations;
@@ -47,6 +48,7 @@ public class MainPaneController extends GuiController {
     // FRIENDS LIST
     public ListView<User> friendsListView;
     private final ObservableList<User> currentUserFriends = FXCollections.observableArrayList();
+    public VBox friendsVbox;
 
     public void initialize() {
         defineDraggableNode(topHBox);
@@ -89,7 +91,7 @@ public class MainPaneController extends GuiController {
         friendsListView.setCellFactory(param -> new FriendListCell(srv, currentUserFriends));
         friendsListView.setItems(currentUserFriends);
 
-        borderPane.setLeft(friendsListView);
+        borderPane.setLeft(friendsVbox);
     }
 
     public void searchForUsersAction() {
@@ -175,20 +177,20 @@ public class MainPaneController extends GuiController {
 
     private void showFriendsPanel() {
         Transition transition = Animations.horizontalSlideAnimation(
-                friendsListView,
-                -1 * friendsListView.getWidth(),
-                friendsListView.getWidth(),
+                friendsVbox,
+                -1 * friendsVbox.getWidth(),
+                friendsVbox.getWidth(),
                 700d
         );
-        borderPane.setLeft(friendsListView);
+        borderPane.setLeft(friendsVbox);
         transition.play();
     }
 
     private void hideFriendsPanel() {
         Transition transition = Animations.horizontalSlideAnimation(
-                friendsListView,
+                friendsVbox,
                 0d,
-                -1 * friendsListView.getWidth(),
+                -1 * friendsVbox.getWidth(),
                 700d
         );
         transition.setOnFinished(param -> borderPane.setLeft(null));

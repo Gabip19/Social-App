@@ -16,7 +16,7 @@ public class FriendListCell extends ListCell<User> {
         this.srv = srv;
         this.friends = friends;
         setPrefWidth(0);
-        setStyle("-fx-padding: 0px; -fx-background-color: rgba(255,255,255,0.6);"); // rgb(194, 194, 194)
+        setStyle("-fx-padding: 0px 10px 12px 10px; -fx-background-color: rgba(0, 0, 0, 0);");
     }
 
     @Override

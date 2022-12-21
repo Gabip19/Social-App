@@ -63,6 +63,16 @@
     -fx-background-color: rgb(0, 0, 0, 0);
 }
 
+.friends-vbox {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-background-radius: 0 40 40 0;
+}
+
+.panel-title {
+    -fx-font-size: 25;
+    -fx-text-fill: linear-gradient(to bottom, rgb(147, 146, 241) 0%, rgb(217, 124, 246) 20%, rgba(0,195,235,1) 96%);
+}
+
 .request-list {
     -fx-background-color: rgb(0, 0, 0, 0);
 }
