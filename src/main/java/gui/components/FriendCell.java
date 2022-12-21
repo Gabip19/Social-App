@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class FriendCell extends HBox {
     @FXML
@@ -19,13 +20,14 @@ public class FriendCell extends HBox {
     @FXML
     public Button openChatButton;
 
+    public static final URL fxmlLocation = FriendCell.class.getResource("/gui/friend-cell-view.fxml");
+
     public FriendCell() {
         super();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/friend-cell-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(fxmlLocation);
         loader.setController(this);
         try {
             loader.load();
-            openChatButton.setOnAction(param -> System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

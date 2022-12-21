@@ -27,7 +27,8 @@ public class UI {
         srv = new Network(
                 new UserService(
                     new UserDatabaseRepo(
-                        DatabaseTables.users.toString(),
+//                        DatabaseTables.users.toString(),
+                            "users",
                         ApplicationContext.DATABASE_URL,
                         ApplicationContext.DB_USERNAME,
                         ApplicationContext.DB_PASSWORD,
@@ -35,7 +36,8 @@ public class UI {
                 )),
                 new FriendshipService(
                     new FriendshipDatabaseRepo(
-                        DatabaseTables.friendships.toString(),
+//                        DatabaseTables.friendships.toString(),
+                            "friendships",
                         ApplicationContext.DATABASE_URL,
                         ApplicationContext.DB_USERNAME,
                         ApplicationContext.DB_PASSWORD,

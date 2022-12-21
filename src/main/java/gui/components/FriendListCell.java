@@ -29,13 +29,17 @@ public class FriendListCell extends ListCell<User> {
             FriendCell friendCell = new FriendCell();
             friendCell.setNameLabelText(item.getFirstName() + " " + item.getLastName());
 
-            friendCell.getRemoveFriendButton().setOnAction(param -> {
-                srv.removeFriend(item);
-                friends.remove(item);
-            });
+            initRemoveFriendButtonFor(item, friendCell);
 
             setText(null);
             setGraphic(friendCell.getAnchorRoot());
         }
+    }
+
+    private void initRemoveFriendButtonFor(User item, FriendCell friendCell) {
+        friendCell.getRemoveFriendButton().setOnAction(param -> {
+            srv.removeFriend(item);
+            friends.remove(item);
+        });
     }
 }

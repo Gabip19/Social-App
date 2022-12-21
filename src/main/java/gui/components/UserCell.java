@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class UserCell extends HBox {
     @FXML
@@ -17,9 +18,11 @@ public class UserCell extends HBox {
     @FXML
     public Label nameLabel;
 
+    private static final URL fxmlLocation = UserCell.class.getResource("/gui/user-cell-view.fxml");
+
     public UserCell() {
         super();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/user-cell-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(fxmlLocation);
         loader.setController(this);
         try {
             loader.load();

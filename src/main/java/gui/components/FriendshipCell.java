@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class FriendshipCell extends HBox {
     @FXML
@@ -23,9 +24,11 @@ public class FriendshipCell extends HBox {
     @FXML
     public AnchorPane anchorRoot;
 
+    public static final URL fxmlLocation = FriendshipCell.class.getResource("/gui/friend-requests-cell-view.fxml");
+
     public FriendshipCell() {
         super();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/friend-requests-cell-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(fxmlLocation);
         loader.setController(this);
         try {
             loader.load();

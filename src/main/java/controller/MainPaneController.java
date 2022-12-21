@@ -152,9 +152,7 @@ public class MainPaneController extends GuiController {
                 requestsListView.getWidth(),
                 700d
         );
-        transition.setOnFinished(param -> {
-            borderPane.setRight(null);
-        });
+        transition.setOnFinished(param -> borderPane.setRight(null));
         transition.play();
     }
 
@@ -193,9 +191,7 @@ public class MainPaneController extends GuiController {
                 -1 * friendsListView.getWidth(),
                 700d
         );
-        transition.setOnFinished(param -> {
-            borderPane.setLeft(null);
-        });
+        transition.setOnFinished(param -> borderPane.setLeft(null));
         transition.play();
     }
 

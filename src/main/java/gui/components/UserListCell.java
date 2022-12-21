@@ -29,24 +29,28 @@ public class UserListCell extends ListCell<User> {
 
             Button addFriendButton = userCell.getAddFriendButton();
 
-            if (!srv.usersAreFriends(srv.getCurrentUser(), item)) {
-                addFriendButton.setOnAction(param -> {
-                    srv.sendFriendRequest(item);
-                    addFriendButton.setDisable(true);
-                    addFriendButton.setText("SENT");
-                    addFriendButton.setGraphic(null);
-                });
-            } else {
-                addFriendButton.setDisable(true);
-                addFriendButton.setText(null);
-                FontIcon blockIcon = new FontIcon("mdal-block");
-                blockIcon.setIconColor(Color.RED);
-                blockIcon.setIconSize(25);
-                addFriendButton.setGraphic(blockIcon);
-            }
+            initAddFriendButtonFor(item, addFriendButton);
 
             setText(null);
             setGraphic(userCell.getAnchorRoot());
+        }
+    }
+
+    private void initAddFriendButtonFor(User item, Button addFriendButton) {
+        if (!srv.usersAreFriends(srv.getCurrentUser(), item)) {
+            addFriendButton.setOnAction(param -> {
+                srv.sendFriendRequest(item);
+                addFriendButton.setDisable(true);
+                addFriendButton.setText("SENT");
+                addFriendButton.setGraphic(null);
+            });
+        } else {
+            addFriendButton.setDisable(true);
+            addFriendButton.setText(null);
+            FontIcon blockIcon = new FontIcon("mdal-block");
+            blockIcon.setIconColor(Color.RED);
+            blockIcon.setIconSize(25);
+            addFriendButton.setGraphic(blockIcon);
         }
     }
 }
