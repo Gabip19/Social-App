@@ -12,10 +12,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -41,12 +38,51 @@ public class MainPaneController extends GuiController {
     public BorderPane borderPane;
     public ListView<User> searchUsersListView = new ListView<>();
 
-    // FRIEND REQUESTS LIST
-    public ListView<Friendship> requestsListView;
-    private final ObservableList<Friendship> friendRequests = FXCollections.observableArrayList();
-    public VBox requestsVbox;
 
-    // FRIENDS LIST
+    /* ***********************************
+     *                                   *
+     *          FRIEND REQUESTS          *
+     *                                   *
+     *************************************/
+    /**
+     * Main Vbox holding all components regarding friend requests
+     */
+    public VBox friendRequestsVbox;
+    /**
+     * Button to switch between sent and incoming friend requests
+     */
+    public Button switchRequestsBtn;
+    /**
+     * Vbox holding the current displayed list view
+     */
+    public VBox requestsViewVBox;
+    /**
+     * Flag for knowing which list view is currently displayed
+     */
+    public boolean showingSentRequests = false;
+    /**
+     * Incoming friend requests list view
+     */
+    public ListView<Friendship> inFriendReqListView;
+    /**
+     * Incoming friend requests list
+     */
+    private final ObservableList<Friendship> incomingFriendRequests = FXCollections.observableArrayList();
+    /**
+     * Sent friend requests list view
+     */
+    public ListView<Friendship> sentFriendReqListView;
+    /**
+     * Sent friend request list
+     */
+    public final ObservableList<Friendship> sentFriendRequests = FXCollections.observableArrayList();
+
+
+    /* ***********************************
+     *                                   *
+     *           FRIENDS LIST            *
+     *                                   *
+     *************************************/
     public ListView<User> friendsListView;
     private final ObservableList<User> currentUserFriends = FXCollections.observableArrayList();
     public VBox friendsVbox;
@@ -57,7 +93,7 @@ public class MainPaneController extends GuiController {
         srv.signIn("test@test.test", "test");
 
         initializeUserSearchListView();
-        initializeFriendRequestsListView();
+        initializeFriendRequestsListViews();
         initializeFriendListView();
 
         userNameLabel.setText(srv.getCurrentUser().getFirstName());
@@ -75,15 +111,31 @@ public class MainPaneController extends GuiController {
         searchUsersListView.setStyle("-fx-padding: 0px; -fx-background-radius: 0 0 30 30;");
     }
 
-    private void initializeFriendRequestsListView() {
-        reloadRequestsList();
-        friendRequests.addListener((ListChangeListener<? super Friendship>) param -> reloadFriendsList());
+    private void initializeFriendRequestsListViews() {
+        requestsViewVBox.getChildren().clear();
+        requestsViewVBox.getChildren().add(inFriendReqListView);
 
-        requestsListView.setCellFactory(param -> new FriendshipListCell(srv, friendRequests));
-        requestsListView.setItems(friendRequests);
-        requestsListView.setPrefWidth(400);
+        initializeIncomingReqListView();
+        initializeSentReqListView();
 
-        borderPane.setRight(requestsVbox);
+        borderPane.setRight(friendRequestsVbox);
+    }
+
+    private void initializeSentReqListView() {
+        reloadSentRequestsList();
+
+        sentFriendReqListView.setCellFactory(param -> new FriendshipListCell(srv, sentFriendRequests));
+        sentFriendReqListView.setItems(sentFriendRequests);
+        sentFriendReqListView.setPrefWidth(400);
+    }
+
+    private void initializeIncomingReqListView() {
+        reloadIncomingRequestsList();
+        incomingFriendRequests.addListener((ListChangeListener<? super Friendship>) param -> reloadFriendsList());
+
+        inFriendReqListView.setCellFactory(param -> new FriendshipListCell(srv, incomingFriendRequests));
+        inFriendReqListView.setItems(incomingFriendRequests);
+        inFriendReqListView.setPrefWidth(400);
     }
 
     private void initializeFriendListView() {
@@ -130,29 +182,35 @@ public class MainPaneController extends GuiController {
 
     public void toggleRequestsPanel() {
         if (borderPane.getRight() == null) {
-            reloadRequestsList();
+            reloadRequestsPanelCurrentList();
             showRequestsPanel();
         } else {
             hideRequestsPanel();
         }
     }
 
+    private void reloadRequestsPanelCurrentList() {
+        if (showingSentRequests)
+            reloadSentRequestsList();
+        else reloadIncomingRequestsList();
+    }
+
     private void showRequestsPanel() {
         Transition transition = Animations.horizontalSlideAnimation(
-                requestsVbox,
-                requestsVbox.getWidth(),
-                -1* requestsVbox.getWidth(),
+                friendRequestsVbox,
+                friendRequestsVbox.getWidth(),
+                -1* friendRequestsVbox.getWidth(),
                 700d
         );
-        borderPane.setRight(requestsVbox);
+        borderPane.setRight(friendRequestsVbox);
         transition.play();
     }
 
     private void hideRequestsPanel() {
         Transition transition = Animations.horizontalSlideAnimation(
-                requestsVbox,
+                friendRequestsVbox,
                 0d,
-                requestsVbox.getWidth(),
+                friendRequestsVbox.getWidth(),
                 700d
         );
         transition.setOnFinished(param -> borderPane.setRight(null));
@@ -163,8 +221,12 @@ public class MainPaneController extends GuiController {
         currentUserFriends.setAll(srv.getFriendsForUser(srv.getCurrentUser()));
     }
 
-    private void reloadRequestsList() {
-        friendRequests.setAll(srv.getFriendRequestsForUser(srv.getCurrentUser()));
+    private void reloadIncomingRequestsList() {
+        incomingFriendRequests.setAll(srv.getFriendRequestsForUser(srv.getCurrentUser()));
+    }
+
+    private void reloadSentRequestsList() {
+        sentFriendRequests.setAll(srv.getFriendRequestsFromUser(srv.getCurrentUser()));
     }
 
     public void toggleFriendsPanel() {
@@ -216,5 +278,48 @@ public class MainPaneController extends GuiController {
         currentStage.initStyle(StageStyle.UNDECORATED);
         currentStage.setScene(scene);
         currentStage.show();
+    }
+
+    public void switchRequestsPanel() {
+        if (showingSentRequests) {
+            reloadIncomingRequestsList();
+            switchRequestsBtn.setText("Sent");
+            hideSentFriendRequests();
+        } else {
+            reloadSentRequestsList();
+            switchRequestsBtn.setText("Incoming");
+            hideIncomingFriendRequests();
+        }
+        showingSentRequests = !showingSentRequests;
+    }
+
+    private void showIncomingFriendRequests() {
+        Transition transition = Animations.fadeIn(inFriendReqListView, 600d);
+        requestsViewVBox.getChildren().add(inFriendReqListView);
+        transition.play();
+    }
+
+    private void hideIncomingFriendRequests() {
+        Transition transition = Animations.fadeOut(inFriendReqListView, 600d);
+        transition.setOnFinished(param -> {
+            requestsViewVBox.getChildren().clear();
+            showSentFriendRequests();
+        });
+        transition.play();
+    }
+
+    private void showSentFriendRequests() {
+        Transition transition = Animations.fadeIn(sentFriendReqListView, 600d);
+        requestsViewVBox.getChildren().add(sentFriendReqListView);
+        transition.play();
+    }
+
+    private void hideSentFriendRequests() {
+        Transition transition = Animations.fadeOut(sentFriendReqListView, 600d);
+        transition.setOnFinished(param -> {
+            requestsViewVBox.getChildren().clear();
+            showIncomingFriendRequests();
+        });
+        transition.play();
     }
 }

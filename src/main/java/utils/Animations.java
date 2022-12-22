@@ -1,10 +1,12 @@
 package utils;
 
+import domain.Friendship;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
+import javafx.scene.control.ListView;
 import javafx.util.Duration;
 
 public class Animations {
@@ -41,4 +43,21 @@ public class Animations {
         return tr;
     }
 
+    public static Transition fadeOut(Node node, Double millisDuration) {
+        FadeTransition transition = new FadeTransition();
+        transition.setFromValue(1d);
+        transition.setToValue(0d);
+        transition.setNode(node);
+        transition.setDuration(Duration.millis(millisDuration));
+        return transition;
+    }
+
+    public static Transition fadeIn(Node node, Double millisDuration) {
+        FadeTransition transition = new FadeTransition();
+        transition.setFromValue(0d);
+        transition.setToValue(1d);
+        transition.setNode(node);
+        transition.setDuration(Duration.millis(millisDuration));
+        return transition;
+    }
 }

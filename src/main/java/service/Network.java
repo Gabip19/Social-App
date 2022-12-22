@@ -148,7 +148,14 @@ public class Network {
                         x.getReceiverID().equals(user.getId())
 //                       && x.getFriendshipStatus().equals(FriendshipStatus.PENDING)
                 )
-                .toList();
+                .sorted((f1, f2) -> {
+                    if (f1.getFriendshipStatus().equals(FriendshipStatus.PENDING)) {
+                        if (f2.getFriendshipStatus().equals(FriendshipStatus.PENDING))
+                            return f2.getFriendshipDate().compareTo(f1.getFriendshipDate());
+                        return -1;
+                    }
+                    return f2.getFriendshipDate().compareTo(f1.getFriendshipDate());
+                }).toList();
     }
 
     public List<Friendship> getFriendRequestsFromUser(User user) {
