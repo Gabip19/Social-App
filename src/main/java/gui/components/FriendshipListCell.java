@@ -20,7 +20,7 @@ public class FriendshipListCell extends ListCell<Friendship> {
         this.srv = srv;
         this.friendships = friendships;
         setPrefWidth(0);
-        setStyle("-fx-padding: 0px; -fx-background-color: rgba(255,255,255,0.6);");
+        setStyle("-fx-padding: 0px 10px 10px 10px; -fx-background-color: rgba(0, 0, 0, 0);");
     }
 
     @Override

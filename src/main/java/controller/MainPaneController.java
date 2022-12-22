@@ -44,6 +44,7 @@ public class MainPaneController extends GuiController {
     // FRIEND REQUESTS LIST
     public ListView<Friendship> requestsListView;
     private final ObservableList<Friendship> friendRequests = FXCollections.observableArrayList();
+    public VBox requestsVbox;
 
     // FRIENDS LIST
     public ListView<User> friendsListView;
@@ -82,7 +83,7 @@ public class MainPaneController extends GuiController {
         requestsListView.setItems(friendRequests);
         requestsListView.setPrefWidth(400);
 
-        borderPane.setRight(requestsListView);
+        borderPane.setRight(requestsVbox);
     }
 
     private void initializeFriendListView() {
@@ -138,20 +139,20 @@ public class MainPaneController extends GuiController {
 
     private void showRequestsPanel() {
         Transition transition = Animations.horizontalSlideAnimation(
-                requestsListView,
-                requestsListView.getWidth(),
-                -1* requestsListView.getWidth(),
+                requestsVbox,
+                requestsVbox.getWidth(),
+                -1* requestsVbox.getWidth(),
                 700d
         );
-        borderPane.setRight(requestsListView);
+        borderPane.setRight(requestsVbox);
         transition.play();
     }
 
     private void hideRequestsPanel() {
         Transition transition = Animations.horizontalSlideAnimation(
-                requestsListView,
+                requestsVbox,
                 0d,
-                requestsListView.getWidth(),
+                requestsVbox.getWidth(),
                 700d
         );
         transition.setOnFinished(param -> borderPane.setRight(null));
