@@ -137,7 +137,7 @@
                         <Insets right="25.0" />
                      </HBox.margin>
                   </Label>
-                  <Button fx:id="switchRequestsBtn" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" onAction="#switchRequestsPanel" styleClass="btn-switch-req" text="Sent" textAlignment="CENTER" HBox.hgrow="NEVER">
+                  <Button fx:id="switchRequestsBtn" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="0.0" onAction="#switchRequestsPanel" styleClass="btn-switch-req" text="Sent" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="NEVER">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -145,8 +145,11 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                      <graphic>
-                        <FontIcon iconLiteral="mdal-chevron_right" iconSize="25" />
+                        <FontIcon iconColor="WHITE" iconLiteral="mdal-chevron_right" iconSize="25" />
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </HBox>
                <VBox fx:id="requestsViewVBox" alignment="CENTER" VBox.vgrow="ALWAYS">

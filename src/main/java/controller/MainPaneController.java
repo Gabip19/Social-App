@@ -287,7 +287,7 @@ public class MainPaneController extends GuiController {
             hideSentFriendRequests();
         } else {
             reloadSentRequestsList();
-            switchRequestsBtn.setText("Incoming");
+            switchRequestsBtn.setText("Inbox");
             hideIncomingFriendRequests();
         }
         showingSentRequests = !showingSentRequests;

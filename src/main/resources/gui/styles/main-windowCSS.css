@@ -83,4 +83,6 @@
 }
 
 .btn-switch-req {
+    -fx-background-radius: 50;
+    -fx-background-color: linear-gradient(to bottom, rgb(147, 146, 241) 0%, rgb(217, 124, 246) 20%, rgba(0,195,235,1) 96%);
 }

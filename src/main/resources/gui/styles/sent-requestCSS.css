@@ -1,0 +1,61 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Archivo&family=Arimo&family=Nunito&family=Pacifico&family=Ubuntu&display=swap');*/
+
+.status-vbox {
+}
+
+.main-hbox {
+    -fx-font-size: 17;
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 20, 0, 10, 10);
+}
+
+.main-hbox:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 20, 0, 10, 10);
+    -fx-font-size: 18;
+}
+
+.name-label {
+    -fx-font-family: 'Arimo', sans-serif;
+    -fx-font-weight: 400;
+    -fx-text-fill: #2d2d2d;
+}
+
+.status-label {
+    -fx-text-fill: #6c6c6c;
+    -fx-font-size: 15;
+}
+
+.date-label {
+    -fx-text-fill: #838383;
+    -fx-font-size: 12;
+}
+
+.main-hbox:hover .status-label {
+    -fx-font-size: 16;
+}
+
+.main-hbox:hover .date-label {
+    -fx-font-size: 13;
+}
+
+.main-hbox:hover .icon-refuse {
+    -fx-icon-size: 26;
+}
+
+.main-hbox:hover .btn-refuse {
+    -fx-font-size: 16;
+}
+
+.btn-refuse {
+    -fx-background-color: rgb(255, 255, 255);
+}
+
+.btn-refuse:hover {
+    -fx-background-color: #ff6c6c;
+}
+
+.icon-refuse {
+    -fx-icon-color: #ff0000;
+    -fx-icon-size: 25;
+}
