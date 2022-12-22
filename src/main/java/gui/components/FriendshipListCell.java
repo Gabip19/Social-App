@@ -66,7 +66,7 @@ public class FriendshipListCell extends ListCell<Friendship> {
     private void initButtonsForPending(Friendship item, FriendshipCell friendshipCell) {
         friendshipCell.getAcceptButton().setOnAction(param -> {
             srv.acceptFriendRequest(item);
-            friendships.setAll(srv.getUserFriendships(srv.getCurrentUser()));
+            friendships.setAll(srv.getFriendRequestsForUser(srv.getCurrentUser()));
         });
 
         friendshipCell.getRejectButton().setOnAction(param -> {

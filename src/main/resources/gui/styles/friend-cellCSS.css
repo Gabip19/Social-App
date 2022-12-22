@@ -3,16 +3,16 @@
 .friend-hbox {
     /*-fx-background-color: radial-gradient(center 50% 50%, radius 55%, #ffffff, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0));*/
     -fx-font-size: 18;
-    -fx-background-color: white;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 20, 0, 0, 10);
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 20, 0, -10, 10);
 }
 
 .friend-hbox:hover {
     /*-fx-background-color: radial-gradient(center 50% 50%, radius 55%, #b6b6b6, rgba(138, 138, 138, 0.8), rgba(0, 0, 0, 0));*/
     /*-fx-border-color: rgba(155, 155, 155, 0.75);*/
     /*-fx-border-width: 2;*/
-    -fx-background-color: #ddb6ff; /* #c88eff */
-    -fx-effect: dropshadow(three-pass-box, rgba(145, 116, 173, 0.5), 20, 0, 0, 10);
+    -fx-background-color: rgba(221, 182, 255, 0.8); /* #c88eff */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 20, 0, -10, 10);
     -fx-font-size: 20;
 }
 
