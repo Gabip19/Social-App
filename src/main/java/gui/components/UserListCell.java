@@ -1,6 +1,8 @@
 package gui.components;
 
+import domain.Friendship;
 import domain.User;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.paint.Color;
@@ -10,9 +12,13 @@ import service.Network;
 public class UserListCell extends ListCell<User> {
     private final Network srv;
 
-    public UserListCell(Network srv) {
+    private final ObservableList<Friendship> sentRequests;
+
+
+    public UserListCell(Network srv, ObservableList<Friendship> sentRequests) {
         super();
         this.srv = srv;
+        this.sentRequests = sentRequests;
         setStyle("-fx-padding: 0px; -fx-background-color: rgba(0, 0, 0, 0);");
         setPrefWidth(0);
     }
@@ -39,7 +45,8 @@ public class UserListCell extends ListCell<User> {
     private void initAddFriendButtonFor(User item, Button addFriendButton) {
         if (!srv.usersAreFriends(srv.getCurrentUser(), item)) {
             addFriendButton.setOnAction(param -> {
-                srv.sendFriendRequest(item);
+                Friendship sentRequest = srv.sendFriendRequest(item);
+                sentRequests.add(sentRequest);
                 addFriendButton.setDisable(true);
                 addFriendButton.setText("SENT");
                 addFriendButton.setGraphic(null);

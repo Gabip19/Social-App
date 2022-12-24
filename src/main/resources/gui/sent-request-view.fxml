@@ -42,7 +42,7 @@
             </Label>
         </VBox>
         <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="15.0" prefHeight="40.0" prefWidth="45.0" HBox.hgrow="NEVER" />
-        <Button fx:id="rejectButton" minWidth="-Infinity" mnemonicParsing="false" styleClass="btn-refuse" text="Cancel" HBox.hgrow="NEVER">
+        <Button fx:id="cancelButton" minWidth="-Infinity" mnemonicParsing="false" styleClass="btn-refuse" text="Cancel" HBox.hgrow="NEVER">
             <graphic>
                 <FontIcon iconLiteral="mdal-cancel" iconSize="25" styleClass="icon-refuse" />
             </graphic>

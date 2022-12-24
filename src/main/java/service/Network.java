@@ -203,7 +203,7 @@ public class Network {
      * @param friendToAdd the user to be added as friend
      * @throws FriendshipException if the users are already friends
      */
-    public void sendFriendRequest(User friendToAdd) {
+    public Friendship sendFriendRequest(User friendToAdd) {
         final Friendship auxFriendS = new Friendship(
                 currentUser.getId(),
                 friendToAdd.getId(),
@@ -211,6 +211,7 @@ public class Network {
         );
 
         friendSrv.addFriendship(auxFriendS);
+        return auxFriendS;
     }
 
     public void acceptFriendRequest(Friendship friendRequest) {
@@ -227,6 +228,10 @@ public class Network {
                 LocalDateTime.now(),
                 FriendshipStatus.REJECTED
         );
+    }
+
+    public void cancelFriendRequest(Friendship friendshipToCancel) {
+        friendSrv.removeFriendship(friendshipToCancel);
     }
 
     /**
