@@ -4,7 +4,6 @@ import config.ApplicationContext;
 import domain.Friendship;
 import domain.User;
 import domain.validators.exceptions.SignInException;
-import repository.database.DatabaseTables;
 import domain.validators.FriendshipValidator;
 import domain.validators.UserValidator;
 import repository.database.FriendshipDatabaseRepo;
@@ -42,8 +41,8 @@ public class UI {
                         ApplicationContext.DB_USERNAME,
                         ApplicationContext.DB_PASSWORD,
                         new FriendshipValidator()
-            ))
-        );
+            )),
+                messageSrv);
     }
 
     public static UI getInstance() {

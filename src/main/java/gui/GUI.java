@@ -54,7 +54,7 @@ public class GUI extends Application {
                         ApplicationContext.DB_USERNAME,
                         ApplicationContext.DB_PASSWORD,
                         new FriendshipValidator()
-                ))
-        );
+                )),
+                messageSrv);
     }
 }

@@ -1,9 +1,6 @@
 package service;
 
-import domain.Friendship;
-import domain.FriendshipStatus;
-import domain.HashedPasswordDTO;
-import domain.User;
+import domain.*;
 import domain.validators.exceptions.FriendshipException;
 import domain.validators.exceptions.SignInException;
 import domain.validators.exceptions.ValidationException;
@@ -17,11 +14,14 @@ import java.util.*;
 public class Network {
     private final UserService userSrv;
     private final FriendshipService friendSrv;
+
+    private final TextMessageService messageSrv;
     private User currentUser;
 
-    public Network(UserService userSrv, FriendshipService friendSrv) {
+    public Network(UserService userSrv, FriendshipService friendSrv, TextMessageService messageSrv) {
         this.userSrv = userSrv;
         this.friendSrv = friendSrv;
+        this.messageSrv = messageSrv;
         currentUser = null;
     }
 
@@ -313,5 +313,13 @@ public class Network {
                 return true;
         }
         return false;
+    }
+
+    public ArrayList<TextMessage> getMessagesBetweenUsers(User secondUser) {
+        return messageSrv.getMessagesBetweenUsers(currentUser, secondUser);
+    }
+
+    public void sendMessage(User receiver, String text) {
+        messageSrv.addMessage(currentUser.getId(), receiver.getId(), text, LocalDateTime.now());
     }
 }

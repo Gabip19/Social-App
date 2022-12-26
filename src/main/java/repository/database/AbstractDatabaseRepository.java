@@ -91,7 +91,7 @@ public abstract class AbstractDatabaseRepository<UUID, E extends Entity<UUID>> i
         throw new IllegalArgumentException("Entity with the given ID does not exist.\n");
     }
 
-    private Iterable<E> getEntitiesFromResult(ResultSet resultSet) throws SQLException {
+    protected Iterable<E> getEntitiesFromResult(ResultSet resultSet) throws SQLException {
         List<E> entities = new ArrayList<>();
         while (resultSet.next()) {
             E entity = createEntity(resultSet);
