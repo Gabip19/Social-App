@@ -15,6 +15,7 @@ public class TextMessage extends Entity<UUID> {
         this.receiverID = receiverID;
         this.text = text;
         this.sentDate = date;
+        setId(UUID.randomUUID());
     }
 
     public TextMessage(UUID id, UUID senderID, UUID receiverID, String text, LocalDateTime date) {

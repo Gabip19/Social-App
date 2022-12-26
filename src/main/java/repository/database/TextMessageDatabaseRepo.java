@@ -41,6 +41,7 @@ public class TextMessageDatabaseRepo extends AbstractDatabaseRepository<UUID, Te
             statement.setObject(3, entity.getReceiverID());
             statement.setString(4, entity.getText());
             statement.setTimestamp(5, Timestamp.valueOf(entity.getSentDate()));
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -76,12 +77,12 @@ public class TextMessageDatabaseRepo extends AbstractDatabaseRepository<UUID, Te
         List<TextMessage> entities = new ArrayList<>();
         String sql = "SELECT * FROM messages WHERE (sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?) ORDER BY sent_date";
         try (
-                PreparedStatement statement = connection.prepareStatement(sql);
+                PreparedStatement statement = connection.prepareStatement(sql)
         ) {
             statement.setObject(1, id1);
             statement.setObject(2, id2);
             statement.setObject(3, id2);
-            statement.setObject(4, id2);
+            statement.setObject(4, id1);
 
             var rez = statement.executeQuery();
             entities = (List<TextMessage>) getEntitiesFromResult(rez);

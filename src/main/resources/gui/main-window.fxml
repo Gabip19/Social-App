@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="rootAnchor" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainPaneController">
+<AnchorPane fx:id="rootAnchor" prefHeight="841.0" prefWidth="1362.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainPaneController">
    <stylesheets>
       <URL value="@styles/main-windowCSS.css" />
    </stylesheets>
@@ -68,9 +68,9 @@
          </left>
 
          <center>
-            <AnchorPane fx:id="midWindow" prefHeight="785.0" prefWidth="1039.0" styleClass="mid-window" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="midWindow" prefHeight="861.0" prefWidth="422.0" styleClass="mid-window" BorderPane.alignment="CENTER">
                <BorderPane.margin>
-                  <Insets left="20.0" right="20.0" />
+                  <Insets left="20.0" right="20.0" top="30.0" />
                </BorderPane.margin></AnchorPane>
          </center>
 

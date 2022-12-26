@@ -315,11 +315,11 @@ public class Network {
         return false;
     }
 
-    public ArrayList<TextMessage> getMessagesBetweenUsers(User secondUser) {
+    public ArrayList<TextMessage> getMessagesWithUsers(User secondUser) {
         return messageSrv.getMessagesBetweenUsers(currentUser, secondUser);
     }
 
-    public void sendMessage(User receiver, String text) {
-        messageSrv.addMessage(currentUser.getId(), receiver.getId(), text, LocalDateTime.now());
+    public TextMessage sendMessage(User receiver, String text) {
+        return messageSrv.addMessage(currentUser.getId(), receiver.getId(), text, LocalDateTime.now());
     }
 }

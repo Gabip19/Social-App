@@ -11,4 +11,6 @@ module ToySocialApp.main {
     exports controller;
     exports gui.components;
     opens gui.components to javafx.fxml;
+    exports gui.components.message;
+    opens gui.components.message to javafx.fxml;
 }

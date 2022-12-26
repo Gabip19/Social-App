@@ -44,4 +44,8 @@ public class FriendCell extends HBox {
     public Button getRemoveFriendButton() {
         return removeFriendButton;
     }
+
+    public Button getOpenChatButton() {
+        return openChatButton;
+    }
 }

@@ -16,9 +16,9 @@ public class TextMessageService {
         this.messageRepo = messageRepo;
     }
 
-    public void addMessage(UUID senderId, UUID receiverId, String text, LocalDateTime sentDate) {
+    public TextMessage addMessage(UUID senderId, UUID receiverId, String text, LocalDateTime sentDate) {
         TextMessage textMessage = new TextMessage(senderId, receiverId, text, sentDate);
-        messageRepo.save(textMessage);
+        return messageRepo.save(textMessage);
     }
 
     ArrayList<TextMessage> getMessagesBetweenUsers(User user1, User user2) {

@@ -6,10 +6,13 @@ import domain.User;
 import domain.validators.exceptions.SignInException;
 import domain.validators.FriendshipValidator;
 import domain.validators.UserValidator;
+import repository.database.DatabaseTables;
 import repository.database.FriendshipDatabaseRepo;
+import repository.database.TextMessageDatabaseRepo;
 import repository.database.UserDatabaseRepo;
 import service.FriendshipService;
 import service.Network;
+import service.TextMessageService;
 import service.UserService;
 
 import java.util.ArrayList;
@@ -42,7 +45,12 @@ public class UI {
                         ApplicationContext.DB_PASSWORD,
                         new FriendshipValidator()
             )),
-                messageSrv);
+                new TextMessageService( new TextMessageDatabaseRepo(
+                        "messages",
+                        ApplicationContext.DATABASE_URL,
+                        ApplicationContext.DB_USERNAME,
+                        ApplicationContext.DB_PASSWORD
+                )));
     }
 
     public static UI getInstance() {

@@ -142,7 +142,7 @@ public class MainPaneController extends GuiController {
     private void initializeFriendListView() {
         currentUserFriends.setAll(srv.getFriendsForUser(srv.getCurrentUser()));
 
-        friendsListView.setCellFactory(param -> new FriendListCell(srv, currentUserFriends));
+        friendsListView.setCellFactory(param -> new FriendListCell(srv, currentUserFriends, borderPane));
         friendsListView.setItems(currentUserFriends);
 
         borderPane.setLeft(friendsVbox);

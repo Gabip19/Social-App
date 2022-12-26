@@ -11,9 +11,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import repository.database.DatabaseTables;
 import repository.database.FriendshipDatabaseRepo;
+import repository.database.TextMessageDatabaseRepo;
 import repository.database.UserDatabaseRepo;
 import service.FriendshipService;
 import service.Network;
+import service.TextMessageService;
 import service.UserService;
 
 import java.io.IOException;
@@ -55,6 +57,12 @@ public class GUI extends Application {
                         ApplicationContext.DB_PASSWORD,
                         new FriendshipValidator()
                 )),
-                messageSrv);
+                new TextMessageService(new TextMessageDatabaseRepo(
+                        DatabaseTables.messages.toString(),
+                        ApplicationContext.DATABASE_URL,
+                        ApplicationContext.DB_USERNAME,
+                        ApplicationContext.DB_PASSWORD
+                ))
+        );
     }
 }
