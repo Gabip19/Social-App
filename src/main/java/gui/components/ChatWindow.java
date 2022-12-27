@@ -23,7 +23,7 @@ public class ChatWindow {
     public VBox messagesVBox;
     public TextField inputField;
     public Button sendButton;
-    public static final URL fxmlLocation = FriendCell.class.getResource("/gui/message-view.fxml");
+    public static final URL fxmlLocation = FriendCell.class.getResource("/gui/chat-view.fxml");
     private final Network srv;
     private final User user;
 
@@ -63,11 +63,11 @@ public class ChatWindow {
     private void displayMessage(TextMessage messageToDisplay) {
         if (messageToDisplay.getSenderID().equals(user.getId())) {
             messagesVBox.getChildren().add(
-                    MessageBoxFactory.newReceiverMessageBox(messageToDisplay.getText())
+                    MessageBoxFactory.newReceiverMessageBox(messageToDisplay)
             );
         } else {
             messagesVBox.getChildren().add(
-                    MessageBoxFactory.newSenderMessageBox(messageToDisplay.getText())
+                    MessageBoxFactory.newSenderMessageBox(messageToDisplay)
             );
         }
     }

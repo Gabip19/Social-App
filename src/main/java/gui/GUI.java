@@ -28,7 +28,7 @@ public class GUI extends Application {
         GuiController.setSrv(createNetwork());
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/main-window.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1250, 810);
+        Scene scene = new Scene(fxmlLoader.load());     // 1250, 810
 
         GuiController.setCurrentStage(stage);
 

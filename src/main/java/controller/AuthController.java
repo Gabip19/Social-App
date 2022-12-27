@@ -17,7 +17,7 @@ public class AuthController extends GuiController {
         FXMLLoader fxmlLoader = new FXMLLoader(
                 GuiController.class.getResource("/gui/main-window.fxml")
         );
-        Scene scene = new Scene(fxmlLoader.load(), 1146, 810);
+        Scene scene = new Scene(fxmlLoader.load());
 
         currentStage = new Stage();
         currentStage.setScene(scene);

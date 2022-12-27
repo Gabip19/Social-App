@@ -1,0 +1,48 @@
+.message-vbox {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-background-radius: 30 30 0 0;
+}
+
+.header-hbox {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 20, 0, 0, 15);
+}
+
+.name-label {
+    -fx-font-size: 20;
+    -fx-font-family: "Arial Rounded MT Bold";
+}
+
+.scroll-pane, .scroll-pane > .viewport {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-background-color: rgba(255, 255, 255, 0);
+}
+
+.msg-date-label {
+    -fx-font-family: Arial;
+    -fx-text-fill: rgba(126, 126, 126, 0.3);
+}
+
+.message-hbox:hover > .msg-date-label {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 15;
+    -fx-text-fill: rgba(126, 126, 126, 0.7);
+}
+
+.input-hbox {
+    -fx-border-color: rgba(148, 148, 148, 0.4);
+    -fx-border-width: 2 0 0 0;
+}
+
+.input-field {
+    -fx-font-family: Arial;
+    -fx-font-size: 15;
+    -fx-background-radius: 20 0 0 20;
+}
+
+.send-btn {
+    -fx-font-family: Arial;
+    -fx-font-size: 15;
+    -fx-background-radius: 0 20 20 0;
+    -fx-background-color: linear-gradient(to bottom, rgb(236, 89, 190) 0%, rgba(162,112,205,1) 28%, rgba(123,123,233,1) 49%, rgb(0, 210, 255) 96%);
+}

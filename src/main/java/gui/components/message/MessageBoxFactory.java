@@ -1,22 +1,27 @@
 package gui.components.message;
 
+import domain.TextMessage;
+import javafx.geometry.Insets;
+import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 
 public class MessageBoxFactory {
-    private static MessageBox createMessageBox(String messageContent) {
-        MessageBox messageBox = new MessageBox(messageContent);
+    private static MessageBox createMessageBox(TextMessage messageContent) {
+        return new MessageBox(messageContent);
+    }
+
+    public static MessageBox newSenderMessageBox(TextMessage textMessage) {
+        MessageBox messageBox = createMessageBox(textMessage);
+        messageBox.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+        messageBox.getTextFlow().setStyle("-fx-background-radius: 20px; -fx-background-color: #d747cd"); // #be4eb7 #c241b9
         return messageBox;
     }
 
-    public static MessageBox newSenderMessageBox(String messageContent) {
-        MessageBox messageBox = createMessageBox(messageContent);
-        messageBox.setAlignment(Pos.CENTER_RIGHT);
-        return messageBox;
-    }
-
-    public static MessageBox newReceiverMessageBox(String messageContent) {
-        MessageBox messageBox = createMessageBox(messageContent);
-        messageBox.setAlignment(Pos.CENTER_LEFT);
+    public static MessageBox newReceiverMessageBox(TextMessage textMessage) {
+        MessageBox messageBox = createMessageBox(textMessage);
+        messageBox.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+        messageBox.getTextFlow().setStyle("-fx-background-radius: 20px; -fx-background-color: #7384F7FF");
+        messageBox.getTextFlow().setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
         return messageBox;
     }
 }
