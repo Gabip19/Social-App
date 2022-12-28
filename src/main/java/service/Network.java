@@ -10,7 +10,6 @@ import utils.PasswordHasher;
 import java.time.LocalDateTime;
 import java.util.*;
 
-// TODO: 12/13/22 haveOngoingFriendship
 public class Network {
     private final UserService userSrv;
     private final FriendshipService friendSrv;

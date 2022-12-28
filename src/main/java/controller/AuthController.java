@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class AuthController extends GuiController {
 
-    public static void switchToMainPage() throws IOException { // TODO: 12/17/22 find preload solution?
+    public static void switchToMainPage() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(
                 GuiController.class.getResource("/gui/main-window.fxml")
         );

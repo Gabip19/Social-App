@@ -86,3 +86,16 @@
     -fx-background-radius: 50;
     -fx-background-color: linear-gradient(to bottom, rgb(147, 146, 241) 0%, rgb(217, 124, 246) 20%, rgba(0,195,235,1) 96%);
 }
+
+.reopen-chat-btn {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 14;
+    -fx-background-radius: 20 20 0 0;
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+}
+
+.reopen-chat-btn:hover {
+    -fx-font-size: 15;
+    -fx-background-color: white;
+    -fx-cursor: hand;
+}

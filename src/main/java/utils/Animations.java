@@ -1,12 +1,10 @@
 package utils;
 
-import domain.Friendship;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
-import javafx.scene.control.ListView;
 import javafx.util.Duration;
 
 public class Animations {
@@ -38,6 +36,15 @@ public class Animations {
         TranslateTransition tr = new TranslateTransition();
         tr.setFromX(fromX);
         tr.setByX(ByX);
+        tr.setDuration(Duration.millis(millisDuration));
+        tr.setNode(node);
+        return tr;
+    }
+
+    public static Transition verticalSlideAnimation(Node node, Double fromY, Double ByY, Double millisDuration) {
+        TranslateTransition tr = new TranslateTransition();
+        tr.setFromY(fromY);
+        tr.setByY(ByY);
         tr.setDuration(Duration.millis(millisDuration));
         tr.setNode(node);
         return tr;

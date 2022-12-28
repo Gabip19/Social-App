@@ -2,10 +2,7 @@ package controller;
 
 import domain.Friendship;
 import domain.User;
-import gui.components.FriendListCell;
-import gui.components.FriendshipListCell;
-import gui.components.SentFriendshipListCell;
-import gui.components.UserListCell;
+import gui.components.*;
 import javafx.animation.Transition;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -25,6 +22,12 @@ import utils.Animations;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// TODO: 12/28/22 design navigation bar
+// TODO: 12/28/22 home button function
+// TODO: 12/28/22 signin and signup change font and input field height
+// TODO: 12/28/22 signin and signup set black color for exit button and minimize
+// TODO: 12/28/22 logout prompt
+// TODO: 12/28/22 app title and logo
 public class MainPaneController extends GuiController {
     public Button logOutButton;
     public Label userNameLabel;
@@ -39,6 +42,8 @@ public class MainPaneController extends GuiController {
     public BorderPane borderPane;
     public ListView<User> searchUsersListView = new ListView<>();
 
+    public AnchorPane lastOpenedChatRoot = null;
+    public HBox bottomChatHead;
 
     /* ***********************************
      *                                   *
@@ -99,6 +104,8 @@ public class MainPaneController extends GuiController {
 
         userNameLabel.setText(srv.getCurrentUser().getFirstName());
 
+        borderPane.setCenter(null);
+        borderPane.setBottom(null);
 //        srv.getUsers().forEach(srv::sendFriendRequest);
     }
 
@@ -200,7 +207,7 @@ public class MainPaneController extends GuiController {
         Transition transition = Animations.horizontalSlideAnimation(
                 friendRequestsVbox,
                 friendRequestsVbox.getWidth(),
-                -1* friendRequestsVbox.getWidth(),
+                -1 * friendRequestsVbox.getWidth(),
                 700d
         );
         borderPane.setRight(friendRequestsVbox);
@@ -320,6 +327,43 @@ public class MainPaneController extends GuiController {
         transition.setOnFinished(param -> {
             requestsViewVBox.getChildren().clear();
             showIncomingFriendRequests();
+        });
+        transition.play();
+    }
+
+    public void toggleLastChatPanel() {
+        if (borderPane.getCenter() == null) {
+            maximizeLastOpenedChat();
+        } else {
+            lastOpenedChatRoot = (AnchorPane) borderPane.getCenter();
+            minimizeOpenedChat();
+        }
+    }
+
+    public void maximizeLastOpenedChat() {
+        if (lastOpenedChatRoot != null) {
+            Transition transition = Animations.verticalSlideAnimation(
+                    lastOpenedChatRoot,
+                    600d,
+                    -600d,
+                    300d
+            );
+            borderPane.setCenter(lastOpenedChatRoot);
+            borderPane.setBottom(null);
+            transition.play();
+        }
+    }
+
+    private void minimizeOpenedChat() {
+        Transition transition = Animations.verticalSlideAnimation(
+                lastOpenedChatRoot,
+                0d,
+                600d,
+                300d
+        );
+        transition.setOnFinished(param2 -> {
+            borderPane.setCenter(null);
+            borderPane.setBottom(bottomChatHead);
         });
         transition.play();
     }

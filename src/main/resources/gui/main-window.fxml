@@ -68,7 +68,7 @@
          </left>
 
          <center>
-            <AnchorPane fx:id="midWindow" prefHeight="861.0" prefWidth="422.0" styleClass="mid-window" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="midWindow" prefHeight="683.0" prefWidth="357.0" styleClass="mid-window" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="20.0" right="20.0" top="30.0" />
                </BorderPane.margin></AnchorPane>
@@ -100,7 +100,7 @@
                   <graphic>
                      <FontIcon iconLiteral="mdal-group_add" iconSize="25" />
                   </graphic></Button>
-               <Button fx:id="messagesButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btn-msg" HBox.hgrow="NEVER">
+               <Button fx:id="messagesButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleLastChatPanel" prefHeight="40.0" prefWidth="40.0" styleClass="btn-msg" HBox.hgrow="NEVER">
                   <HBox.margin>
                      <Insets right="15.0" />
                   </HBox.margin>
@@ -158,6 +158,14 @@
                </VBox>
             </VBox>
          </right>
+         <bottom>
+            <HBox fx:id="bottomChatHead" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <Button mnemonicParsing="false" onAction="#maximizeLastOpenedChat" prefHeight="31.0" prefWidth="267.0" styleClass="reopen-chat-btn" text="REOPEN CHAT" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Rounded MT Bold" size="14.0" />
+                  </font></Button>
+            </HBox>
+         </bottom>
 
       </BorderPane>
    </VBox>

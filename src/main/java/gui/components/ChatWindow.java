@@ -3,14 +3,17 @@ package gui.components;
 import domain.TextMessage;
 import domain.User;
 import gui.components.message.MessageBoxFactory;
+import javafx.animation.Transition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import service.Network;
+import utils.Animations;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +22,7 @@ public class ChatWindow {
 
     public AnchorPane mainAnchor;
     public Label userNameLabel;
+    public Button closeButton;
     public ScrollPane messagesScrollPane;
     public VBox messagesVBox;
     public TextField inputField;
@@ -33,6 +37,7 @@ public class ChatWindow {
 
         loadChatView();
         initSendActions();
+        initCloseAction();
         loadMessages();
 
         messagesVBox.heightProperty().addListener(param ->
@@ -45,6 +50,21 @@ public class ChatWindow {
     private void initSendActions() {
         sendButton.setOnAction(param -> sendMessage());
         inputField.setOnAction(param -> sendMessage());
+    }
+
+    private void initCloseAction() {
+        closeButton.setOnAction(param -> {
+            Transition transition = Animations.verticalSlideAnimation(
+                    mainAnchor,
+                    0d,
+                    600d,
+                    300d
+            );
+            transition.setOnFinished(param2 -> {
+                ((BorderPane) mainAnchor.getParent()).setCenter(null);
+            });
+            transition.play();
+        });
     }
 
     private void sendMessage() {
@@ -84,5 +104,13 @@ public class ChatWindow {
 
     public AnchorPane getMainAnchor() {
         return mainAnchor;
+    }
+
+    public ScrollPane getMessagesScrollPane() {
+        return messagesScrollPane;
+    }
+
+    public Label getUserNameLabel() {
+        return userNameLabel;
     }
 }
