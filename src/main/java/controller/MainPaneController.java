@@ -15,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.Animations;
@@ -22,14 +24,16 @@ import utils.Animations;
 import java.io.IOException;
 import java.util.ArrayList;
 
-// TODO: 12/28/22 design navigation bar
+// TODO: 12/28/22 profile picture
 // TODO: 12/28/22 home button function
 // TODO: 12/28/22 signin and signup change font and input field height
 // TODO: 12/28/22 signin and signup set black color for exit button and minimize
 // TODO: 12/28/22 logout prompt
 // TODO: 12/28/22 app title and logo
+// TODO: 12/28/22 background image (one for signin and signup one for main one for main maximized)
 public class MainPaneController extends GuiController {
     public Button logOutButton;
+    public Circle profilePicture;
     public Label userNameLabel;
     public Button messagesButton;
     public Button requestsButton;
@@ -103,6 +107,7 @@ public class MainPaneController extends GuiController {
         initializeFriendListView();
 
         userNameLabel.setText(srv.getCurrentUser().getFirstName());
+        profilePicture.setFill(Color.RED);
 
         borderPane.setCenter(null);
         borderPane.setBottom(null);
@@ -116,7 +121,8 @@ public class MainPaneController extends GuiController {
         searchUsersListView.setCellFactory(param -> new UserListCell(srv, sentFriendRequests));
         searchUsersListView.prefWidthProperty().bind(Bindings.add(0, searchBar.widthProperty()));
         searchUsersListView.setVisible(false);
-        searchUsersListView.setStyle("-fx-padding: 0px; -fx-background-radius: 0 0 30 30;");
+        searchUsersListView.getStyleClass().add("search-view");
+        searchUsersListView.getStylesheets().add("gui/styles/main-windowCSS.css");
     }
 
     private void initializeFriendRequestsListViews() {

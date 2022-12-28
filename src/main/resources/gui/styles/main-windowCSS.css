@@ -11,12 +11,18 @@
     -fx-background-color: #f55e5e;
 }
 
+
+
+        /* TOOL BAR */
+
 .action-top-bar {
     -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 15, 0, 0, 0);
 }
 
 .btn-friends {
     -fx-background-radius: 50;
+    -fx-background-color: rgb(0, 0, 0, 0);
 }
 
 .btn-home {
@@ -26,21 +32,50 @@
 
 .search-bar {
     -fx-background-radius: 50;
+    -fx-effect: dropshadow(three-pass-box, rgb(183, 92, 210), 3, 0, 0, 0);
 }
 
 .btn-rqst {
     -fx-background-radius: 50;
+    -fx-background-color: rgb(0, 0, 0, 0);
 }
 
 .btn-msg {
     -fx-background-radius: 50;
+    -fx-cursor: hand;
+    -fx-background-color: rgb(0, 0, 0, 0);
+}
+
+.profile-pic {
+
 }
 
 .user-name-label {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 17;
 }
 
 .btn-log-out {
     -fx-background-radius: 50;
+    -fx-background-color: rgb(0, 0, 0, 0);
+}
+
+.icon-menu {
+    -fx-cursor: hand;
+    -fx-icon-color: #4c4a8d;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 15, 0, 5, 5);
+}
+
+.icon-menu:hover {
+    -fx-icon-color: #be5be1;
+}
+
+
+
+.search-view {
+    -fx-padding: 0px;
+    -fx-background-radius: 0 0 30 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 15, 0, 0, 0);
 }
 
 .top-bar-btn, .close-app-btn {

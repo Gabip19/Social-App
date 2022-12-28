@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
@@ -79,42 +80,50 @@
                <padding>
                   <Insets bottom="12.0" left="20.0" right="20.0" top="12.0" />
                </padding>
-               <Button fx:id="friendsButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleFriendsPanel" prefHeight="40.0" prefWidth="40.0" styleClass="btn-friends" HBox.hgrow="NEVER">
+               <Button fx:id="friendsButton" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleFriendsPanel" prefHeight="40.0" prefWidth="40.0" styleClass="btn-friends" HBox.hgrow="NEVER">
                   <HBox.margin>
                      <Insets right="15.0" />
                   </HBox.margin>
                   <graphic>
-                     <FontIcon iconLiteral="mdmz-people_alt" iconSize="25" />
+                     <FontIcon iconLiteral="mdmz-people_alt" iconSize="25" styleClass="icon-menu" />
                   </graphic></Button>
-               <Button fx:id="homeButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btn-home" textAlignment="CENTER" HBox.hgrow="NEVER">
+               <Button fx:id="messagesButton" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#toggleLastChatPanel" prefHeight="40.0" prefWidth="40.0" styleClass="btn-msg" textAlignment="CENTER" HBox.hgrow="NEVER">
                   <graphic>
-                     <FontIcon iconLiteral="mdral-home" iconSize="25" />
-                  </graphic></Button>
-               <Region minWidth="-Infinity" prefHeight="55.0" prefWidth="55.0" HBox.hgrow="ALWAYS" />
-               <TextField fx:id="searchBar" alignment="CENTER" minWidth="-Infinity" onKeyTyped="#searchForUsersAction" prefHeight="25.0" prefWidth="305.0" promptText="Connect with people" styleClass="search-bar" HBox.hgrow="ALWAYS" />
+                     <FontIcon iconLiteral="mdmz-mark_chat_unread" iconSize="23" styleClass="icon-menu" />
+                  </graphic>
+                  <HBox.margin>
+                     <Insets right="15.0" />
+                  </HBox.margin>
+               </Button>
+               <Region minWidth="-Infinity" prefHeight="40.0" prefWidth="118.0" HBox.hgrow="ALWAYS" />
+               <Button fx:id="homeButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btn-home" textAlignment="CENTER" HBox.hgrow="NEVER">
+                  <graphic>
+                     <FontIcon iconLiteral="mdral-home" iconSize="25" styleClass="icon-menu" />
+                  </graphic>
+                  <HBox.margin>
+                     <Insets right="15.0" />
+                  </HBox.margin></Button>
+               <TextField fx:id="searchBar" alignment="CENTER" minWidth="-Infinity" onKeyTyped="#searchForUsersAction" prefHeight="33.0" prefWidth="318.0" promptText="Connect with people" styleClass="search-bar" HBox.hgrow="ALWAYS" />
                <Region minWidth="-Infinity" prefHeight="40.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
-               <Button fx:id="requestsButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleRequestsPanel" prefHeight="40.0" prefWidth="40.0" styleClass="btn-rqst" HBox.hgrow="NEVER">
+               <Button fx:id="requestsButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleRequestsPanel" prefHeight="40.0" prefWidth="40.0" styleClass="btn-rqst" HBox.hgrow="NEVER">
                   <HBox.margin>
-                     <Insets right="15.0" />
+                     <Insets right="30.0" />
                   </HBox.margin>
                   <graphic>
-                     <FontIcon iconLiteral="mdal-group_add" iconSize="25" />
+                     <FontIcon iconLiteral="mdal-group_add" iconSize="30" styleClass="icon-menu" />
                   </graphic></Button>
-               <Button fx:id="messagesButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleLastChatPanel" prefHeight="40.0" prefWidth="40.0" styleClass="btn-msg" HBox.hgrow="NEVER">
+               <Circle fx:id="profilePicture" fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" styleClass="profile-pic" HBox.hgrow="NEVER" />
+               <Label fx:id="userNameLabel" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="113.0" styleClass="user-name-label" text="USER_NAME" HBox.hgrow="NEVER">
                   <HBox.margin>
-                     <Insets right="15.0" />
-                  </HBox.margin>
-                  <graphic>
-                     <FontIcon disable="true" iconLiteral="mdmz-mark_chat_unread" iconSize="25" />
-                  </graphic></Button>
-               <Label fx:id="userNameLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="134.0" styleClass="user-name-label" text="USER_NAME" wrapText="true" HBox.hgrow="NEVER">
-                  <HBox.margin>
-                     <Insets right="15.0" />
+                     <Insets left="15.0" right="15.0" />
                   </HBox.margin></Label>
-               <Button fx:id="logOutButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logOut" prefHeight="40.0" prefWidth="40.0" styleClass="btn-log-out" HBox.hgrow="NEVER">
+               <Button fx:id="logOutButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logOut" prefHeight="40.0" prefWidth="40.0" styleClass="btn-log-out" HBox.hgrow="NEVER">
                   <graphic>
-                     <FontIcon iconLiteral="mdral-exit_to_app" iconSize="25" />
+                     <FontIcon iconLiteral="mdral-exit_to_app" iconSize="27" styleClass="icon-menu" />
                   </graphic></Button>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
             </HBox>
          </top>
          <right>
