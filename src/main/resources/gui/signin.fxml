@@ -16,27 +16,24 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1146.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.SignInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1146.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignInController">
     <stylesheets>
         <URL value="@styles/inputCSS.css" />
     </stylesheets>
-    <Group layoutX="1034.0" layoutY="-2.0">
-        <HBox layoutY="2.0" prefHeight="27.0" prefWidth="112.0">
-            <Button focusTraversable="false" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="30.0" prefWidth="69.0" styleClass="min-btn">
-                <graphic>
-                    <FontIcon iconLiteral="mdmz-minimize" iconSize="20" styleClass="topbar-btn" />
-                </graphic>
-            </Button>
-            <Button focusTraversable="false" mnemonicParsing="false" onAction="#closeWindow" prefHeight="30.0" prefWidth="69.0" styleClass="close-btn">
-                <graphic>
-                    <FontIcon iconLiteral="mdal-close" iconSize="20" styleClass="topbar-btn" />
-                </graphic>
-            </Button>
-        </HBox>
-    </Group>
+     <HBox fx:id="topHBox" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="112.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <Button focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="30.0" prefWidth="60.0" styleClass="min-btn">
+             <graphic>
+                 <FontIcon iconLiteral="mdrmz-minimize" iconSize="20" styleClass="topbar-btn" />
+             </graphic>
+         </Button>
+         <Button focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeWindow" prefHeight="30.0" prefWidth="60.0" styleClass="close-btn">
+             <graphic>
+                 <FontIcon iconLiteral="mdral-close" iconSize="20" styleClass="topbar-btn" />
+             </graphic>
+         </Button>
+     </HBox>
     <Group id="sign-in-group" layoutX="382.0" layoutY="75.0">
         <VBox fx:id="signInVBox" alignment="CENTER" prefHeight="661.0" prefWidth="382.0" styleClass="sign-in-vbox">
             <padding>
@@ -68,8 +65,8 @@
                 <TextField fx:id="emailField" promptText="Email" styleClass="grid-input" GridPane.columnIndex="1" />
                 <PasswordField fx:id="passwordField" onAction="#signIn" promptText="Password" styleClass="grid-input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                <FontIcon iconLiteral="mdoal-email" iconSize="25" GridPane.rowIndex="0" styleClass="input-icon" />
-                <FontIcon iconLiteral="mdoal-lock" iconSize="25" GridPane.rowIndex="1" styleClass="input-icon" />
+                <FontIcon iconLiteral="mdoal-email" iconSize="25" styleClass="input-icon" GridPane.rowIndex="0" />
+                <FontIcon iconLiteral="mdoal-lock" iconSize="25" styleClass="input-icon" GridPane.rowIndex="1" />
 
             </GridPane>
             <Label fx:id="errorLabel" styleClass="error-label">

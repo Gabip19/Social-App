@@ -96,7 +96,7 @@
                   </HBox.margin>
                </Button>
                <Region minWidth="-Infinity" prefHeight="40.0" prefWidth="118.0" HBox.hgrow="ALWAYS" />
-               <Button fx:id="homeButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btn-home" textAlignment="CENTER" HBox.hgrow="NEVER">
+               <Button fx:id="homeButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeAllPanels" prefHeight="40.0" prefWidth="40.0" styleClass="btn-home" textAlignment="CENTER" HBox.hgrow="NEVER">
                   <graphic>
                      <FontIcon iconLiteral="mdral-home" iconSize="25" styleClass="icon-menu" />
                   </graphic>

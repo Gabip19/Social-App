@@ -78,10 +78,11 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 15, 0, 0, 0);
 }
 
+
+
 .top-bar-btn, .close-app-btn {
     -fx-background-radius: 0;
     -fx-font-size: 15;
-    -fx-background-color: rgb(0, 0, 0, 0);
     -fx-font-weight: 200;
     -fx-background-color: rgba(255, 255, 255, 0.40);
 }
@@ -93,6 +94,8 @@
 .close-app-btn:hover {
     -fx-background-color: rgba(255, 0, 0, 0.73);
 }
+
+
 
 .friends-view {
     -fx-background-color: rgb(0, 0, 0, 0);

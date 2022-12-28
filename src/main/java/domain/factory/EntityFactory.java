@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-//TODO maybe refactor generic method into separated methods
 public class EntityFactory {
     public @SuppressWarnings("unchecked") static <E extends Entity<UUID>> E createEntity(EntityTypes entityType, List<String> attr) {
         if (entityType == EntityTypes.USER) {

@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import utils.Animations;
 
@@ -26,8 +27,10 @@ public class SignInController extends AuthController {
     public Label errorLabel;
     @FXML
     public Button signInButton;
+    public HBox topHBox;
 
     public void initialize() {
+        defineDraggableNode(topHBox);
         playIntroAnimation();
         signInVBox.requestFocus();
     }

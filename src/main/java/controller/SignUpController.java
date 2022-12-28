@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
@@ -33,8 +34,10 @@ public class SignUpController extends AuthController {
     public Button signUpButton;
     @FXML
     public VBox signUpVBox;
+    public HBox topHBox;
 
     public void initialize() {
+        defineDraggableNode(topHBox);
         playIntroAnimation();
         signUpVBox.requestFocus();
         errorLabel.setMinHeight(Region.USE_PREF_SIZE);

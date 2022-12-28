@@ -8,7 +8,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 
-// TODO: 12/07/22 PasswordHasher interface
 public class PasswordHasher {
 
     public static String getHashedPassword(String passwordToHash, String salt) {

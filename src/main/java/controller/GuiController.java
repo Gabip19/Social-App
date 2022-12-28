@@ -29,7 +29,7 @@ public abstract class GuiController {
         currentStage.setMaximized(!currentStage.isMaximized());
     }
 
-    public void defineDraggableNode(Node node) {    // TODO: 12/16/22 define for signin and signup too
+    public void defineDraggableNode(Node node) {
         // allow the clock background to be used to drag the clock around.
         final Delta dragDelta = new Delta();
         node.setOnMousePressed(mouseEvent -> {
