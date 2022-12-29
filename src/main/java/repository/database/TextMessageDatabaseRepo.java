@@ -30,7 +30,9 @@ public class TextMessageDatabaseRepo extends AbstractDatabaseRepository<UUID, Te
         if (entity == null)
             throw new IllegalArgumentException("Entity must not be null.\n");
 
-        // TODO: 12/24/22 validation
+        if (entity.getText().length() > 511) {
+            throw new IllegalArgumentException("Text is too long.\n");
+        }
 
         String sql = "INSERT INTO messages VALUES (?, ?, ?, ?, ?)";
         try (
@@ -54,7 +56,7 @@ public class TextMessageDatabaseRepo extends AbstractDatabaseRepository<UUID, Te
         if (entity == null)
             throw new IllegalArgumentException("Entity must not be null.\n");
 
-        // TODO: 12/25/22 validation
+        // validation
 
         if (findOne(entity.getId()) != null) {
             String sql = "UPDATE messages SET text_message = ? WHERE id = ?";
