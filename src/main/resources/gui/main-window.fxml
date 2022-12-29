@@ -51,19 +51,27 @@
 
          <left>
             <VBox fx:id="friendsVbox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="450.0" styleClass="friends-vbox" BorderPane.alignment="CENTER">
-               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mouseTransparent="true" styleClass="panel-title" text="FRIENDS" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="NEVER">
-                  <font>
-                     <Font size="20.0" />
-                  </font>
+               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="35.0" prefWidth="433.0" styleClass="title-hbox" VBox.vgrow="NEVER">
                   <VBox.margin>
-                     <Insets bottom="15.0" left="10.0" right="10.0" />
-                  </VBox.margin></Label>
+                     <Insets bottom="20.0" right="40.0" top="10.0" />
+                  </VBox.margin>
+                  <children>
+                     <Label contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mouseTransparent="true" styleClass="panel-title" text="FRIENDS" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                           <Font size="20.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets left="160.0" />
+                        </HBox.margin>
+                     </Label>
+                  </children>
+               </HBox>
                <ListView fx:id="friendsListView" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="746.0" prefWidth="356.0" styleClass="friends-view" VBox.vgrow="ALWAYS" />
                <BorderPane.margin>
                   <Insets bottom="30.0" top="30.0" />
                </BorderPane.margin>
                <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="25.0" />
+                  <Insets bottom="20.0" right="10.0" top="20.0" />
                </padding>
             </VBox>
          </left>
@@ -132,26 +140,26 @@
                   <Insets bottom="30.0" top="30.0" />
                </BorderPane.margin>
                <padding>
-                  <Insets bottom="30.0" left="10.0" top="25.0" />
+                  <Insets bottom="30.0" left="10.0" top="20.0" />
                </padding>
-               <HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
+               <HBox alignment="CENTER_RIGHT" minHeight="-Infinity" prefHeight="35.0" prefWidth="433.0" styleClass="title-hbox-2" VBox.vgrow="NEVER">
                   <VBox.margin>
-                     <Insets bottom="15.0" left="10.0" right="10.0" />
+                     <Insets bottom="20.0" left="40.0" top="10.0" />
                   </VBox.margin>
                   <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mouseTransparent="true" styleClass="panel-title" text="FRIEND REQUESTS" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
                      <HBox.margin>
-                        <Insets right="25.0" />
+                        <Insets right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Button fx:id="switchRequestsBtn" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="0.0" onAction="#switchRequestsPanel" styleClass="btn-switch-req" text="Sent" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="NEVER">
+                  <Button fx:id="switchRequestsBtn" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="0.0" maxWidth="-Infinity" minWidth="-Infinity" onAction="#switchRequestsPanel" prefHeight="39.0" prefWidth="94.0" styleClass="btn-switch-req" text="Sent" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="NEVER">
                      <font>
                         <Font size="18.0" />
                      </font>
                      <HBox.margin>
-                        <Insets right="5.0" />
+                        <Insets />
                      </HBox.margin>
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="mdal-chevron_right" iconSize="25" />

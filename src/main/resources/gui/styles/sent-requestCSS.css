@@ -10,7 +10,8 @@
 }
 
 .main-hbox:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.8);
+    /*-fx-background-color: rgba(255, 255, 255, 0.8);*/
+    -fx-background-color: rgba(221, 182, 255, 0.8);
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 20, 0, 10, 10);
     -fx-font-size: 18;
 }

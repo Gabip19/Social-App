@@ -24,9 +24,8 @@ import utils.Animations;
 import java.io.IOException;
 import java.util.ArrayList;
 
-// TODO: 12/28/22 redesign side panels
+// TODO: 12/29/22 no friends/requests gui
 // TODO: 12/28/22 profile picture
-// TODO: 12/28/22 signin and signup change font and input field height
 // TODO: 12/28/22 logout prompt
 // TODO: 12/28/22 app title and logo
 // TODO: 12/28/22 background image (one for signin and signup one for main one for main maximized)

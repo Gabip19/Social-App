@@ -49,6 +49,7 @@
 }
 
 .grid-input {
+    -fx-font-family: Arial;
     -fx-font-size: 15;
     -fx-background-radius: 12;
 }

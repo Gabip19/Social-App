@@ -97,6 +97,16 @@
 
 
 
+.title-hbox {
+    -fx-background-color: linear-gradient(to bottom, rgb(236, 89, 190) 0%, rgba(162,112,205,1) 28%, rgba(123,123,233,1) 49%, rgb(0, 210, 255) 96%);;
+    -fx-background-radius: 0 20 20 0;
+}
+
+.title-hbox-2 {
+    -fx-background-color: linear-gradient(to bottom, rgb(236, 89, 190) 0%, rgba(162,112,205,1) 28%, rgba(123,123,233,1) 49%, rgb(0, 210, 255) 96%);;
+    -fx-background-radius: 20 0 0 20;
+}
+
 .friends-view {
     -fx-background-color: rgb(0, 0, 0, 0);
 }
@@ -107,8 +117,9 @@
 }
 
 .panel-title {
-    -fx-font-size: 25;
-    -fx-text-fill: linear-gradient(to bottom, rgb(147, 146, 241) 0%, rgb(217, 124, 246) 20%, rgba(0,195,235,1) 96%);
+    -fx-font-size: 22;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
 }
 
 .request-view {
@@ -122,8 +133,10 @@
 
 .btn-switch-req {
     -fx-background-radius: 50;
-    -fx-background-color: linear-gradient(to bottom, rgb(147, 146, 241) 0%, rgb(217, 124, 246) 20%, rgba(0,195,235,1) 96%);
+    -fx-background-color: rgba(255, 255, 255, 0);
 }
+
+
 
 .reopen-chat-btn {
     -fx-font-family: "Arial Rounded MT Bold";
