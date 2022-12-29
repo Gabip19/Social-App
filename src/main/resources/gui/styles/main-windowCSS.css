@@ -46,8 +46,8 @@
     -fx-background-color: rgb(0, 0, 0, 0);
 }
 
-.profile-pic {
-
+.profile-img {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 15, 0, 8, 8);
 }
 
 .user-name-label {
@@ -114,6 +114,7 @@
 .friends-vbox {
     -fx-background-color: rgba(255, 255, 255, 0.8);
     -fx-background-radius: 0 40 40 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 15, 0, 0, 0);
 }
 
 .panel-title {
@@ -129,6 +130,7 @@
 .requests-vbox {
     -fx-background-color: rgba(255, 255, 255, 0.8);
     -fx-background-radius: 40 0 0 40;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 15, 0, 0, 0);
 }
 
 .btn-switch-req {

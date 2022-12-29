@@ -20,8 +20,18 @@
     -fx-icon-size: 32;
 }
 
+.profile-img {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 15, 0, -8, 8);
+}
+
+.friend-hbox:hover .profile-img {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
 .name-label {
-    -fx-font-family: 'Arimo', sans-serif;
+    /*-fx-font-family: 'Arimo', sans-serif;*/
+    /*-fx-font-family: Arial;*/
     -fx-font-weight: 400;
     -fx-text-fill: #2d2d2d;
 }

@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +16,8 @@ public class UserCell extends HBox {
     public AnchorPane anchorRoot;
     @FXML
     public Button addFriendButton;
+    @FXML
+    public Circle profileCircle;
     @FXML
     public Label nameLabel;
 
@@ -41,5 +44,9 @@ public class UserCell extends HBox {
 
     public Button getAddFriendButton() {
         return addFriendButton;
+    }
+
+    public Circle getProfileCircle() {
+        return profileCircle;
     }
 }

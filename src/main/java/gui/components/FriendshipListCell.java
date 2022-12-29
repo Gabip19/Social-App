@@ -5,6 +5,7 @@ import domain.FriendshipStatus;
 import domain.User;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
+import javafx.scene.paint.Color;
 import service.Network;
 
 import java.time.format.DateTimeFormatter;
@@ -34,6 +35,7 @@ public class FriendshipListCell extends ListCell<Friendship> {
 
             User senderUser = srv.findOneUser(item.getSenderID());
 
+            friendshipCell.getProfileCircle().setFill(Color.valueOf(senderUser.getHexProfileColor()));
             initLabels(item, friendshipCell, senderUser);
             initButtons(item, friendshipCell);
 

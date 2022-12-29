@@ -32,6 +32,7 @@ public class UserListCell extends ListCell<User> {
         } else {
             UserCell userCell = new UserCell();
             userCell.setNameLabelText(item.getFirstName() + " " + item.getLastName());
+            userCell.getProfileCircle().setFill(Color.valueOf(item.getHexProfileColor()));
 
             Button addFriendButton = userCell.getAddFriendButton();
 

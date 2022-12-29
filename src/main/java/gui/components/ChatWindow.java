@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import service.Network;
 import utils.Animations;
 
@@ -21,6 +23,7 @@ import java.net.URL;
 public class ChatWindow {
 
     public AnchorPane mainAnchor;
+    public Circle profileCircle;
     public Label userNameLabel;
     public Button closeButton;
     public ScrollPane messagesScrollPane;
@@ -45,6 +48,7 @@ public class ChatWindow {
         );
 
         userNameLabel.setText(user.getFirstName() + " " + user.getLastName());
+        profileCircle.setFill(Color.valueOf(user.getHexProfileColor()));
     }
 
     private void initSendActions() {

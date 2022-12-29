@@ -4,6 +4,7 @@ import domain.Friendship;
 import domain.User;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
+import javafx.scene.paint.Color;
 import service.Network;
 
 import java.time.format.DateTimeFormatter;
@@ -34,6 +35,7 @@ public class SentFriendshipListCell extends ListCell<Friendship> {
             User receiver = srv.findOneUser(item.getReceiverID());
             friendshipCell.setNameLabelText(receiver.getFirstName() + " " + receiver.getLastName());
             friendshipCell.setDateLabelText(item.getFriendshipDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            friendshipCell.getProfileCircle().setFill(Color.valueOf(receiver.getHexProfileColor()));
 
             friendshipCell.getCancelButton().setOnAction(param -> {
                 srv.cancelFriendRequest(item);

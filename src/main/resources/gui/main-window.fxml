@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="rootAnchor" prefHeight="841.0" prefWidth="1362.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainPaneController">
+<AnchorPane fx:id="rootAnchor" prefHeight="841.0" prefWidth="1362.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MainPaneController">
    <stylesheets>
       <URL value="@styles/main-windowCSS.css" />
    </stylesheets>
@@ -51,20 +51,20 @@
 
          <left>
             <VBox fx:id="friendsVbox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="450.0" styleClass="friends-vbox" BorderPane.alignment="CENTER">
-               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="35.0" prefWidth="433.0" styleClass="title-hbox" VBox.vgrow="NEVER">
+               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="35.0" prefWidth="433.0"
+                     styleClass="title-hbox" VBox.vgrow="NEVER">
                   <VBox.margin>
-                     <Insets bottom="20.0" right="40.0" top="10.0" />
+                     <Insets bottom="20.0" right="40.0" top="10.0"/>
                   </VBox.margin>
-                  <children>
-                     <Label contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mouseTransparent="true" styleClass="panel-title" text="FRIENDS" textAlignment="CENTER" textFill="WHITE">
-                        <font>
-                           <Font size="20.0" />
-                        </font>
-                        <HBox.margin>
-                           <Insets left="160.0" />
-                        </HBox.margin>
-                     </Label>
-                  </children>
+                  <Label contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mouseTransparent="true"
+                         styleClass="panel-title" text="FRIENDS" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="20.0"/>
+                     </font>
+                     <HBox.margin>
+                        <Insets left="160.0"/>
+                     </HBox.margin>
+                  </Label>
                </HBox>
                <ListView fx:id="friendsListView" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="746.0" prefWidth="356.0" styleClass="friends-view" VBox.vgrow="ALWAYS" />
                <BorderPane.margin>
@@ -120,7 +120,7 @@
                   <graphic>
                      <FontIcon iconLiteral="mdal-group_add" iconSize="30" styleClass="icon-menu" />
                   </graphic></Button>
-               <Circle fx:id="profilePicture" fill="DODGERBLUE" radius="15.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" styleClass="profile-pic" HBox.hgrow="NEVER" />
+               <Circle fx:id="profilePicture" fill="DODGERBLUE" radius="17.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="profile-img" HBox.hgrow="NEVER" />
                <Label fx:id="userNameLabel" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="113.0" styleClass="user-name-label" text="USER_NAME" HBox.hgrow="NEVER">
                   <HBox.margin>
                      <Insets left="15.0" right="15.0" />

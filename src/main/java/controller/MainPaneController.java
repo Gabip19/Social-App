@@ -106,7 +106,9 @@ public class MainPaneController extends GuiController {
         initializeFriendListView();
 
         userNameLabel.setText(srv.getCurrentUser().getFirstName());
-        profilePicture.setFill(Color.RED);
+
+        Color color = Color.valueOf(srv.getCurrentUser().getHexProfileColor());
+        profilePicture.setFill(color);
 
         borderPane.setCenter(null);
         borderPane.setBottom(null);

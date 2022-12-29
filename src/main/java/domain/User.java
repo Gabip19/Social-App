@@ -1,10 +1,7 @@
 package domain;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class User extends Entity<UUID> {
     private String firstName;
@@ -12,25 +9,34 @@ public class User extends Entity<UUID> {
     private String email;
     private LocalDate birthdate;
     private final List<UUID> friendIDs;
+    private final String hexProfileColor;
 
     public User(String firstName, String lastName, String email, LocalDate birthdate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.birthdate = birthdate;
+        this.hexProfileColor = getProfileColor();
 
         this.setId(UUID.randomUUID());
         friendIDs = new ArrayList<>();
     }
 
-    public User(UUID id, String firstName, String lastName, String email, LocalDate birthdate) {
+    public User(UUID id, String firstName, String lastName, String email, LocalDate birthdate, String hexProfileColor) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.birthdate = birthdate;
+        this.hexProfileColor = hexProfileColor;
 
         this.setId(id);
         friendIDs = new ArrayList<>();
+    }
+
+    private String getProfileColor() {
+        Random obj = new Random();
+        int randNum = obj.nextInt(0xffffff + 1);
+        return String.format("#%06x", randNum);
     }
 
     public String getFirstName() {
@@ -67,6 +73,10 @@ public class User extends Entity<UUID> {
 
     public List<UUID> getFriendIDs() {
         return friendIDs;
+    }
+
+    public String getHexProfileColor() {
+        return hexProfileColor;
     }
 
     @Override

@@ -15,6 +15,16 @@
     -fx-font-size: 18;
 }
 
+.profile-img {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 8, 0, 3, 3);
+}
+
+.main-hbox:hover .profile-img {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 20, 0, 5, 5);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
 .name-label {
     -fx-font-family: 'Arimo', sans-serif;
     -fx-font-weight: 400;

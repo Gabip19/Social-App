@@ -25,7 +25,7 @@ public class UserDatabaseRepo extends AbstractDatabaseRepository<UUID, User> {
 
         validator.validate(entity);
 
-        String sql = "INSERT INTO users VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)";
         try (
                 PreparedStatement statement = connection.prepareStatement(sql)
         ) {
@@ -34,6 +34,7 @@ public class UserDatabaseRepo extends AbstractDatabaseRepository<UUID, User> {
             statement.setString(3, entity.getLastName());
             statement.setString(4, entity.getEmail());
             statement.setDate(5, Date.valueOf(entity.getBirthdate()));
+            statement.setString(6, entity.getHexProfileColor());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -76,8 +77,9 @@ public class UserDatabaseRepo extends AbstractDatabaseRepository<UUID, User> {
         String lastName = resultSet.getString("last_name");
         String email = resultSet.getString("email");
         LocalDate birthdate = resultSet.getDate("birthdate").toLocalDate();
+        String hexProfileColor = resultSet.getString("profile_color");
 
-        return new User(id, firstName, lastName, email, birthdate);
+        return new User(id, firstName, lastName, email, birthdate, hexProfileColor);
     }
 
     public void setUserPassword(String email, HashedPasswordDTO passwordInfo) {

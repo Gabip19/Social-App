@@ -6,6 +6,7 @@ import javafx.animation.Transition;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import service.Network;
 import utils.Animations;
 
@@ -33,6 +34,7 @@ public class FriendListCell extends ListCell<User> {
         } else {
             FriendCell friendCell = new FriendCell();
             friendCell.setNameLabelText(item.getFirstName() + " " + item.getLastName());
+            friendCell.getProfileCircle().setFill(Color.valueOf(item.getHexProfileColor()));
 
             initRemoveFriendButtonFor(item, friendCell);
             initOpenChatButton(item, friendCell);
