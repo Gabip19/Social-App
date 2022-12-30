@@ -7,6 +7,7 @@ import domain.validators.UserValidator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import repository.database.DatabaseTables;
@@ -34,6 +35,7 @@ public class GUI extends Application {
 
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.getIcons().add(new Image("gui/styles/images/colorslogo.png"));
         stage.show();
     }
 

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.Animations;
@@ -22,6 +23,7 @@ public class AuthController extends GuiController {
         currentStage = new Stage();
         currentStage.setScene(scene);
         currentStage.initStyle(StageStyle.UNDECORATED);
+        currentStage.getIcons().add(new Image("gui/styles/images/colorslogo.png"));
         currentStage.show();
     }
 

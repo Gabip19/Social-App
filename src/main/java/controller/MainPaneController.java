@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -26,7 +27,6 @@ import java.util.ArrayList;
 
 // TODO: 12/29/22 no friends/requests gui
 // TODO: 12/28/22 logout prompt
-// TODO: 12/28/22 app title and logo
 // TODO: 12/28/22 background image (one for signin and signup one for main one for main maximized)
 public class MainPaneController extends GuiController {
     public Button logOutButton;
@@ -290,6 +290,7 @@ public class MainPaneController extends GuiController {
 
         currentStage.setResizable(false);
         currentStage.initStyle(StageStyle.UNDECORATED);
+        currentStage.getIcons().add(new Image("gui/styles/images/colorslogo.png"));
         currentStage.setScene(scene);
         currentStage.show();
     }

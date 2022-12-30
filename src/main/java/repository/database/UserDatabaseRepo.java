@@ -25,7 +25,7 @@ public class UserDatabaseRepo extends AbstractDatabaseRepository<UUID, User> {
 
         validator.validate(entity);
 
-        String sql = "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (id, first_name, last_name, email, birthdate, profile_color) VALUES (?, ?, ?, ?, ?, ?)";
         try (
                 PreparedStatement statement = connection.prepareStatement(sql)
         ) {

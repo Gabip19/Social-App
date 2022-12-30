@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="rootAnchor" prefHeight="841.0" prefWidth="1362.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MainPaneController">
+<AnchorPane fx:id="rootAnchor" prefHeight="841.0" prefWidth="1362.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainPaneController">
    <stylesheets>
       <URL value="@styles/main-windowCSS.css" />
    </stylesheets>
@@ -51,18 +51,16 @@
 
          <left>
             <VBox fx:id="friendsVbox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="450.0" styleClass="friends-vbox" BorderPane.alignment="CENTER">
-               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="35.0" prefWidth="433.0"
-                     styleClass="title-hbox" VBox.vgrow="NEVER">
+               <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="35.0" prefWidth="433.0" styleClass="title-hbox" VBox.vgrow="NEVER">
                   <VBox.margin>
-                     <Insets bottom="20.0" right="40.0" top="10.0"/>
+                     <Insets bottom="20.0" right="40.0" top="10.0" />
                   </VBox.margin>
-                  <Label contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mouseTransparent="true"
-                         styleClass="panel-title" text="FRIENDS" textAlignment="CENTER" textFill="WHITE">
+                  <Label contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mouseTransparent="true" styleClass="panel-title" text="FRIENDS" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font size="20.0"/>
+                        <Font size="20.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="160.0"/>
+                        <Insets left="160.0" />
                      </HBox.margin>
                   </Label>
                </HBox>
@@ -103,7 +101,15 @@
                      <Insets right="15.0" />
                   </HBox.margin>
                </Button>
-               <Region minWidth="-Infinity" prefHeight="40.0" prefWidth="118.0" HBox.hgrow="ALWAYS" />
+               <Label styleClass="app-name" text="Color'Social" HBox.hgrow="NEVER">
+                  <font>
+                     <Font size="22.0" />
+                  </font>
+                  <HBox.margin>
+                     <Insets left="40.0" />
+                  </HBox.margin>
+               </Label>
+               <Region prefHeight="40.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
                <Button fx:id="homeButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeAllPanels" prefHeight="40.0" prefWidth="40.0" styleClass="btn-home" textAlignment="CENTER" HBox.hgrow="NEVER">
                   <graphic>
                      <FontIcon iconLiteral="mdral-home" iconSize="25" styleClass="icon-menu" />
@@ -111,8 +117,8 @@
                   <HBox.margin>
                      <Insets right="15.0" />
                   </HBox.margin></Button>
-               <TextField fx:id="searchBar" alignment="CENTER" minWidth="-Infinity" onKeyTyped="#searchForUsersAction" prefHeight="33.0" prefWidth="318.0" promptText="Connect with people" styleClass="search-bar" HBox.hgrow="ALWAYS" />
-               <Region minWidth="-Infinity" prefHeight="40.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+               <TextField fx:id="searchBar" alignment="CENTER" minWidth="-Infinity" onKeyTyped="#searchForUsersAction" prefHeight="33.0" prefWidth="400.0" promptText="Connect with people" styleClass="search-bar" HBox.hgrow="ALWAYS" />
+               <Region minWidth="-Infinity" prefHeight="40.0" prefWidth="57.0" HBox.hgrow="ALWAYS" />
                <Button fx:id="requestsButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleRequestsPanel" prefHeight="40.0" prefWidth="40.0" styleClass="btn-rqst" HBox.hgrow="NEVER">
                   <HBox.margin>
                      <Insets right="30.0" />

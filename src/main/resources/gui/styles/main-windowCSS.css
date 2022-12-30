@@ -1,6 +1,6 @@
 .root {
     -fx-font-size: 15;
-    -fx-background-image: url("images/4back.jpg");
+    -fx-background-image: url("images/fullscreenlogo.jpg");
 }
 
 .top-hbox {
@@ -23,6 +23,12 @@
 .btn-friends {
     -fx-background-radius: 50;
     -fx-background-color: rgb(0, 0, 0, 0);
+}
+
+.app-name {
+    -fx-font-family: Magneto; /* Vivaldi */
+    -fx-font-size: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0, 3, 3);
 }
 
 .btn-home {

@@ -13,7 +13,6 @@ import java.util.*;
 public class Network {
     private final UserService userSrv;
     private final FriendshipService friendSrv;
-
     private final TextMessageService messageSrv;
     private User currentUser;
 
