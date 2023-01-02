@@ -27,8 +27,8 @@ public class GUI extends Application {
     public void start(Stage stage) throws IOException {
         GuiController.setSrv(createNetwork());
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/main-window.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1330, 810);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/signin.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
 
         GuiController.setCurrentStage(stage);
 

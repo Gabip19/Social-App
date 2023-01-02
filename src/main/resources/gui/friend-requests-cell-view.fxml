@@ -33,7 +33,7 @@
         <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="0.0" prefHeight="50.0" prefWidth="12.0" HBox.hgrow="ALWAYS" />
         <VBox alignment="CENTER" minWidth="-Infinity" styleClass="status-vbox">
             <HBox.margin>
-                <Insets left="10.0" right="10.0" />
+                <Insets right="10.0" />
             </HBox.margin>
             <Label fx:id="statusLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="status-label" text="PENDING" wrapText="true" VBox.vgrow="NEVER">
                 <font>
@@ -46,7 +46,6 @@
                 </font>
             </Label>
         </VBox>
-        <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="15.0" prefHeight="50.0" prefWidth="12.0" HBox.hgrow="NEVER" />
         <Button fx:id="acceptButton" minWidth="-Infinity" mnemonicParsing="false" styleClass="btn-accept" HBox.hgrow="NEVER">
            <graphic>
                <FontIcon iconLiteral="mdal-check_circle" iconSize="25" styleClass="icon-accept" />

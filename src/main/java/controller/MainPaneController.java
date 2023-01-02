@@ -97,8 +97,6 @@ public class MainPaneController extends GuiController {
     public void initialize() {
         defineDraggableNode(topHBox);
 
-        srv.signIn("test@test.test", "test");
-
         initializeUserSearchListView();
         initializeFriendRequestsListViews();
         initializeFriendListView();
@@ -110,7 +108,6 @@ public class MainPaneController extends GuiController {
 
         borderPane.setCenter(centerLogo);
         borderPane.setBottom(null);
-//        srv.getUsers().forEach(srv::sendFriendRequest);
     }
 
     private void initializeUserSearchListView() {
