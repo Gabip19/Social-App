@@ -25,10 +25,8 @@ import utils.Animations;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
-// TODO: 12/29/22 no friends/requests gui
-// TODO: 12/28/22 logout prompt
-// TODO: 12/28/22 background image (one for signin and signup one for main one for main maximized)
 public class MainPaneController extends GuiController {
     public Button logOutButton;
     public Circle profilePicture;
@@ -276,11 +274,22 @@ public class MainPaneController extends GuiController {
     }
 
     public void logOut() {
-        try {
-            currentStage.close();
-            switchToSignInScene();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Color'Social");
+        alert.setHeaderText("Are you sure you want to log out?");
+
+        ButtonType logOutButton = new ButtonType("Log out", ButtonBar.ButtonData.YES);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(logOutButton, cancelButton);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get().equals(logOutButton)) {
+            try {
+                currentStage.close();
+                switchToSignInScene();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

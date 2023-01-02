@@ -21,7 +21,6 @@ import service.UserService;
 
 import java.io.IOException;
 
-// TODO: 12/11/22 set background and icon
 public class GUI extends Application {
 
     @Override
