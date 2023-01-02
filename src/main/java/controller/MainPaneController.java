@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -37,8 +38,8 @@ public class MainPaneController extends GuiController {
     public TextField searchBar;
     public Button homeButton;
     public Button friendsButton;
-    public AnchorPane midWindow;
     public HBox topHBox;
+    public ImageView centerLogo;
     public AnchorPane rootAnchor;
     public BorderPane borderPane;
     public ListView<User> searchUsersListView = new ListView<>();
@@ -109,7 +110,7 @@ public class MainPaneController extends GuiController {
         Color color = Color.valueOf(srv.getCurrentUser().getHexProfileColor());
         profilePicture.setFill(color);
 
-        borderPane.setCenter(null);
+        borderPane.setCenter(centerLogo);
         borderPane.setBottom(null);
 //        srv.getUsers().forEach(srv::sendFriendRequest);
     }
@@ -339,7 +340,7 @@ public class MainPaneController extends GuiController {
     }
 
     public void toggleLastChatPanel() {
-        if (borderPane.getCenter() == null) {
+        if (borderPane.getCenter() == centerLogo) {
             maximizeLastOpenedChat();
         } else {
             lastOpenedChatRoot = (AnchorPane) borderPane.getCenter();
@@ -369,7 +370,7 @@ public class MainPaneController extends GuiController {
                 300d
         );
         transition.setOnFinished(param2 -> {
-            borderPane.setCenter(null);
+            borderPane.setCenter(centerLogo);
             borderPane.setBottom(bottomChatHead);
         });
         transition.play();

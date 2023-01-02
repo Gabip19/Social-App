@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -73,13 +75,6 @@
                </padding>
             </VBox>
          </left>
-
-         <center>
-            <AnchorPane fx:id="midWindow" prefHeight="683.0" prefWidth="357.0" styleClass="mid-window" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets left="20.0" right="20.0" top="30.0" />
-               </BorderPane.margin></AnchorPane>
-         </center>
 
          <top>
             <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="10.0" prefWidth="1146.0" styleClass="action-top-bar" BorderPane.alignment="CENTER">
@@ -189,6 +184,12 @@
                   </font></Button>
             </HBox>
          </bottom>
+         <center>
+            <ImageView fx:id="centerLogo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
+                       BorderPane.alignment="CENTER">
+               <Image url="@styles/images/colorslogo.png"/>
+            </ImageView>
+         </center>
 
       </BorderPane>
    </VBox>

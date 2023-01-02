@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -30,6 +31,7 @@ public class ChatWindow {
     public VBox messagesVBox;
     public TextField inputField;
     public Button sendButton;
+    public ImageView centerLogo = new ImageView("gui/styles/images/colorslogo.png");
     public static final URL fxmlLocation = FriendCell.class.getResource("/gui/chat-view.fxml");
     private final Network srv;
     private final User user;
@@ -46,6 +48,10 @@ public class ChatWindow {
         messagesVBox.heightProperty().addListener(param ->
                 messagesScrollPane.setVvalue(messagesVBox.getHeight())
         );
+
+        centerLogo.setPreserveRatio(true);
+        centerLogo.setFitWidth(200);
+        centerLogo.setFitHeight(150);
 
         userNameLabel.setText(user.getFirstName() + " " + user.getLastName());
         profileCircle.setFill(Color.valueOf(user.getHexProfileColor()));
@@ -65,7 +71,7 @@ public class ChatWindow {
                     300d
             );
             transition.setOnFinished(param2 -> {
-                ((BorderPane) mainAnchor.getParent()).setCenter(null);
+                ((BorderPane) mainAnchor.getParent()).setCenter(centerLogo);
             });
             transition.play();
         });
